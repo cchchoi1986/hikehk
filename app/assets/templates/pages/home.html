@@ -1,7 +1,21 @@
 <body>
   <div id="map-canvas">
-  </div>
+  <!-- <div class="filter">
+  </div> -->
 
-  <div class="filter">
+    <ui-gmap-google-map 
+      center='map.center'
+      zoom='map.zoom'
+      >
+
+      <ui-gmap-marker
+        idKey='marker.idKey'
+        coords='marker.coords'
+        >
+      </ui-gmap-marker>
+      
+    </ui-gmap-google-map>
+
   </div>
 </body>
+
