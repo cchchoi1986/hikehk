@@ -46,6 +46,12 @@ gem 'binding_of_caller'
 gem 'devise'
 gem 'pry'
 
+# nokogiri to scrape data
+gem 'nokogiri'
+
+# bower
+gem 'bower'
+
 # gmaps4rails
 gem 'gmaps4rails'
 # underscore

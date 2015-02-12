@@ -12,6 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
+//= require angular
+//= require angular-animate
+//= require angular-resource
+//= require angular-route
+//= require angular-ui-bootstrap-tpls
+//= require d3
+//= require angular-google-maps
+//= require lodash
 //= require underscore
-//= require gmaps/google
+//= require jquery-ui
+//= require jquery-ui/slider
+//= require noty/packaged/jquery.noty.packaged.min
 //= require_tree .
