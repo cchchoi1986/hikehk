@@ -1,0 +1,8 @@
+var app = angular.module("hikehk",['ngRoute', 'ui.bootstrap']);
+
+app.config(['$routeProvider', function($routeProvider){
+  $routeProvider.when('/', {
+    templateUrl: "<%= asset_path('pages/home.html') %>",
+    controller: 'HomeCtrl'
+  })
+}]);
