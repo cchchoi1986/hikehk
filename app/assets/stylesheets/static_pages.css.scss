@@ -1,15 +1,39 @@
-#map-canvas { 
-  height: 100%; 
-  margin: 0; 
-  padding: 0;
-}
-
-.filter {
-  background: red;
-  height: 350px;
-  width: 300px;
-}
-
 .angular-google-map-container{
   height: 800px;
+  // height: 100%; why can't do 100%?
 }
+
+html, body, #map-canvas { 
+  height: 100vh; 
+  width: 100vw;
+  margin: 0; 
+  padding: 0;
+  z-index: 10;
+  position: absolute;
+}
+
+#filter-box{
+  text-align: center;
+  z-index: 20;
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  // height: 200px;
+  width:350px;
+  background-color: transparent;
+  border: 1px solid black;
+
+}
+
+// list group item
+#filter-box > ul > li {
+  background-color: transparent;
+
+}
+
+// list group
+#filter-box > ul {
+  margin-bottom: 0;
+}
+
+

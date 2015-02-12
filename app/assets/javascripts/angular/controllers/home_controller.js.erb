@@ -14,8 +14,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       longitude: 114.143910
     }
   ];
+
   var marker;
-  // var map;
+  var map;
 
   // function initialize() {
   //   var mapOptions = {
@@ -49,9 +50,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //   google.maps.event.addDomListener(window, 'load', initialize);
   // })
 
+
   $scope.map = { 
     center: { latitude: 22.241165, longitude: 114.241569 },
-    zoom: 15
+    zoom: 13,
   };
 
   $scope.marker = {
