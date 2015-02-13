@@ -1,5 +1,11 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout){
   
+  $scope.outPanel = false;
+
+  $scope.showPanel = function(){
+    $scope.outPanel = !$scope.outPanel;
+  }
+
   // // uiGmapGoogleMapApi.then(function(maps){
 
   // var directionsService = new google.maps.DirectionsService();
