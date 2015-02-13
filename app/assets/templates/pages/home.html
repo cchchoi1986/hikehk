@@ -2,18 +2,26 @@
   <div id="map-canvas">
 
     <ui-gmap-google-map 
+
         center='map.center'
         zoom  ='map.zoom'
         bounds = 'map.bounds'>
 
-      <ui-gmap-marker
+<!--       <ui-gmap-marker
           idKey ='marker.idKey'
           coords='marker.coords'>
-      </ui-gmap-marker>
+      </ui-gmap-marker> -->
 
-      <ui-gmap-polyline ng-repeat="p in polylines" path="p.path" stroke="p.stroke" visible='p.visible'
+<!--       <ui-gmap-polyline ng-repeat="p in polylines" path="p.path" stroke="p.stroke" visible='p.visible'
           geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'>
       </ui-gmap-polyline>
+ -->
+
+      <ui-gmap-markers
+          models  = 'trails'
+          coords  = "'self'">
+      </ui-gmap-markers>
+
 
     </ui-gmap-google-map>
 
@@ -22,6 +30,7 @@
   </div> -->
   <div id="filter-box">
       <ul class="list-group">
+        <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li>
         <li class="list-group-item"><div>Duration</div></li>
         <li class="list-group-item"><div>Difficulties</div></li>
         <li class="list-group-item"><div>Scenary</div></li>
