@@ -6,6 +6,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.outPanel = !$scope.outPanel;
   }
 
+
   // // uiGmapGoogleMapApi.then(function(maps){
 
   // var directionsService = new google.maps.DirectionsService();
@@ -15,7 +16,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //   // origin: $scope.trip.pickupLocation,
   //   // destination: $scope.trip.dropOfflocation,
   //   // DRIVING, BICYCLING, TRANSIT, WALKING
-  //   //travelMode: google.maps.DirectionsTravelMode.WALKING 
+  //   // travelMode: google.maps.DirectionsTravelMode.WALKING 
   // };
 
   // var mapOptions = {
@@ -28,6 +29,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //   mapTypeId: google.maps.MapTypeId.ROAMAP 
   // };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> angular google map windows for markers work
   var map;
   $scope.map = { 
 
@@ -55,25 +60,33 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       title: "Dragon's Back",
       latitude: 22.241165, 
       longitude: 114.241569,
-      id: 1
+      id: 1,
+      show: false,
+      description: ""
   },{
-      name: "Victoria Peak",
+      title: "Victoria Peak",
       latitude: 22.275590,
       longitude: 114.143910,
-      id: 2
+      id: 2,
+      show: false,
+      description: ""
   }];
 
   // the push must wait til the map is ready in order to show up
   // $scope.trails.push(trail);
   $scope.addMarker = function(){
     var newtrail = { 
+        title: "Happy Valley",
         latitude: 22.268394, 
         longitude: 114.186700,
-        id: 3
+        description: "",
+        show: false,
+        id: 3,
     };
     $scope.trails.push(newtrail);
   }
 
+<<<<<<< HEAD
   $scope.polylines = [
     {
       id: 1,
@@ -148,6 +161,16 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     //   }]
     // }
   ];
+=======
+// onclick the window shows up, with title and description
+  $scope.trails.onClick = function() {
+      trails.show = !trails.show;
+  };
+
+  // map.getDirections().directions().then( function( directions ) { 
+  //   console.log(directions); 
+  // });
+>>>>>>> angular google map windows for markers work
 
 }]);
 

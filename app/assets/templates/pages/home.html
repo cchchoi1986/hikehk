@@ -20,6 +20,13 @@
       <ui-gmap-markers
           models  = 'trails'
           coords  = "'self'">
+        <ui-gmap-windows
+          show="show">
+          <div ng-non-bindable>
+            <h3>{{title}}</h3>
+            {{description}}
+          </div>
+        </ui-gmap-windows>
       </ui-gmap-markers>
 
 
@@ -46,4 +53,3 @@
   </div>
 
 </body>
-
