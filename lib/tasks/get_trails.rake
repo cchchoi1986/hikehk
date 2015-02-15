@@ -38,8 +38,6 @@ namespace :get_trails do
 
         trail_html_doc = Nokogiri::HTML(open("http://www.oasistrek.com/#{f}").read)
 
-        
-
         puts "<<<<<<<<<<<<<"
         trail = { 
           :region => region, 
