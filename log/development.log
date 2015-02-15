@@ -17268,3 +17268,58 @@ Migrating to CreateRegionBirdLinks (20150215074708)
             FROM sqlite_temp_master
             WHERE name='index_trails_on_region_id' AND type='index'
 [0m
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (19.9ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.867209"], ["district", "New Territories"], ["name", "Islands"], ["updated_at", "2015-02-15 08:26:18.867209"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.907764"], ["district", "New Territories"], ["name", "Kwai Tsing"], ["updated_at", "2015-02-15 08:26:18.907764"]]
+  [1m[35m (18.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.928752"], ["district", "New Territories"], ["name", "North"], ["updated_at", "2015-02-15 08:26:18.928752"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.932581"], ["district", "New Territories"], ["name", "Sai Kung"], ["updated_at", "2015-02-15 08:26:18.932581"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.936123"], ["district", "New Territories"], ["name", "Sha Tin"], ["updated_at", "2015-02-15 08:26:18.936123"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.939420"], ["district", "New Territories"], ["name", "Tai Po"], ["updated_at", "2015-02-15 08:26:18.939420"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.942345"], ["district", "New Territories"], ["name", "Tsuen Wan"], ["updated_at", "2015-02-15 08:26:18.942345"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.945441"], ["district", "New Territories"], ["name", "Tuen Mun"], ["updated_at", "2015-02-15 08:26:18.945441"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.948554"], ["district", "New Territories"], ["name", "Yuen Long"], ["updated_at", "2015-02-15 08:26:18.948554"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.951457"], ["district", "Kowloon"], ["name", "Kowloon City"], ["updated_at", "2015-02-15 08:26:18.951457"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.954614"], ["district", "Kowloon"], ["name", "Kwun Tong"], ["updated_at", "2015-02-15 08:26:18.954614"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.957708"], ["district", "Kowloon"], ["name", "Sham Shui Po"], ["updated_at", "2015-02-15 08:26:18.957708"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.960959"], ["district", "Kowloon"], ["name", "Wong Tai Sin"], ["updated_at", "2015-02-15 08:26:18.960959"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.964054"], ["district", "Kowloon"], ["name", "Yau Tsim Mong"], ["updated_at", "2015-02-15 08:26:18.964054"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.967125"], ["district", "Hong Kong"], ["name", "Central & Western"], ["updated_at", "2015-02-15 08:26:18.967125"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.970090"], ["district", "Hong Kong"], ["name", "Eastern"], ["updated_at", "2015-02-15 08:26:18.970090"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-15 08:26:18.972997"], ["district", "Hong Kong"], ["name", "Southern"], ["updated_at", "2015-02-15 08:26:18.972997"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "regions" ("created_at", "district", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-02-15 08:26:18.975924"], ["district", "Hong Kong"], ["name", "Wan Chai"], ["updated_at", "2015-02-15 08:26:18.975924"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mRegion Load (42.2ms)[0m  [1mSELECT  "regions".* FROM "regions"   ORDER BY "regions"."id" DESC LIMIT 1[0m
