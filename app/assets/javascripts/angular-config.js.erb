@@ -1,6 +1,7 @@
 var app = angular.module("hikehk",['ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps']);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
   $routeProvider.when('/', {
     templateUrl: "<%= asset_path('pages/home.html') %>",
@@ -24,6 +25,19 @@ app.config(['$routeProvider', function($routeProvider, uiGmapGoogleMapApiProvide
   //     libraries: 'weather,geometry,visualization'
   // });
 >>>>>>> angular google map windows for markers work
+=======
+app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
+  $routeProvider.when('/', {
+    templateUrl: "<%= asset_path('pages/home.html') %>",
+    controller: 'HomeCtrl'
+  });
+
+  uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyD8Y_6eoFv73xFcbb4dj2ORHLcAdY2WoPw', // cassie api key
+      v: '3.17',
+      libraries: 'weather,geometry,visualization'
+  });
+>>>>>>> added apri key on app config
 
 }]);
 
