@@ -163,9 +163,14 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   ];
 =======
 // onclick the window shows up, with title and description
-  $scope.trails.onClick = function() {
+  $scope.trails.onMouseOver = function() {
       trails.show = !trails.show;
   };
+
+  // $scope.clickEventsObject = {
+  //     mouseover: trailsInfoMouseOver,
+  //     mouseout: trailsInfoMouseOut,
+  // };
 
   // map.getDirections().directions().then( function( directions ) { 
   //   console.log(directions); 
