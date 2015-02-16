@@ -1,7 +1,7 @@
 namespace :scrape_gov_trails do 
   desc "Scrape trail's info from http://www.lcsd.gov.hk/en/healthy/hiking/"
 
-  task :get_trails => :trails do
+  task :get_trails => :environment do
     require 'open-uri'
     require 'nokogiri'
 
