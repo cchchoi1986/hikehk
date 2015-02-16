@@ -40,11 +40,19 @@
   <div id="filter-box">
       <ul class="list-group">
         <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li>
-        <li class="list-group-item"><div>Duration</div></li>
-        <li class="list-group-item"><div>Difficulties</div></li>
-        <li class="list-group-item"><div>Scenary</div></li>
-        <li class="list-group-item"><div>Trees & Flowers</div></li>
-        <li class="list-group-item"><div>Hello World</div></li>
+        <li class="list-group-item">
+          <div>Duration: {{duration}} mins</div>
+          <div duration-Slider config="sliderConfig" model="duration" id="duration-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Difficulty Level: {{difficulty}}</div>
+          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Scenary Level: {{scenary}}</div>
+          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider"></div>
+        </li>
+        <!-- <li class="list-group-item"><div>Trees & Flowers</div></li> -->
       </ul>
   </div>
 

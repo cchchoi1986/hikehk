@@ -1,0 +1,80 @@
+app.directive("durationSlider", function() {
+    return {
+      restrict: 'A',
+      scope: {
+          config: "=config",
+          duration: "=model"
+      },
+      link: function(scope, elem, attrs) {
+        var setModel = function(value) {
+          scope.model = value;   
+        }
+        $("#duration-slider").slider({
+          range: false,
+          min: scope.config.min,
+          max: scope.config.max,
+          step: scope.config.step,
+          slide: function(event, ui) { 
+            console.log("im sliding!",ui.value);
+            scope.$apply(function() {
+                scope.duration = ui.value;
+            });
+          }
+        });
+      }
+    }
+});
+
+app.directive("difficultySlider", function() {
+    return {
+      restrict: 'A',
+      scope: {
+          config: "=config",
+          difficulty: "=model"
+      },
+      link: function(scope, elem, attrs) {
+        var setModel = function(value) {
+          scope.model = value;   
+        }
+        $("#difficulty-slider").slider({
+          range: false,
+          min: scope.config.min,
+          max: scope.config.max,
+          step: scope.config.step,
+          slide: function(event, ui) { 
+            console.log("im difficult sliding!",ui.value);
+            scope.$apply(function() {
+                scope.difficulty = ui.value;
+            });
+          }
+        });
+      }
+    }
+});
+
+app.directive("scenarySlider", function() {
+    return {
+      restrict: 'A',
+      scope: {
+          config: "=config",
+          scenary: "=model"
+      },
+      link: function(scope, elem, attrs) {
+        var setModel = function(value) {
+          scope.model = value;   
+        }
+        $("#scenary-slider").slider({
+          range: false,
+          min: scope.config.min,
+          max: scope.config.max,
+          step: scope.config.step,
+          slide: function(event, ui) { 
+            console.log("im scenary sliding!",ui.value);
+            scope.$apply(function() {
+                scope.scenary = ui.value;
+            });
+          }
+        });
+      }
+    }
+});
