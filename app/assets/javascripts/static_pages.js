@@ -1,3 +1,5 @@
+// USE THIS FILE ONLY WHEN WE FIGURE OUT HOW TO USE GOOGLE MAP
+
 
 // $(document).ready(function(){
   
