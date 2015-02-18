@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150215074708) do
     t.text     "scientific_name"
     t.text     "chinese_name"
     t.text     "common_name"
-    t.text     "type"
+    t.text     "plant_type"
     t.text     "photo_urls"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20150215074708) do
     t.decimal  "start_latitude"
     t.decimal  "end_longitude"
     t.decimal  "end_latitude"
+    t.text     "vegetation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

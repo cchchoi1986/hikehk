@@ -3,10 +3,12 @@ class CreateTrails < ActiveRecord::Migration
     create_table :trails do |t|
       t.string :name
       t.text :description #serialized
+      # t.string  :region
       t.integer :region_id
-      t.integer :difficulty
-      t.integer :distance_meters
-      t.integer :num_minutes
+      t.decimal :difficulty
+      t.decimal :scenery
+      t.decimal :distance
+      t.decimal :duration
       t.text :route_url
       t.text :food_supply #serialized
       t.text :warning #serialized
@@ -15,6 +17,7 @@ class CreateTrails < ActiveRecord::Migration
       t.decimal :start_latitude
       t.decimal :end_longitude
       t.decimal :end_latitude
+      t.text :vegetation #serialized
       t.timestamps
     end
     add_index :trails, :region_id

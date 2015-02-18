@@ -42,16 +42,17 @@ namespace :get_plants do
             index = index + 1
           end
 
-          plant = {
+          plant = Plant.create({
             :family_name => family_name,
             :chinese_family_name => chinese_family_name,
-            :name => common_name,
+            :common_name => common_name,
+            :scientific_name => scientific_name,
             :chinese_name => chinese_name,
             :family_name => family_name,
             :plant_type => plant_type,
-            :flowering_time => flowering_period,
+            # :flowering_time => flowering_period,
             :photo_urls => photos
-          }
+          })
 
           puts "plant: #{plant}"
         end
@@ -83,7 +84,7 @@ def get_photos(html_doc)
   # print imgScript
 
   imgScript.split(",").each do |f|
-    photos.push(f)
+    photos.push(f.to_s.gsub("\"", ""))
   end
   return photos
 end
