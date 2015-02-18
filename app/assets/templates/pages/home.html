@@ -6,28 +6,57 @@
         zoom  ='map.zoom'
         bounds = 'map.bounds'>
 
-      <ui-gmap-marker
-          idKey ='marker.idKey'
-          coords='marker.coords'>
-      </ui-gmap-marker>
-
-      <ui-gmap-polyline ng-repeat="p in polylines" path="p.path" stroke="p.stroke" visible='p.visible'
-          geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'>
+      <ui-gmap-polyline 
+          ng-repeat="p in polylines" 
+          path="p.path" 
+          stroke="p.stroke" 
+          visible='p.visible'
+          geodesic='p.geodesic' 
+          fit="false" 
+          editable="p.editable" 
+          draggable="p.draggable" 
+          icons='p.icons'>
       </ui-gmap-polyline>
 
-    </ui-gmap-google-map>
+      <ui-gmap-markers
+          models  = 'trails'
+          coords  = "'self'">
+        <ui-gmap-windows
+          show="show"
+          event="clickEventsObject">
 
+          <div ng-non-bindable>
+            <h3>{{title}}</h3>
+            {{description}}
+          </div>
+        </ui-gmap-windows>
+      </ui-gmap-markers>
+    </ui-gmap-google-map>
   </div>
-  <!-- <div class="filter-back">
-  </div> -->
+
   <div id="filter-box">
       <ul class="list-group">
-        <li class="list-group-item"><div>Duration</div></li>
-        <li class="list-group-item"><div>Difficulties</div></li>
-        <li class="list-group-item"><div>Scenary</div></li>
-        <li class="list-group-item"><div>Trees & Flowers</div></li>
-        <li class="list-group-item"><div>Hello World</div></li>
+        <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li>
+        <li class="list-group-item">
+          <div>Duration: {{duration}} mins</div>
+          <div duration-Slider config="sliderConfig" model="duration" id="duration-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Difficulty Level: {{difficulty}}</div>
+          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Scenary Level: {{scenary}}</div>
+          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider"></div>
+        </li>
+        <!-- <li class="list-group-item"><div>Trees & Flowers</div></li> -->
       </ul>
   </div>
-</body>
 
+  <button class="btn btn-sm btn-default close-button" ng-click="showPanel()">Close</button>
+
+  <div id="info-panel" ng-show="outPanel">
+    <h1>INFO BOX</h1>
+  </div>
+
+</body>

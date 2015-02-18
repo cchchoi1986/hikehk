@@ -1,71 +1,82 @@
-app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', function($scope, $http, $routeParams, uiGmapGoogleMapApi){
+app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout){
   
-  // uiGmapGoogleMapApi.then(function(maps){
+  $scope.outPanel = false;
 
-  var trails = [
-    {
-      name: "Dragon's Back",
-      latitude: 22.241165,
-      longitude: 114.241569
+  $scope.showPanel = function(){
+    $scope.outPanel = !$scope.outPanel;
+  }
+
+  // // uiGmapGoogleMapApi.then(function(maps){
+
+  // var directionsService = new google.maps.DirectionsService();
+
+  // var request = 
+  // {
+  //   // origin: $scope.trip.pickupLocation,
+  //   // destination: $scope.trip.dropOfflocation,
+  //   // DRIVING, BICYCLING, TRANSIT, WALKING
+  //   // travelMode: google.maps.DirectionsTravelMode.WALKING 
+  // };
+
+  // var mapOptions = {
+  //   zoom: 12,
+  //   center: { 
+  //     latitude: 22.268394, 
+  //     longitude: 114.186700
+  //   },
+  //   //ROADMAP, SATELLITE, HYBRID, TERRAIN
+  //   mapTypeId: google.maps.MapTypeId.ROAMAP 
+  // };
+
+  var map;
+  $scope.map = {
+    center: { 
+      latitude: 22.268394, //happy valley
+      longitude: 114.186700 
     },
-    {
-      name: "Victoria Peak",
-      latitude: 22.275590 ,
-      longitude: 114.143910
+    zoom: 12,
+    bounds: {
+      latitude: 22.1634178, 
+      longitude: 113.5629425
     }
-  ];
-  // var marker;
-  // var map;
-
-  // function initialize() {
-  //   var mapOptions = {
-  //     center: {lat: 22.241165, lng: 114.241569},
-  //     zoom: 15,
-  //     mapTypeId: google.maps.MapTypeId.TERRAIN
-  //   };
-  //   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-  //   for (var i = 0; i < trails.length; i++) {
-  //     marker = new google.maps.Marker({
-  //       position: new google.maps.LatLng(trails[i].latitude,trails[i].longitude),
-  //       map: map,
-  //       title: trails[i].name,
-  //       animation: google.maps.Animation.DROP,
-  //       // position: parliament,
-  //     });
-  //   }
-  //   google.maps.event.addListener(marker, 'click', toggleBounce);
-  // }
-
-  // function toggleBounce() {
-  //   if (marker.getAnimation() != null) {
-  //     marker.setAnimation(null);
-  //   } else {
-  //     marker.setAnimation(google.maps.Animation.BOUNCE);
-  //   }
-  // }
-
-
-  //   google.maps.event.addDomListener(window, 'load', initialize);
-  // })
-
-
-  $scope.map = { 
-    center: 
-      { latitude: 22.3700556, longitude: 114.1223784 },
-    zoom: 11,
-    bounds: 
-      { latitude: 22.1634178, longitude: 113.5629425 }
+  };
+  
+  $scope.options = {
+    // allow zoom in zoom out by scrolling
+    scrollwheel: true
   };
 
-  $scope.marker = {
-    idKey: 1,
-    coords: { 
-      latitude: 22.241165,
-      longitude: 114.241569 
-    },
-    title: "Hihi"
+  // initial markers set, see html models = 'trails'
+  $scope.trails = [{ 
+      title: "Dragon's Back",
+      latitude: 22.241165, 
+      longitude: 114.241569,
+      id: 1,
+      show: false,
+      description: ""
+  },{
+      title: "Victoria Peak",
+      latitude: 22.275590,
+      longitude: 114.143910,
+      id: 2,
+      show: false,
+      description: ""
+  }];
+
+  // the push must wait til the map is ready in order to show up
+  // $scope.trails.push(trail);
+  $scope.addMarker = function(){
+    var newtrail = { 
+        title: "Happy Valley",
+        latitude: 22.268394, 
+        longitude: 114.186700,
+        description: "",
+        show: false,
+        id: 3,
+    };
+    $scope.trails.push(newtrail);
   }
+
 
   $scope.polylines = [
     {
@@ -142,4 +153,52 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     // }
   ];
 
+// onclick the window shows up, with title and description
+  $scope.trails.onMouseOver = function() {
+      trails.show = !trails.show;
+  };
+
+  // $scope.clickEventsObject = {
+  //     mouseover: trailsInfoMouseOver,
+  //     mouseout: trailsInfoMouseOut,
+  // };
+
+
+  // slider for durations (mins)
+  $scope.sliderConfig = {
+      // value:100,
+      min: 0,
+      max: 500,
+      step: 50
+  }
+  $scope.duration = 0;
+  $scope.setDuration = function (duration){
+    $scope.duration = duration; 
+  }
+
+  // slider for difficulties (0-5)
+  $scope.sliderDifficultConfig = {
+      min: 0,
+      max: 5,
+      step: 1
+  }
+  $scope.difficulty = 0;
+  $scope.setDifficulty = function (difficulty){
+    $scope.difficulty = difficulty; 
+  }
+
+  // slider for scenary (0-5)
+  $scope.sliderScenaryConfig = {
+      min: 0,
+      max: 5,
+      step: 1
+  }
+  $scope.scenary = 0;
+  $scope.setScenary = function (scenary){
+    $scope.scenary = scenary; 
+  }
+
+
 }]);
+
+

@@ -18,7 +18,6 @@
 //= require angular-resource
 //= require angular-route
 //= require angular-ui-bootstrap-tpls
-//= require d3
 //= require angular-google-maps
 //= require lodash
 //= require underscore

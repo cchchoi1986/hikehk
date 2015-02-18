@@ -1,0 +1,23 @@
+@import "colors";
+
+#filter-box{
+  text-align: center;
+  z-index: 20;
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  // height: 200px;
+  width:350px;
+  border: 1px solid $primary-border-color;
+}
+
+// list group item
+#filter-box > ul > li {
+  background-color: $primary-background-color;
+
+}
+
+// list group
+#filter-box > ul {
+  margin-bottom: 0;
+}
