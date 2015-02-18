@@ -12,16 +12,25 @@ html, body, #map-canvas {
   position: absolute;
 }
 
+// .filter-back {
+//   background: white;
+//   z-index: 19;
+//   position: fixed;
+//   bottom: 25px;
+//   left: 25px;
+// }
+
 #filter-box{
   text-align: center;
+  opacity: 0.8;
   z-index: 20;
   position: fixed;
   bottom: 25px;
   left: 25px;
   // height: 200px;
   width:350px;
-  background-color: transparent;
-  border: 1px solid black;
+  background-color: white;
+  // border: 1px solid black;
 
 }
 

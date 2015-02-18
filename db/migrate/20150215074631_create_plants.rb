@@ -6,7 +6,7 @@ class CreatePlants < ActiveRecord::Migration
       t.text :scientific_name
       t.text :chinese_name
       t.text :common_name
-      t.text :type
+      t.text :plant_type
       t.text :photo_urls #serialized
       t.timestamps
     end

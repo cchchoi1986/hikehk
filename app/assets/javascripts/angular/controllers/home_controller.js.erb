@@ -51,8 +51,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
 
   $scope.map = { 
-    center: { latitude: 22.241165, longitude: 114.241569 },
-    zoom: 13,
+    center: 
+      { latitude: 22.3700556, longitude: 114.1223784 },
+    zoom: 11,
+    bounds: 
+      { latitude: 22.1634178, longitude: 113.5629425 }
   };
 
   $scope.marker = {
@@ -63,5 +66,80 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     },
     title: "Hihi"
   }
+
+  $scope.polylines = [
+    {
+      id: 1,
+      path: [
+        {
+          latitude: 45,
+          longitude: -74
+        },
+        {
+          latitude: 30,
+          longitude: -89
+        },
+        {
+          latitude: 37,
+          longitude: -122
+        },
+        {
+          latitude: 60,
+          longitude: -95
+        }
+      ],
+      stroke: {
+        color: '#6060FB',
+        weight: 3
+      },
+      editable: true,
+      draggable: true,
+      geodesic: true,
+      visible: true,
+      icons: [{
+          icon: {
+            path: google.maps.SymbolPath.FORWARD
+          },
+        offset: '25px',
+        repeat: '50px'
+      }]
+    }
+    // {
+    //   id: 2,
+    //   path: [
+    //     {
+    //       latitude: 47,
+    //       longitude: -74
+    //     },
+    //     {
+    //       latitude: 32,
+    //       longitude: -89
+    //     },
+    //     {
+    //       latitude: 39,
+    //       longitude: -122
+    //     },
+    //     {
+    //       latitude: 62,
+    //       longitude: -95
+    //     }
+    //   ],
+    //   stroke: {
+    //     color: '#6060FB',
+    //     weight: 3
+    //   },
+    //   editable: true,
+    //   draggable: true,
+    //   geodesic: true,
+    //   visible: true,
+    //   icons: [{
+    //     icon: {
+    //       path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
+    //     },
+    //     offset: '25px',
+    //     repeat: '50px'
+    //   }]
+    // }
+  ];
 
 }]);

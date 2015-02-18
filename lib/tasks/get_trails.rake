@@ -39,8 +39,8 @@ namespace :get_trails do
         trail_html_doc = Nokogiri::HTML(open("http://www.oasistrek.com/#{f}").read)
 
         puts "<<<<<<<<<<<<<"
-        trail = { 
-          :region => region, 
+        trail = Trail.create({ 
+          # :region => region, 
           :name => get_name(trail_html_doc), 
           :difficulty => get_difficulty_rating(trail_html_doc),
           :scenery => get_scenery_rating(trail_html_doc),
@@ -50,7 +50,7 @@ namespace :get_trails do
           :duration => get_duration(trail_html_doc),
           :photo_urls => get_photo_urls(trail_html_doc),
           :description => get_description(trail_html_doc)
-        }
+        })
         puts trail
       end
 
@@ -127,10 +127,10 @@ def get_duration(trail_html_doc)
   temp_info_array = trail_html_doc.css("div.info")
   temp_info_array.each do |f|
     if f.children.attr("src").to_s == 'images/content_images/time_icon_e.gif'
-      duration = f.text.squish
+      duration = f.text.squish.gsub(" hours","").gsub(" hour","")
     end
   end
-  return duration
+  return duration.to_f
 end
 
 def get_distance(trail_html_doc)
@@ -138,10 +138,10 @@ def get_distance(trail_html_doc)
   temp_info_array = trail_html_doc.css("div.info")
   temp_info_array.each do |f|
     if f.children.attr("src").to_s == "images/content_images/distance_icon_e.gif"
-      distance = f.text.squish
+      distance = f.text.squish.gsub!(" km","")
     end
   end
-  return distance
+  return distance.to_f
 end
 
 def get_food_supply(trail_html_doc)

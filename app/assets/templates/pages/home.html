@@ -1,16 +1,25 @@
 <body>
   <div id="map-canvas">
+
     <ui-gmap-google-map 
         center='map.center'
-        zoom  ='map.zoom'>
+        zoom  ='map.zoom'
+        bounds = 'map.bounds'>
 
       <ui-gmap-marker
           idKey ='marker.idKey'
           coords='marker.coords'>
       </ui-gmap-marker>
-    </ui-gmap-google-map>
-  </div>
 
+      <ui-gmap-polyline ng-repeat="p in polylines" path="p.path" stroke="p.stroke" visible='p.visible'
+          geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'>
+      </ui-gmap-polyline>
+
+    </ui-gmap-google-map>
+
+  </div>
+  <!-- <div class="filter-back">
+  </div> -->
   <div id="filter-box">
       <ul class="list-group">
         <li class="list-group-item"><div>Duration</div></li>
