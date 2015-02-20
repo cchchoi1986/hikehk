@@ -2,104 +2,79 @@ namespace :make_region_plants do
   desc "make regions of hong kong"
   task :create => :environment do
 
-    grasslands = [
-      "Cynodon dactylon",
-      "Cyrtococcum patens",
-      "Digitaria sanquinalis",
-      "Echinochloa crus-galli",
-      "Eleusine indica",
-      "Imperata cylindrica",
-      "Ischaemum aristatum",
-      "Miscanthus sinensis",
-      "Neyraudia arundinaceae",
-      "Panicum maximum",
-      "Paspalum conjugatum",
-      "Paspalum scrobiculatum",
-      "Pennisetum alopecuroides",
-      "Rhynchelytrum repens",
-      "Thysanolaena maxima",
-      "Abutilon indicum",
-      "Achyranthes aspera",
-      "Ageratum conyzoides",
-      "Amaranthus spinosus",
-      "Amaranthus viridis",
-      "Bidens bipinnata",
-      "Cassia tora",
-      "Chrysanthemum frutescens",
-      "Chrysanthemum indicum",
-      "Conyza bonariensis",
-      "Crotalaria pallida",
-      "Desmodium heterocarpon",
-      "Eclipta prostrata",
-      "Elephantopus scaber",
-      "Elephantopus spicatus",
-      "Elephantopus tomentosa",
-      "Emilia sonchifolia",
-      "Gahnia tristis",
-      "Hedyotis acutangula",
-      "Inula cappa",
-      "Polygonum chinense",
-      "Mimosa pudica",
-      "Alysicarpus vaginalis",
-      "Millettia nitida",
-      "Paederia scandens",
-      "Phyllodium pulchellum",
-      "Pueraria lobata",
-      "Rubus reflexus",
-      "Scleria levis",
-      "Sida rhombifolia",
-      "Spilanthes acmella",
-      "Synedrella nodiflora",
-      "Vernonia cinerea"
-    ]
+      require 'nokogiri'
+      require 'open-uri'
+      # require 'csv'
 
-    shrublands = [
-      "Aporusa dioica",
-      "Baeckea frutescens",
-      "Boehmeria nivea",
-      "Breynia fruticosa",
-      "Bridelia tomentosa",
-      "Crotalaria pallida",
-      "Eurya chinensis",
-      "Evodia lepta",
-      "Ficus hispida",
-      "Ficus variegata",
-      "Glochidion eriocarpum",
-      "Gordonia axillaris",
-      "Ilex asprella",
-      "Litsea rotundifolia",
-      "Melastoma candidum",
-      "Melastoma dodecandrum",
-      "Melastoma sanguineum",
-      "Millettia dielsiana",
-      "Mimosa pudica",
-      "Phyllanthus emblica",
-      "Psychotria rubra",
-      "Pteroloma triquetrum",
-      "Rhaphiolepis indica",
-      "Rhodomyrtus tomentosa",
-      "Rubus reflexus",
-      "Sapium discolor",
-      "Schefflera octophylla",
-      "Sterculia lanceolata",
-      "Tetracera asiatica"
-    ]
+      url = "https://docs.google.com/spreadsheets/d/1vUGHTLK9BrGilPFWSahFz4M_UvIUH01kGvz1Vj1gsYE/pubhtml"
 
-    woodlands = [
-      "Alangium chinense",
-      "Aquilaria sinensis",
-      "Cinnamomum camphora",
-      "Diospyros morrisiana",
-      "Ficus",
-      "Liquidambar formosana",
-      "Lithocarpus",
-      "Litsea",
-      "Machilus",
-      "Sapium discolor",
-      "Schefflera octophylla",
-      "Sterculia lanceolata"
-    ]
-    
+      html_doc = Nokogiri::HTML(open(url).read)
+
+      region = html_doc.css("table.waffle > tbody > tr > td:nth-child(2)")
+      # region.each do |f|
+            # puts f.text
+      # end
+
+      districts = {
+            "Aberdeen" => 17,
+            "Tai Tong" => 9,
+            "Tai Tam" => 16,
+            "Tai Tan" => 6,
+            "Pak Tam Chung" => 4,
+            "Kei Ling Ha" => 5,
+            "Ngong Ping" => 1,
+            "Nai Chung" => 5,
+            "Kam Shan" => 2,
+            "Chung Pui" => 3,
+            "Clear Water Bay" => 4,
+            "Wong Shek" => 6,
+            "Pok Fu Lam" => 17,
+            "Quarry Bay" => 16,
+            "Wong Nai Chung" => 18,
+            "Nam Shan" => 1
+      }
+      # puts districts["Aberdeen"]
+
+      row = html_doc.css("table.waffle > tbody > tr")
+      row.each do |f|
+            array = []
+            rowtext = f.to_s
+            rowtext.gsub!(/(<tr style)(.*)/,"")
+            rowtext.gsub!(/(<th id)(.*)/,"")
+            rowtext.to_s.gsub!(/(<td class="s2)(.*)/,"")
+            rowtext.gsub!(/(<\/tr)(.*)/,"")
+            rowtext.gsub!(/(<td class="s1 softmerge"><div class="softmerge-inner" style="width: 110px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s0 softmerge" dir="ltr"><div class="softmerge-inner" style="width: 251px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s1 softmerge"><div class="softmerge-inner" style="width: 86px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s0 softmerge"><div class="softmerge-inner" style="width: 110px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s1 softmerge"><div class="softmerge-inner" style="width: 88px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s0 softmerge"><div class="softmerge-inner" style="width: 251px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s1 softmerge"><div class="softmerge-inner" style="width: 93px; left: -1px;">)(.*)/,"")
+            rowtext.gsub!(/(<td class="s1 softmerge"><div class="softmerge-inner" style="width: 251px; left: -1px;">)(.*)(<\/div><\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s0" dir="ltr">)(.*)(<\/td>)/,'\2')
+            rowtext.gsub!(/(<td class="s0">)(.*)(<\/td>)/,'\2')
+            # print rowtext.squish
+
+            rowtext.split("\n").each do |e|
+                  if e != ""
+                        array.push(e)
+                  end
+            end
+            # print array[0],array[3]
+            region = districts[array[0]]
+            Plant.where("scientific_name like ?", "%#{array[3]}%").each do |f|
+                  # puts f.id
+                  # puts region
+                  RegionPlantLink.create({
+                        :region_id => region,
+                        :plant_id => f.id
+                  })
+            end
+
+            
+            puts "================="
+      end
+
 
 
   end
