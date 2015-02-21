@@ -1,10 +1,17 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout){
   
   $scope.outPanel = false;
-
   $scope.showPanel = function(){
     $scope.outPanel = !$scope.outPanel;
   }
+
+  $scope.search = true;
+  $scope.trail = false;
+  $scope.switchPanel = function(){
+    $scope.search = !$scope.search;
+    $scope.trail = !$scope.trail;
+  }
+
 
   // // uiGmapGoogleMapApi.then(function(maps){
 
