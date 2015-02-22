@@ -4,7 +4,9 @@
     <ui-gmap-google-map 
         center='map.center'
         zoom  ='map.zoom'
-        bounds = 'map.bounds'>
+        draggable="true" 
+        options="options" 
+        bounds="map.bounds">
 
       <ui-gmap-polyline 
           ng-repeat="p in polylines" 
@@ -18,7 +20,7 @@
           icons='p.icons'>
       </ui-gmap-polyline>
 
-      <ui-gmap-markers
+      <!-- <ui-gmap-markers
           models  = 'trails'
           coords  = "'self'">
         <ui-gmap-windows
@@ -30,7 +32,7 @@
             {{description}}
           </div>
         </ui-gmap-windows>
-      </ui-gmap-markers>
+      </ui-gmap-markers> -->
     </ui-gmap-google-map>
   </div>
 
@@ -66,6 +68,7 @@
       <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 6</div></a>
       <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 7</div></a>
     </div>
+    
     <div class="one-trail" ng-show="trail">
       <h1>Trail Name</h1>
       <button ng-click="switchPanel()">Back</button>
