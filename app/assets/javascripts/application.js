@@ -18,7 +18,7 @@
 //= require angular-resource
 //= require angular-route
 //= require angular-ui-bootstrap-tpls
-//= require lodash
+//= require underscore
 //= require angular-google-maps
 //= require jquery-ui
 //= require jquery-ui/slider
