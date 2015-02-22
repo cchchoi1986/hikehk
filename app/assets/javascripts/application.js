@@ -18,9 +18,8 @@
 //= require angular-resource
 //= require angular-route
 //= require angular-ui-bootstrap-tpls
-//= require angular-google-maps
 //= require lodash
-//= require underscore
+//= require angular-google-maps
 //= require jquery-ui
 //= require jquery-ui/slider
 //= require noty/packaged/jquery.noty.packaged.min
