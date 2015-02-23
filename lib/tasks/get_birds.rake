@@ -28,39 +28,35 @@ namespace :scrape_birds do
     birds = html_doc.css(birdsFormat)
     # puts birds 
 
-    endOfList = false
-    begOfList = false
+    start = false
     # scrape the li an loop thru it with .each
     birds.each do |bird|
       # puts the li
-      if endOfList == false
-        bird_common_name = bird.css('a').attr('title').text.squish
-        if bird_common_name == "Pacific loon" then begOfList = true end
+      bird_common_name = bird.css('a').attr('title') ? bird.css('a').attr('title').text.squish : ''
 
-        if bird_common_name == "List of birds"
-          endOfList = true
-        else
-          if begOfList == true
+      case bird_common_name
+        when "Pacific loon"
+          start = true
+        when "List of birds"
+          start = false
+      end
 
-            # puts bird_common_name
-            
-            bird_scientific_name = bird.css('i').text
-            # puts bird_scientific_name
+      if start == true
+          
+        bird_scientific_name = bird.css('i').text
+        puts bird_scientific_name
 
-            bird_url = bird.css('a').attr('href')
-            # puts bird_url
-            
-            # call the get_bird_pix for that url
-            # get_bird_pix(bird_url)
+        bird_url = bird.css('a').attr('href')
+        puts bird_url
+        
+        # call the get_bird_pix for that url
 
-            bird = Bird.create({
-              :common_name => bird_common_name,
-              :scientific_name => bird_scientific_name, 
-              :photo_urls => get_bird_pix(bird_url)
-              })
-            puts bird.to_yaml
-          end
-        end
+        bird = Bird.create({
+          :common_name => bird_common_name,
+          :scientific_name => bird_scientific_name,
+          :photo_urls => get_bird_pix(bird_url)
+          })
+        puts bird.to_yaml
       end
     end
   end
