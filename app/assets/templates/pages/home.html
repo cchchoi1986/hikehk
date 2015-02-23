@@ -39,10 +39,9 @@
       <ul class="list-group">
 <!--         <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li> -->
         <li class="list-group-item">
-          <div>Please select</div>
-          <checkbox>HK Island</checkbox>
-          <checkbox>Kowloon</checkbox>
-          <checkbox>New Territories</checkbox>
+          <input type="checkbox" checked>HK Island 
+          <input type="checkbox" checked>Kowloon 
+          <input type="checkbox" checked>New Territories 
         </li>
         <li class="list-group-item">
           <div>Difficulty Level: {{difficulty}}</div>
@@ -78,8 +77,10 @@
     </div>
     
     <div class="one-trail" ng-show="trail">
-      <h1>Trail Name</h1>
-      <button ng-click="switchPanel()">Back</button>
+      <div>
+        <button ng-click="switchPanel()" id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
+        <h1 class="title-name">Trail Name</h1>
+      </div>
       <div class="list-group-item">Location: Wan Chai District </div>
       <div class="list-group-item">
         Difficulty: 

@@ -32,7 +32,15 @@ img.icon{
   width: 20px;
 }
 
-// can't get inline block to work for the research results
-.inline-block {
-    position: inline-block;
-  }
+#back-button{
+  background-color: transparent;
+  display: inline-block;
+  margin-bottom: 20px;
+  &:hover{
+    background-color: $secondary-background-color;
+   }
+}
+
+.title-name{
+  display: inline-block;
+}
