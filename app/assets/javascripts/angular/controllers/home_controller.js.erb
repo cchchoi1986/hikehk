@@ -61,11 +61,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.trails.push(newtrail);
   }
 
-
+// dont undersatnd ui-gamp-windows at all show is not working
   // onclick the window shows up, with title and description
-  $scope.trails.onMouseOver = function() {
-      trails.show = !trails.show;
-  };
+  // $scope.trails.onMouseOver = function() {
+  //     trails.show = !trails.show;
+  // };
 
   // slider for distance (km)
   $scope.sliderDistanceConfig = {
