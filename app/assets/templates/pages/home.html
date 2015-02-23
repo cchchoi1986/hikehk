@@ -20,7 +20,7 @@
           icons='p.icons'>
       </ui-gmap-polyline>
 
-      <!-- <ui-gmap-markers
+      <ui-gmap-markers
           models  = 'trails'
           coords  = "'self'">
         <ui-gmap-windows
@@ -31,7 +31,7 @@
             {{description}}
           </div>
         </ui-gmap-windows>
-      </ui-gmap-markers> -->
+      </ui-gmap-markers>
     </ui-gmap-google-map>
   </div>
 
@@ -67,13 +67,48 @@
   <div id="info-panel" class="container-fluid" ng-show="true">
     <div class="search-results" ng-show="search">
       <h1 ng-click="eee()">Search Results</h1>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 1</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 2</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 3</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 4</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 5</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 6</div></a>
-      <a href="" class="glyphicon glyphicon-chevron-right list-group-item" ng-click="switchPanel()"><div class="">Result 7</div></a>
+
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 1</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 2</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 3</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 4</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 5</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 6</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 7</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
+      <button class="list-group-item" ng-click="switchPanel()">
+        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
+        <div class="search-results-item col-md-7"><h2>Result 8</h2>{{info.climate}}</div>
+        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
+      </button>
     </div>
     
     <div class="one-trail" ng-show="trail">

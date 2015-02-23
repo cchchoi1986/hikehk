@@ -18,6 +18,27 @@
   position: fixed;
 }
 
+.search-result-pix{
+  display: inline-block;
+  height: 60px;
+  width: auto;
+}
+
+button.list-group-item{
+  display: flex;
+  align-items: center;
+}
+
+button.search-results-button{
+  display: inline-block;
+  background-color: transparent;
+}
+
+.search-results-item{
+  display: inline-block;
+  text-align: left;
+}
+
 .search-results{
   text-align: left;
 }
