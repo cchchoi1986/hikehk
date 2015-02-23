@@ -5,48 +5,63 @@ namespace :scrape_birds do
     require 'open-uri'
     require 'nokogiri'
     url = "http://en.wikipedia.org/wiki/List_of_birds_of_Hong_Kong"
-    # get_birds(url)
-    urla = "http://en.wikipedia.org/wiki/Pacific_loon"
-    get_bird_pix(urla)
+    get_birds(url)
   end
   
-  def get_bird_pix(url)
-    bird_document = open(bird_url).read
-    html_doc = Nokogiri::HTML(bird_document)
-    
-    birdDataStructure_pix = "tbody > tr > td > a > img"
-    bird_pix = html_doc.css(birdDataStructure_pix).attr("href")
-    puts bird_pix
+  def get_bird_pix(bird_url)
+    #concatenate bird_url with wikipedia
+    complete_bird_url = "http://en.wikipedia.org" + bird_url 
 
+    bird_document = open(complete_bird_url).read
+    html_doc = Nokogiri::HTML(bird_document)
+    birdDataStructure_pix = "a.image > img"
+    bird_pix_list = html_doc.css(birdDataStructure_pix).first.attr("src").gsub("//","").gsub("220px","440px")
+    return bird_pix_list
   end
 
   def get_birds(url)
     document = open(url).read
     html_doc = Nokogiri::HTML(document)
 
-    # bird family name
-    birdDataStructure_type = "div > div > div > h2 > span"
-    bird_family_name = html_doc.css(birdDataStructure_type).attr("id")
-    # puts bird_family_name 
-    #Loons
+    # set the format for the li
+    birdsFormat = "div > div.mw-content-ltr > ul > li"
+    birds = html_doc.css(birdsFormat)
+    # puts birds 
 
-    # bird common name
-    birdDataStructure_name = "div > div.mw-content-ltr > ul > li > a"
-    bird_common_name = html_doc.css(birdDataStructure_name).attr("title")
-    # puts bird_common_name
-    #Pacific loon
+    endOfList = false
+    begOfList = false
+    # scrape the li an loop thru it with .each
+    birds.each do |bird|
+      # puts the li
+      if endOfList == false
+        bird_common_name = bird.css('a').attr('title').text.squish
+        if bird_common_name == "Pacific loon" then begOfList = true end
 
-    # bird scentific name
-    birdDataStructure_scentific = "div > div > ul > li > i"
-    bird_scentific_name = html_doc.css(birdDataStructure_scentific).text
-    # puts bird_scentific_name 
-    #Gavia pacifica
+        if bird_common_name == "List of birds"
+          endOfList = true
+        else
+          if begOfList == true
 
-    bird_common_name_url = html_doc.css(birdDataStructure_name).attr("href")
-    bird_url = "http://en.wikipedia.org" + bird_common_name_url
-    # puts bird_url
-    # get_bird_pix(bird_url)
+            # puts bird_common_name
+            
+            bird_scientific_name = bird.css('i').text
+            # puts bird_scientific_name
 
+            bird_url = bird.css('a').attr('href')
+            # puts bird_url
+            
+            # call the get_bird_pix for that url
+            # get_bird_pix(bird_url)
+
+            bird = Bird.create({
+              :common_name => bird_common_name,
+              :scientific_name => bird_scientific_name, 
+              :photo_urls => get_bird_pix(bird_url)
+              })
+            puts bird.to_yaml
+          end
+        end
+      end
+    end
   end
-
 end
