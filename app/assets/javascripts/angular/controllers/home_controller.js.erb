@@ -95,13 +95,24 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //     mouseout: trailsInfoMouseOut,
   // };
 
+  // slider for distance (km)
+  $scope.sliderDistanceConfig = {
+      min: 0,
+      max: 24,
+      step: 1
+  }
+  $scope.distance = 0;
+  $scope.setDistance = function (distance){
+    $scope.distance = distance;
+  }
+
 
   // slider for durations (mins)
   $scope.sliderConfig = {
       // value:100,
       min: 0,
-      max: 500,
-      step: 50
+      max: 600,
+      step: 10
   }
   $scope.duration = 0;
   $scope.setDuration = function (duration){
@@ -113,7 +124,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       min: 0,
       max: 5,
       step: 1
-  };
+  }
 
   $scope.difficulty = 0;
   $scope.setDifficulty = function (difficulty){
@@ -131,44 +142,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.scenary = scenary; 
   }
 
-  // map.getDirections().directions().then( function( directions ) { 
-  //   console.log(directions); 
-  // });
-
-
-  // slider for durations (mins)
-  $scope.sliderConfig = {
-      // value:100,
-      min: 0,
-      max: 500,
-      step: 50
-  }
-  $scope.duration = 0;
-  $scope.setDuration = function (duration){
-    $scope.duration = duration; 
-  }
-
-  // slider for difficulties (0-5)
-  $scope.sliderDifficultConfig = {
-      min: 0,
-      max: 5,
-      step: 1
-  }
-  $scope.difficulty = 0;
-  $scope.setDifficulty = function (difficulty){
-    $scope.difficulty = difficulty; 
-  }
-
-  // slider for scenary (0-5)
-  $scope.sliderScenaryConfig = {
-      min: 0,
-      max: 5,
-      step: 1
-  }
-  $scope.scenary = 0;
-  $scope.setScenary = function (scenary){
-    $scope.scenary = scenary; 
-  }
 
 
 

@@ -78,3 +78,30 @@ app.directive("scenarySlider", function() {
       }
     }
 });
+
+app.directive("distanceSlider", function() {
+    return {
+      restrict: 'A',
+      scope: {
+          config: "=config",
+          scenary: "=model"
+      },
+      link: function(scope, elem, attrs) {
+        var setModel = function(value) {
+          scope.model = value;   
+        }
+        $("#distance-slider").slider({
+          range: false,
+          min: scope.config.min,
+          max: scope.config.max,
+          step: scope.config.step,
+          slide: function(event, ui) { 
+            console.log("im distance sliding!",ui.value);
+            scope.$apply(function() {
+                scope.distance = ui.value;
+            });
+          }
+        });
+      }
+    }
+});

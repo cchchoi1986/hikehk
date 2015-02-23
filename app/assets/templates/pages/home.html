@@ -38,10 +38,11 @@
   <div id="filter-box">
       <ul class="list-group">
 <!--         <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li> -->
-        <li class="list-group-item"><div>Please select</div></li>
         <li class="list-group-item">
-          <div>Duration: {{duration}} mins</div>
-          <div duration-Slider config="sliderConfig" model="duration" id="duration-slider"></div>
+          <div>Please select</div>
+          <checkbox>HK Island</checkbox>
+          <checkbox>Kowloon</checkbox>
+          <checkbox>New Territories</checkbox>
         </li>
         <li class="list-group-item">
           <div>Difficulty Level: {{difficulty}}</div>
@@ -50,6 +51,14 @@
         <li class="list-group-item">
           <div>Scenary Level: {{scenary}}</div>
           <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Distance: {{distance}} km</div>
+          <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider"></div>
+        </li>
+        <li class="list-group-item">
+          <div>Duration: {{duration}} mins</div>
+          <div duration-Slider config="sliderConfig" model="duration" id="duration-slider"></div>
         </li>
       </ul>
   </div>
