@@ -152,6 +152,16 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.info = WeatherServices.processData(data)
   });
 
+  $scope.slides = [{
+    image: "assets/dragon1.jpg", 
+    text: "hello dragon one"
+  }, {
+    image: "assets/dragon2.jpg",
+    text:  "dragon 2"
+  }
+  ];
+
+
 
 }]);
 
