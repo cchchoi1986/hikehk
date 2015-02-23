@@ -50,7 +50,6 @@ namespace :scrape_birds do
         puts bird_url
         
         # call the get_bird_pix for that url
-
         bird = Bird.create({
           :common_name => bird_common_name,
           :scientific_name => bird_scientific_name,

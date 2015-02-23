@@ -51,6 +51,7 @@ gem 'nokogiri'
 
 # bower
 gem 'bower'
+gem 'rails_12factor'
 
 # gmaps4rails
 gem 'gmaps4rails'

@@ -1,12 +1,12 @@
 @import "colors";
 
-#filter-box{
+#filter-box {
   text-align: center;
   z-index: 20;
   position: fixed;
   bottom: 25px;
   left: 25px;
-  width:25vw;
+  width: 25vw;
   border: 1px solid $primary-border-color;
 }
 
