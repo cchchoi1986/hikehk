@@ -1,5 +1,5 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout){
-  
+
   $scope.outPanel = false;
   $scope.showPanel = function(){
     $scope.outPanel = !$scope.outPanel;
@@ -94,6 +94,46 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //     mouseover: trailsInfoMouseOver,
   //     mouseout: trailsInfoMouseOut,
   // };
+
+
+  // slider for durations (mins)
+  $scope.sliderConfig = {
+      // value:100,
+      min: 0,
+      max: 500,
+      step: 50
+  }
+  $scope.duration = 0;
+  $scope.setDuration = function (duration){
+    $scope.duration = duration; 
+  }
+
+  // slider for difficulties (0-5)
+  $scope.sliderDifficultConfig = {
+      min: 0,
+      max: 5,
+      step: 1
+  };
+
+  $scope.difficulty = 0;
+  $scope.setDifficulty = function (difficulty){
+    $scope.difficulty = difficulty; 
+  }
+
+  // slider for scenary (0-5)
+  $scope.sliderScenaryConfig = {
+      min: 0,
+      max: 5,
+      step: 1
+  }
+  $scope.scenary = 0;
+  $scope.setScenary = function (scenary){
+    $scope.scenary = scenary; 
+  }
+
+  // map.getDirections().directions().then( function( directions ) { 
+  //   console.log(directions); 
+  // });
 
 
   // slider for durations (mins)
@@ -233,5 +273,4 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
 
 }]);
-
 
