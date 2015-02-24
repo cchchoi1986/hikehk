@@ -6,7 +6,7 @@ namespace :make_region_birds do
     require 'nokogiri'
     require 'open-uri'
 
-    url = ""
+    url = "https://drive.google.com/open?id=1w1IC_uSzD1KXI9kcQbQB4e2x29_k924XEvxZRQiz5JA&authuser=0"
 
     html_doc = Nokogiri::HTML(open(url).read)
 
