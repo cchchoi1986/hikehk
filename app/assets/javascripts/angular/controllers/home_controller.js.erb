@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout){
+app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices){
 
   $scope.outPanel = false;
   $scope.showPanel = function(){
@@ -11,29 +11,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.search = !$scope.search;
     $scope.trail = !$scope.trail;
   }
-
-
-  // // uiGmapGoogleMapApi.then(function(maps){
-
-  // var directionsService = new google.maps.DirectionsService();
-
-  // var request = 
-  // {
-  //   // origin: $scope.trip.pickupLocation,
-  //   // destination: $scope.trip.dropOfflocation,
-  //   // DRIVING, BICYCLING, TRANSIT, WALKING
-  //   // travelMode: google.maps.DirectionsTravelMode.WALKING 
-  // };
-
-  // var mapOptions = {
-  //   zoom: 12,
-  //   center: { 
-  //     latitude: 22.268394, 
-  //     longitude: 114.186700
-  //   },
-  //   //ROADMAP, SATELLITE, HYBRID, TERRAIN
-  //   mapTypeId: google.maps.MapTypeId.ROAMAP 
-  // };
 
   var map;
   $scope.map = {
@@ -84,24 +61,30 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.trails.push(newtrail);
   }
 
-
-// onclick the window shows up, with title and description
-  $scope.trails.onMouseOver = function() {
-      trails.show = !trails.show;
-  };
-
-  // $scope.clickEventsObject = {
-  //     mouseover: trailsInfoMouseOver,
-  //     mouseout: trailsInfoMouseOut,
+// dont undersatnd ui-gamp-windows at all show is not working
+  // onclick the window shows up, with title and description
+  // $scope.trails.onMouseOver = function() {
+  //     trails.show = !trails.show;
   // };
 
+  // slider for distance (km)
+  $scope.sliderDistanceConfig = {
+      min: 0,
+      max: 24,
+      step: 1
+  }
+  $scope.distance = 0;
+  $scope.setDistance = function (distance){
+    $scope.distance = distance;
+  }
+
 
   // slider for durations (mins)
-  $scope.sliderConfig = {
+  $scope.sliderDurationConfig = {
       // value:100,
       min: 0,
-      max: 500,
-      step: 50
+      max: 600,
+      step: 10
   }
   $scope.duration = 0;
   $scope.setDuration = function (duration){
@@ -113,7 +96,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       min: 0,
       max: 5,
       step: 1
-  };
+  }
 
   $scope.difficulty = 0;
   $scope.setDifficulty = function (difficulty){
@@ -131,44 +114,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.scenary = scenary; 
   }
 
-  // map.getDirections().directions().then( function( directions ) { 
-  //   console.log(directions); 
-  // });
-
-
-  // slider for durations (mins)
-  $scope.sliderConfig = {
-      // value:100,
-      min: 0,
-      max: 500,
-      step: 50
-  }
-  $scope.duration = 0;
-  $scope.setDuration = function (duration){
-    $scope.duration = duration; 
-  }
-
-  // slider for difficulties (0-5)
-  $scope.sliderDifficultConfig = {
-      min: 0,
-      max: 5,
-      step: 1
-  }
-  $scope.difficulty = 0;
-  $scope.setDifficulty = function (difficulty){
-    $scope.difficulty = difficulty; 
-  }
-
-  // slider for scenary (0-5)
-  $scope.sliderScenaryConfig = {
-      min: 0,
-      max: 5,
-      step: 1
-  }
-  $scope.scenary = 0;
-  $scope.setScenary = function (scenary){
-    $scope.scenary = scenary; 
-  }
 
 
 
@@ -178,7 +123,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
           id: 3,
           path: google.maps.geometry.encoding.decodePath("sz{fCmlixTN_@f@gAJQvB{Cz@eAj@g@BAEOGi@@[QKKMCSBg@Re@JM`@SZONOhAe@~@QPELKlAcARK`@G`@?zDCH@PJHJHBXIr@Sr@Kv@G^BbA\|@\f@LRLb@l@vAhCx@bB`@f@ZJVApBa@dB_@TBRLDT]~A?P@FNJLu@BDHLFL@NRTNH^FPCt@Ch@F^Pf@^NHb@F`CVh@CPHXRT`@LTDTDLVT|@h@BVDn@v@fCDd@rA@r@In@QlA@h@IP@RHr@RXLP?j@OZUl@o@tBq@TARDP@JCHGBKDKJCDEBIHEVFd@Gd@EbEnAN?LARDd@L`@BHALBh@[D@X^Pv@@p@JHMTc@DUNEVq@ZFV]JIXH^Ph@XZNbAA`@L`@d@n@V^JRFTTx@ND~@Dv@@n@Bl@Cl@Wj@]DETGh@Q@E?EGK"),
           stroke: {
-              color: '#4EAE47',
+              // color: '#4EAE47',
+              color: 'red',
               weight: 3
           },
           editable: false,
@@ -187,7 +133,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
           visible: true,
           icons: [{
               icon: {
-                  path: google.maps.SymbolPath.BACKWARD
+                  // path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
               },
               offset: '25px',
               repeat: '50px'
@@ -196,9 +142,26 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   ];
 
     // polyline test ^^
-    $scope.eee = function () {
-      console.log($scope.polylines[0].path)
-    }
+  $scope.eee = function () {
+    console.log($scope.polylines[0].path)
+  }
+
+  $scope.lat = 22.268394;
+  $scope.lon = 114.186700;
+  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
+    $scope.info = WeatherServices.processData(data)
+  });
+
+  $scope.slides = [{
+    image: "assets/dragon1.jpg", 
+    text: "hello dragon one"
+  }, {
+    image: "assets/dragon2.jpg",
+    text:  "dragon 2"
+  }
+  ];
+
+
 
 }]);
 

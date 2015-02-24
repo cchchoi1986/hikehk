@@ -18,6 +18,27 @@
   position: fixed;
 }
 
+.search-result-pix{
+  display: inline-block;
+  height: 60px;
+  width: auto;
+}
+
+button.list-group-item{
+  display: flex;
+  align-items: center;
+}
+
+button.search-results-button{
+  display: inline-block;
+  background-color: transparent;
+}
+
+.search-results-item{
+  display: inline-block;
+  text-align: left;
+}
+
 .search-results{
   text-align: left;
 }
@@ -26,13 +47,30 @@
   text-align: left;
 }
 
-
 img.icon{
   height: 20px;
   width: 20px;
 }
 
-// can't get inline block to work for the research results
-.inline-block {
-    position: inline-block;
-  }
+#back-button{
+  background-color: transparent;
+  display: inline-block;
+  margin-bottom: 20px;
+  &:hover{
+    background-color: $secondary-background-color;
+   }
+}
+
+.title-name{
+  display: inline-block;
+}
+
+#trail-carousel{
+
+}
+
+img.trail-img{
+  height: 100%;
+  width: 100%;
+}
+
