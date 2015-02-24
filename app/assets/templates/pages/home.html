@@ -48,19 +48,19 @@
         </li>
         <li class="list-group-item">
           <div>Difficulty Level: {{difficulty}}</div>
-          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider"></div>
+          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
         </li>
         <li class="list-group-item">
           <div>Scenary Level: {{scenary}}</div>
-          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider"></div>
+          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider" data-name="scenary"></div>
         </li>
         <li class="list-group-item">
           <div>Distance: {{distance}} km</div>
-          <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider"></div>
+          <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
         </li>
         <li class="list-group-item">
           <div>Duration: {{duration}} mins</div>
-          <div duration-Slider config="sliderConfig" model="duration" id="duration-slider"></div>
+          <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
         </li>
       </ul>
   </div>
@@ -122,9 +122,10 @@
       <div class="list-group-item"><h2>Location: </h2>Wan Chai District </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <img src="assets/mountain.png" class="icon">
-        <img src="assets/mountain.png" class="icon">
-        <img src="assets/mountain.png" class="icon">
+        <i class="icon fa fa-star">
+        <i class="icon fa fa-star">
+        <i class="icon fa fa-star">
+        <i class="icon fa fa-star-half">
       </div>
       <div class="list-group-item"><h2>Duration: </h2>120 mins</div>
       <div class="list-group-item">

@@ -1,28 +1,49 @@
-app.directive("durationSlider", function() {
-    return {
-      restrict: 'A',
-      scope: {
-          config: "=config",
-          duration: "=model"
-      },
-      link: function(scope, elem, attrs) {
+// var attribute = ["difficulty","duration","scenary","distance"];
+
+app.directive("slider", function($parse){
+
+
+  var newScope = {};
+  newScope["config"] = "=";
+  newScope["duration"] = "=";
+
+  console.log(newScope)
+
+  return {
+    restrict: 'A',
+    scope: newScope,
+    link: function(scope, elem, attrs) {
+
+      var attribute;
+
+      attrs.$observe('name', function (value) {
+        attribute = value;
+        console.log(attribute);
+        
         var setModel = function(value) {
-          scope.model = value;   
+          scope.model = value;
         }
-        $("#duration-slider").slider({
+
+
+        $("#"+ attribute + "-slider").slider({
+          // 
           range: false,
           min: scope.config.min,
           max: scope.config.max,
           step: scope.config.step,
           slide: function(event, ui) { 
+
             console.log("im sliding!",ui.value);
             scope.$apply(function() {
-                scope.duration = ui.value;
+              scope[attribute] = ui.value;
             });
           }
         });
-      }
+      });
+      
+
     }
+  }
 });
 
 app.directive("difficultySlider", function() {
@@ -57,7 +78,7 @@ app.directive("scenarySlider", function() {
       restrict: 'A',
       scope: {
           config: "=config",
-          scenary: "=model"
+          // scenary: "=model"
       },
       link: function(scope, elem, attrs) {
         var setModel = function(value) {
