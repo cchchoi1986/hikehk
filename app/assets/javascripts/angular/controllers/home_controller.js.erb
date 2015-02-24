@@ -173,81 +173,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
 
   // polyline test...
-
-  // $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {}};
   $scope.polylines = [
-      {
-          id: 1,
-          path: [
-              {
-                  latitude: 45,
-                  longitude: -74
-              },
-              {
-                  latitude: 30,
-                  longitude: -89
-              },
-              {
-                  latitude: 37,
-                  longitude: -122
-              },
-              {
-                  latitude: 60,
-                  longitude: -95
-              }
-          ],
-          stroke: {
-              color: '#6060FB',
-              weight: 3
-          },
-          editable: true,
-          draggable: true,
-          geodesic: true,
-          visible: true,
-          icons: [{
-              icon: {
-                  path: google.maps.SymbolPath.BACKWARD_OPEN_
-              },
-              offset: '25px',
-              repeat: '50px'
-          }]
-      },
-      {
-          id: 2,
-          path: [
-              {
-                  latitude: 47,
-                  longitude: -74
-              },
-              {
-                  latitude: 32,
-                  longitude: -89
-              },
-              {
-                  latitude: 39,
-                  longitude: -122
-              },
-              {
-                  latitude: 62,
-                  longitude: -95
-              }
-          ],
-          stroke: {
-              color: '#6060FB',
-              weight: 3
-          },
-          editable: true,
-          draggable: true,
-          geodesic: true,
-          visible: true,
-          icons: [{
-              icon: {
-                  path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
-              },
-              offset: '25px',
-              repeat: '50px'
-          }]
-      },
       {
           id: 3,
           path: google.maps.geometry.encoding.decodePath("sz{fCmlixTN_@f@gAJQvB{Cz@eAj@g@BAEOGi@@[QKKMCSBg@Re@JM`@SZONOhAe@~@QPELKlAcARK`@G`@?zDCH@PJHJHBXIr@Sr@Kv@G^BbA\|@\f@LRLb@l@vAhCx@bB`@f@ZJVApBa@dB_@TBRLDT]~A?P@FNJLu@BDHLFL@NRTNH^FPCt@Ch@F^Pf@^NHb@F`CVh@CPHXRT`@LTDTDLVT|@h@BVDn@v@fCDd@rA@r@In@QlA@h@IP@RHr@RXLP?j@OZUl@o@tBq@TARDP@JCHGBKDKJCDEBIHEVFd@Gd@EbEnAN?LARDd@L`@BHALBh@[D@X^Pv@@p@JHMTc@DUNEVq@ZFV]JIXH^Ph@XZNbAA`@L`@d@n@V^JRFTTx@ND~@Dv@@n@Bl@Cl@Wj@]DETGh@Q@E?EGK"),
@@ -261,7 +187,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
           visible: true,
           icons: [{
               icon: {
-                  path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
+                  path: google.maps.SymbolPath.BACKWARD
               },
               offset: '25px',
               repeat: '50px'
@@ -271,7 +197,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
     // polyline test ^^
     $scope.eee = function () {
-      
       console.log($scope.polylines[0].path)
     }
 
