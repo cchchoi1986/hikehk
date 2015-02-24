@@ -16,22 +16,22 @@ namespace :make_region_plants do
       # end
 
       districts = {
-            "Aberdeen" => 17,
-            "Tai Tong" => 9,
-            "Tai Tam" => 16,
-            "Tai Tan" => 6,
-            "Pak Tam Chung" => 4,
-            "Kei Ling Ha" => 5,
-            "Ngong Ping" => 1,
-            "Nai Chung" => 5,
-            "Kam Shan" => 2,
-            "Chung Pui" => 3,
-            "Clear Water Bay" => 4,
-            "Wong Shek" => 6,
-            "Pok Fu Lam" => 17,
-            "Quarry Bay" => 16,
-            "Wong Nai Chung" => 18,
-            "Nam Shan" => 1
+            "Aberdeen" => Region.find_by(:name => "Southern").id,
+            "Tai Tong" => Region.find_by(:name => "Yuen Long").id,
+            "Tai Tam" => Region.find_by(:name => "Eastern").id,
+            "Tai Tan" => Region.find_by(:name => "Tai Po").id,
+            "Pak Tam Chung" => Region.find_by(:name => "Sai Kung").id,
+            "Kei Ling Ha" => Region.find_by(:name => "Sha Tin").id,
+            "Ngong Ping" => Region.find_by(:name => "Islands").id,
+            "Nai Chung" => Region.find_by(:name => "Sha Tin").id,
+            "Kam Shan" => Region.find_by(:name => "Kwai Tsing").id,
+            "Chung Pui" => Region.find_by(:name => "North").id,
+            "Clear Water Bay" => Region.find_by(:name => "Sai Kung").id,
+            "Wong Shek" => Region.find_by(:name => "Tai Po").id,
+            "Pok Fu Lam" => Region.find_by(:name => "Southern").id,
+            "Quarry Bay" => Region.find_by(:name => "Eastern").id,
+            "Wong Nai Chung" => Region.find_by(:name => "Wan Chai").id,
+            "Nam Shan" => Region.find_by(:name => "Islands").id
       }
       # puts districts["Aberdeen"]
 
