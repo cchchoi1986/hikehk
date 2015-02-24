@@ -1,14 +1,17 @@
 namespace :make_region_birds do
   desc "make regions of hong kong"
+  # rake create:make_region_birds
   task :create => :environment do
 
     require 'nokogiri'
     require 'open-uri'
 
-    urlHK = "http://www.hkbws.org.hk/web/eng/hongkong_eng.htm"
-    urlKln = "http://www.hkbws.org.hk/web/eng/kowloon_eng.htm"
-    urlNT = "http://www.hkbws.org.hk/web/eng/new_territories_eng.htm"
+    url = ""
+
     html_doc = Nokogiri::HTML(open(url).read)
+
+    region = html_doc.css("")
+
 
     districtsNum = {
       "Islands" => 1, 
@@ -51,40 +54,62 @@ namespace :make_region_birds do
       "The Peak" => "Central & Western",
       "Mount Davis" => "Central & Western",
     }
-
-    def find_bird(url)
-
-      hk_bird_document = open(url).read
-      HK_array = [];
-
-      birdDataStructure_HK = "tbody > tr > td > div > p:nth-child(1).style3"
-      bird_region = bird.css(birdDataStructure_HK).text
-
-      birdDataStructure_species = "tbody > tr > td > div > p:nth-child(5).style2"
-      bird_name = bird.css(birdDataStructure_species).text
-
-      foo ={
-        :bird_common_name => bird_name,
-        :district => bird_region
-      }
-      HK_array.push(foo)
-
-
-      birdDataStructure_KLN_species = "table > tbody > tr > td > p:nth-child(5).style5"
-      birdDataStructure_NT_species = ""
-
-
-      Bird.where().each do |f|
-        puts districts
-        puts f.id
-        # RegionBirdLink.create({
-        #   :region_id => districts
-        #   :bird_id => f.id
-        # })
-      end
+    
+    Bird.where("").each do |f|
+      puts districts
+      puts f.id
+      RegionBirdLink.create({
+        :region_id => region,
+        :bird_id => f.id
+      })
     end
+  end
 
+  def find_bird(url)
+    # urlHK = "http://www.hkbws.org.hk/web/eng/hongkong_eng.htm"
+    # urlKln = "http://www.hkbws.org.hk/web/eng/kowloon_eng.htm"
+    # urlNT = "http://www.hkbws.org.hk/web/eng/new_territories_eng.htm"
+    # puts "scraping #{url}"
+    # document = open(url).read
+    # html_doc = Nokogiri::HTML(document)
+    # locations = html_doc.css("td > div")
+    # locations.each_with_index do |location, index|
+      # puts location
+      # puts index+1
+      # CAUTION: HO CHUNG NOT WORKING
 
+      # grap the location title
+      # location_title = location.css('p:nth-child(1)').text
+      # puts location_title
+      # grab the location birds
 
+      # match location with region
+
+      # loop thry the birds and store them in DB
+
+    # birdDataStructure_HK = "tbody > tr > td > div > p:nth-child(1)"
+    # bird_HK_region = bird.css(birdDataStructure_HK).text
+    # puts bird_HK_region
+
+    # birdDataStructure_species = "tbody > tr > td > div > p:nth-child(5)"
+    # bird__HK_name = bird.css(birdDataStructure_species).text
+    # puts bird__HK_name
+
+    # create an array of hash
+    # equate the region to a district
+    # save each record
+    # Alexandrine Parakeet, Japanese Thrush, Grey-backed Thrush, Chestnut-tailed Starling, Red-whiskered Bulbul, Magpie Robin, Chinese Bulbul, Fork-tailed Sunbird, Blue Magpie, Black-crowned Night Heron
+    # birdDataStructure_KLN_species = "table > tbody > tr > td > p:nth-child(5).style5"
+    # bird_KLN_name = bird.css(birdDataStructure_KLN_species).text
+
+    # birdDataStructure_NT_species = "tbody > tr > td > div > p:nth-child(5)" # missing ng tung chai, starling inlet
+    # bird_NT_name = bird.css(birdDataStructure_NT_species).text
+
+    # foo ={
+    #   :bird_common_name => bird_name,
+    #   :district => bird_region
+    # }
+    # HK_array.push(foo)
+    end
   end
 end

@@ -1,6 +1,6 @@
 namespace :scrape_birds do 
   desc "Scrape Hong Kong birds from wikipedia"
-  # rake get_birds:scrape_birds
+  # rake scrape_birds:get_birds
   task :get_birds => :environment do
     require 'open-uri'
     require 'nokogiri'
