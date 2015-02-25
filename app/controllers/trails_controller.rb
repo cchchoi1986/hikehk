@@ -4,6 +4,11 @@ class TrailsController < ApplicationController
     render 'show.json.jbuilder'
   end
 
+  def index
+    @trails = Trail.all
+    render 'index.json.jbuilder'
+  end
+
   def search
 
   end

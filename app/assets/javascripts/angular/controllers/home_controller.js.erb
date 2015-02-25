@@ -30,6 +30,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     scrollwheel: true
   };
 
+  $http.get('/trails').success(function(data, status, xhr) {
+    $scope.trails2 = data;
+    console.log($scope.trails2);
+  })
+
   // initial markers set, see html models = 'trails'
   $scope.trails = [{ 
       title: "Dragon's Back",
@@ -274,7 +279,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     "22.24422,114.24592",
     "22.24421,114.24595",
     "22.24421,114.24598",
-    "22.24425,114.24604"]
+    "22.24425,114.24604"
+    ]
 
   test = function(array) {
     new_array = [];
@@ -330,7 +336,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
     // polyline test ^^
   $scope.eee = function () {
-    console.log($scope.polylines[0].path)
+    // console.log($scope.polylines[0].path);
+    console.log($scope.trails2);
   }
 
   $scope.lat = 22.268394;

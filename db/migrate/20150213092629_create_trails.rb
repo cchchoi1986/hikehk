@@ -12,11 +12,9 @@ class CreateTrails < ActiveRecord::Migration
       t.text :food_supply #serialized
       t.text :warning #serialized
       t.text :photo_urls #serialized
-      t.float :start_longitude
-      t.float :start_latitude
-      t.float :end_longitude
-      t.float :end_latitude
-      t.text :vegetation #serialized
+      t.text :start_coordinates #serialized
+      t.text :end_coordinates #serialized
+      t.text :trail_coordinates #serialized
       t.timestamps
     end
     add_index :trails, :region_id
