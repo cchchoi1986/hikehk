@@ -65,12 +65,12 @@ namespace :make_region_plants do
             Plant.where("scientific_name like ?", "%#{array[3]}%").each do |f|
                   # puts f.id
                   # puts region
-                  RegionPlantLink.create({
+                  link = RegionPlantLink.create({
                         :region_id => region,
                         :plant_id => f.id
                   })
+                  puts link.to_yaml
             end
-
             
             puts "================="
       end
