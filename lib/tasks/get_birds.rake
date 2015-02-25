@@ -37,10 +37,10 @@ namespace :scrape_birds do
         bird_common_name = bird.css('a').attr('title') ? bird.css('a').attr('title').text.squish : ''
 
         case bird_common_name
-          when "Pacific loon"
-            start = true
-          when "List of birds"
-            start = false
+        when "Pacific loon"
+          start = true
+        when "List of birds"
+          start = false
         end
 
         if start == true
