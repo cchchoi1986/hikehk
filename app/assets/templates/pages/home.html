@@ -1,6 +1,5 @@
 <body>
   <div id="map-canvas">
-
     <ui-gmap-google-map 
         center='map.center'
         zoom  ='map.zoom'
@@ -34,10 +33,11 @@
       </ui-gmap-markers>
     </ui-gmap-google-map>
   </div>
-
   <div id="filter-box">
       <ul class="list-group">
-<!--         <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li> -->
+        <!-- <li class="list-group-item" ng-click="addMarker()">
+          <div>Add Mark</div>
+        </li>  -->
         <li class="list-group-item">
           <div class="region-checkbox"><input type="checkbox" checked>
           HK Island</div>
@@ -64,13 +64,10 @@
         </li>
       </ul>
   </div>
-
 <!--   <button class="btn btn-sm btn-default close-button" ng-click="showPanel()">Close</button> -->
-
   <div id="info-panel" class="container-fluid" ng-show="true">
     <div class="search-results" ng-show="search">
       <h1 ng-click="eee()">Search Results</h1>
-
       <button class="list-group-item" ng-click="switchPanel()">
         <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
         <div class="search-results-item col-md-7"><h2>Result 1</h2>{{info.climate}}</div>
@@ -115,37 +112,58 @@
     </div>
     
     <div class="one-trail" ng-show="trail">
-      <div>
-        <button ng-click="switchPanel()" id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
-        <h1 class="title-name">Trail Name</h1>
+      <div class="list-group-item" ng-click="switchPanel()">
+        <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
+        <h2 class="title-name">{{trail.name}}</h2>
       </div>
-      <div class="list-group-item"><h2>Location: </h2>Wan Chai District </div>
+      <div class="list-group-item">
+        <h2>Location: </h2>
+        <p>{{trail.region}}</p>
+      </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star-half">
+        <p></p>
+        <!-- the icons are messing up -->
+        <!-- <i class="icon fa fa-star"> -->
+        <!-- <i class="icon fa fa-star-half"> -->
       </div>
-      <div class="list-group-item"><h2>Duration: </h2>120 mins</div>
+      <div class="list-group-item">
+        <h2>Duration: </h2>
+        <p>{{trail.duration}} mins</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Distance: </h2>
+        <p>{{trail.distance}} km</p>
+      </div>
       <div class="list-group-item">
         <h2>Scenary: </h2>
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
+        <p></p><!-- <i class="icon fa fa-star"> -->
       </div>
-      <div class="list-group-item"><h2>Description: </h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
+      <div class="list-group-item">
+        <h2>Food Supply: </h2>
+        <p>{{trail.food_supply}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Warning: </h2>
+        <p>{{trail.warning}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Birds: </h2>
+        <p>{{trail.birds}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Plants: </h2>
+        <p>{{trail.plants}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Description: </h2>
+        <p>{{trail.description}}</p>
+      </div>
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
           <slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}" class="trail-img">
+            <!-- trail photo? -->
+            <img ng-src="http://www.oasistrek.com/{{trail.photo_urls}}" class="trail-img">
             <!-- <div class="carousel-caption"> 
               <h4>Slide {{$index}}</h4> 
               <p>{{slide.text}}</p> 
@@ -155,5 +173,4 @@
       </div>
     </div>
   </div>
-
 </body>
