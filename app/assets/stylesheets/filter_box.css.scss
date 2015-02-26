@@ -29,6 +29,14 @@ button.showBar{
   // outline: none;
 }
 
+button.home-button{
+  top: 50px;
+  left: 15px;
+  position: fixed;
+  background-color: $primary-font-color;
+  z-index: 20;
+}
+
 // list group
 #filter-box > ul {
   margin-bottom: 0;
