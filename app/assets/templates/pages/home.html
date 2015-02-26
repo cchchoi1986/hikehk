@@ -35,9 +35,9 @@
     </ui-gmap-google-map>
   </div>
 
+  <button class="btn btn-sm glyphicon glyphicon-plus showBar" ng-click="showbox()"></button>
   <div id="filter-box">
     <ul class="list-group">
-      <li class="list-group-item showBar" ng-click="showbox()">Hide / Show</li>
       <li class="list-group-item" ng-show="outBox">
         <div class="region-checkbox"><input type="checkbox" checked>
           HK Island</div>
@@ -65,13 +65,14 @@
     </ul>
   </div>
   <div id="info-panel" class="container-fluid" ng-show="true">
+    <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
     <div class="search-results" ng-show="search">
       <h1>Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="switchPanel()">
-        <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="search-result-pix col-md-3">
+        <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">
           <h2>{{trail.name}}</h2>
-          <ul ng-bind-html="makeStars(trail.difficulty)"></ul>
+<!--           <ul ng-bind-html="makeStars(trail.difficulty)"></ul> -->
           <!-- {{info.climate}} -->
         </div>
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
