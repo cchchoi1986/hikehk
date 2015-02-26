@@ -1,17 +1,20 @@
-app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices){
+app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', '$sce', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices, $sce){
 
-  $scope.outPanel = false;
-  $scope.showPanel = function(){
-    $scope.outPanel = !$scope.outPanel;
+  // the toggle function that show and hide the filter
+  $scope.outBox = true;
+  $scope.showbox = function(){
+    $scope.outBox = !$scope.outBox;
   }
 
+  // the switch that switch from search results to individual result
   $scope.search = true;
-  $scope.trail = false;
+  $scope.trailPanel = false;
   $scope.switchPanel = function(){
     $scope.search = !$scope.search;
-    $scope.trail = !$scope.trail;
+    $scope.trailPanel = !$scope.trailPanel;
   }
 
+  // the map
   var map;
   $scope.map = {
     center: { 
@@ -24,10 +27,84 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       longitude: 113.5629425
     }
   };
-  
+
+  // the function that create the stars
+  $scope.makeStars = function(factor) {
+    // console.log('factor:',factor);
+    range = 5;
+    wholeDiff = range - factor;
+    stars = "";
+    for (var i = factor; i > 0; i--) {
+      if (i == 0.5) {
+        stars = stars + "<i class='icon fa fa-star-half'></i>";
+      } else {
+        stars = stars + "<i class='icon fa fa-star'></i>";
+      }
+    }
+    for (var i = wholeDiff; i > 0.5; i--) {
+      if (i == 0.5) {
+        stars = stars + "<i class='icon fa fa-star-outline'></i>";
+      }
+    }
+    // must trust html for it to show up
+    return $sce.trustAsHtml(stars);
+  }
+
+  // styling options, array
+  var hikeMapStyle = [
+    {
+      "featureType":"landscape.natural",
+      "elementType":"geometry.fill",
+      "stylers":[
+        {"visibility":"on"},
+        {"color":"#e0efef"}
+      ]
+    },
+    {
+      "featureType":"poi",
+      "elementType":"geometry.fill",
+      "stylers":[
+        {"visibility":"on"},
+        {"hue":"#1900ff"},
+        {"color":"#c0e8e8"}
+      ]
+    },
+    {
+      "featureType":"road",
+      "elementType":"geometry",
+      "stylers":[
+        {"lightness":100},
+        {"visibility":"simplified"}
+      ]
+    },
+    {
+      "featureType":"road",
+      "elementType":"labels",
+      "stylers":[
+        {"visibility":"off"}
+      ]
+    },
+    {
+      "featureType":"transit.line",
+      "elementType":"geometry",
+      "stylers":[
+        {"visibility":"on"},
+        {"lightness":700}
+      ]
+    },
+    {
+      "featureType":"water",
+      "elementType":"all",
+      "stylers":[
+        {"color":"#7dcdcd"}
+      ]
+    }
+  ];
+
+  // map options
   $scope.options = {
-    // allow zoom in zoom out by scrolling
-    scrollwheel: true
+    scrollwheel: true,
+    styles: hikeMapStyle
   };
 
   $http.get('/trails').success(function(data, status, xhr) {
@@ -53,20 +130,22 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
 
   // initial markers set, see html models = 'trails'
-  $scope.trails = [{ 
+  $scope.trailMarkers = [{ 
       title: "Dragon's Back",
       latitude: 22.241165, 
       longitude: 114.241569,
       id: 1,
       show: false,
-      description: ""
+      description: "",
+      icon: "assets/scenery.png"
   },{
       title: "Victoria Peak",
       latitude: 22.275590,
       longitude: 114.143910,
       id: 2,
       show: false,
-      description: ""
+      description: "",
+      icon: "http://s3.amazonaws.com/nvest/users/avatars/000/000/001/thumb/33baa87.jpg?1407815203"
   }];
 
   // the push must wait til the map is ready in order to show up
@@ -82,6 +161,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     };
     $scope.trails.push(newtrail);
   }
+
+
 
 // dont undersatnd ui-gamp-windows at all show is not working
   // onclick the window shows up, with title and description
@@ -100,7 +181,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.distance = distance;
   }
 
-
   // slider for durations (mins)
   $scope.sliderDurationConfig = {
       // value:100,
@@ -117,7 +197,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.sliderDifficultConfig = {
       min: 0,
       max: 5,
-      step: 1
+      step: 0.5
   }
 
   $scope.difficulty = 0;
@@ -125,18 +205,31 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.difficulty = difficulty; 
   }
 
-  // slider for scenary (0-5)
-  $scope.sliderScenaryConfig = {
+  // slider for scenery (0-5)
+  $scope.sliderSceneryConfig = {
       min: 0,
       max: 5,
-      step: 1
+      step: 0.5
   }
-  $scope.scenary = 0;
-  $scope.setScenary = function (scenary){
-    $scope.scenary = scenary; 
+  $scope.scenery = 0;
+  $scope.setScenery = function (scenery){
+    $scope.scenery = scenery; 
   }
 
-  trail1 = [
+  // Weather service functions to get weather details
+  $scope.lat = 22.268394; //set to trails beginning coordinates
+  $scope.lon = 114.186700;
+  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
+    $scope.info = WeatherServices.processData(data)
+  });
+
+  $http.get('/trails').success(function(data, status, xhr) {
+    $scope.trails = data.trails;
+    console.log($scope.trails);
+  })
+
+  // array of trails for plotting polylines
+  var trail1 = [
     "22.26618,114.24983",
     "22.26610,114.24999",
     "22.26590,114.25035",
@@ -299,7 +392,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     "22.24425,114.24604"
     ]
 
-  test = function(array) {
+  // CLEM: this is an array of coordinates for the polylines
+  var makeCoord = function(array) {
     new_array = [];
     for (var i =0; i < array.length; i++){
       new_array.push({ latitude: array[i].split(',')[0], longitude: array[i].split(',')[1]});
@@ -307,12 +401,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     return new_array;
   }
 
-
   // polyline test...
   $scope.polylines = [
       {
           id: 2,
-          path: test(trail1), 
+          path: makeCoord(trail1), 
           stroke: {
               // color: '#4EAE47',
               color: 'red',
@@ -351,18 +444,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       }
   ];
 
-    // polyline test ^^
-  $scope.eee = function () {
-    // console.log($scope.polylines[0].path);
-    console.log($scope.trails2);
-  }
-
-  $scope.lat = 22.268394;
-  $scope.lon = 114.186700;
-  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
-    $scope.info = WeatherServices.processData(data)
-  });
-
+  // pictures for displaying the individual trail
   $scope.slides = [{
     image: "assets/dragon1.jpg", 
     text: "hello dragon one"

@@ -9,24 +9,30 @@
   z-index: 15;
   background-color: $primary-background-color;
   overflow: scroll;
+  padding: 0;
+  color: $primary-font-color;
 }
 
-.close-button{
-  z-index: 20;
-  right: 0;
-  margin: 5px;
-  position: fixed;
-}
-
-.search-result-pix{
+img.search-result-pix{
   display: inline-block;
-  height: 60px;
-  width: auto;
+  // max-height: 80px;
+  // height: auto;
+  height: 80px;
+  // width: auto;
+  max-width: 10vw;
+  padding: 0px 0px;
 }
 
-button.list-group-item{
+// acting funny .trail-results
+div.list-group-item{
   display: flex;
   align-items: center;
+  background-color: $primary-background-color;
+  color: $primary-font-color;
+}
+
+div.list-group-item.trail-results{
+  padding: 0;
 }
 
 button.search-results-button{
@@ -39,26 +45,41 @@ button.search-results-button{
   text-align: left;
 }
 
+.search-results-item > h2 {
+  font-size: 20px;
+}
+
 .search-results{
   text-align: left;
 }
 
-.one-trail{
+.search-results > h1{
+  font-size: 24px;
+  padding-left: 15px;
+}
+
+#one-trail{
   text-align: left;
 }
 
-img.icon{
-  height: 20px;
-  width: 20px;
+#one-trail > div.list-group-item{
+  display: inherit;
+  text-align: left;
+}
+
+#one-trail > div > h2 {
+  font-size: 20px;
+  display: inline-block;
+}
+
+#one-trail > div > p {
+  display: inline-block;
 }
 
 #back-button{
   background-color: transparent;
   display: inline-block;
   margin-bottom: 20px;
-  &:hover{
-    background-color: $secondary-background-color;
-   }
 }
 
 .title-name{

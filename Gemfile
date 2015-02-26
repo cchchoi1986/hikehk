@@ -69,3 +69,7 @@ gem 'jquery-ui-rails'
 
 # noty-fications
 gem 'noty-rails'
+
+# to hide api key
+gem 'dotenv-rails', :groups => [:development, :test]
+

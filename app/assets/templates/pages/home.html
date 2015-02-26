@@ -1,6 +1,5 @@
 <body>
   <div id="map-canvas">
-
     <ui-gmap-google-map 
         center='map.center'
         zoom  ='map.zoom'
@@ -21,8 +20,9 @@
       </ui-gmap-polyline>
 
       <ui-gmap-markers
-          models  = 'trails'
-          coords  = "'self'">
+          models  = 'trailMarkers'
+          coords  = "'self'"
+          icon    = "'icon'">
         <ui-gmap-windows 
           show="show"
           event="clickEventsObject">
@@ -36,116 +36,97 @@
   </div>
 
   <div id="filter-box">
-      <ul class="list-group">
-<!--         <li class="list-group-item" ng-click="addMarker()"><div>Add Mark<div></li> -->
-        <li class="list-group-item">
-          <div class="region-checkbox"><input type="checkbox" checked>
+    <ul class="list-group">
+      <li class="list-group-item showBar" ng-click="showbox()">Hide / Show</li>
+      <li class="list-group-item" ng-show="outBox">
+        <div class="region-checkbox"><input type="checkbox" checked>
           HK Island</div>
-          <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" checked>
           Kowloon</div>
-          <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" checked>
           New Territories</div>
-        </li>
-        <li class="list-group-item">
-          <div>Difficulty Level: {{difficulty}}</div>
-          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Scenary Level: {{scenary}}</div>
-          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider" data-name="scenary"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Distance: {{distance}} km</div>
-          <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Duration: {{duration}} mins</div>
-          <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
-        </li>
-      </ul>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Difficulty Level: {{difficulty}}</div>
+        <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Scenery Level: {{scenery}}</div>
+        <div scenery-Slider config="sliderSceneryConfig" model="scenery" id="scenery-slider" data-name="scenery"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Distance: {{distance}} km</div>
+        <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Duration: {{duration}} mins</div>
+        <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
+      </li>
+    </ul>
   </div>
-
-<!--   <button class="btn btn-sm btn-default close-button" ng-click="showPanel()">Close</button> -->
-
   <div id="info-panel" class="container-fluid" ng-show="true">
     <div class="search-results" ng-show="search">
-      <h1 ng-click="eee()">Search Results</h1>
-
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 1</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 2</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 3</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 4</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 5</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 6</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 7</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-      <button class="list-group-item" ng-click="switchPanel()">
-        <img src="assets/hiking-default.jpg" class="search-result-pix col-md-3"></img>
-        <div class="search-results-item col-md-7"><h2>Result 8</h2>{{info.climate}}</div>
-        <div class="btn glyphicon glyphicon-chevron-right  search-results-button col-md-2"></div>
-      </button>
-    </div>
-    
-    <div class="one-trail" ng-show="trail">
-      <div>
-        <button ng-click="switchPanel()" id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
-        <h1 class="title-name">Trail Name</h1>
+      <h1>Search Results...</h1>
+      <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="switchPanel()">
+        <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="search-result-pix col-md-3">
+        <div class="search-results-item col-md-7">
+          <h2>{{trail.name}}</h2>
+          <ul ng-bind-html="makeStars(trail.difficulty)"></ul>
+          <!-- {{info.climate}} -->
+        </div>
+        <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
-      <div class="list-group-item"><h2>Location: </h2>Wan Chai District </div>
+    </div>    
+    <div id="one-trail" ng-show="trailPanel">
+      <div class="list-group-item" ng-click="switchPanel()">
+        <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
+        <h2 class="title-name">{{trail.name}}</h2>
+      </div>
+      <div class="list-group-item">
+        <h2>Location: </h2>
+        <p>{{trail.region}}</p>
+      </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star-half">
+        <p><ul ng-bind-html="makeStars(trail.difficulty)"></ul></p>
       </div>
-      <div class="list-group-item"><h2>Duration: </h2>120 mins</div>
       <div class="list-group-item">
-        <h2>Scenary: </h2>
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
-        <i class="icon fa fa-star">
+        <h2>Duration: </h2>
+        <p>{{trail.duration}} mins</p>
       </div>
-      <div class="list-group-item"><h2>Description: </h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
+      <div class="list-group-item">
+        <h2>Distance: </h2>
+        <p>{{trail.distance}} km</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Scenery: </h2>
+        <p><ul ng-bind-html="makeStars(trail.scenery)"></ul></p>
+      </div>
+      <div class="list-group-item">
+        <h2>Food Supply: </h2>
+        <p>{{trail.food_supply}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Warning: </h2>
+        <p>{{trail.warning}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Fauna: </h2>
+        <p>{{trail.birds}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Flora: </h2>
+        <p>{{trail.plants}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Description: </h2>
+        <p>{{trail.description}}</p>
+      </div>
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
           <slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}" class="trail-img">
+            <!-- trail photo? -->
+            <img ng-src="http://www.oasistrek.com/{{trail.photo_urls}}" class="trail-img">
             <!-- <div class="carousel-caption"> 
               <h4>Slide {{$index}}</h4> 
               <p>{{slide.text}}</p> 
@@ -155,5 +136,4 @@
       </div>
     </div>
   </div>
-
 </body>

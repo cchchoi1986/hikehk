@@ -2,12 +2,16 @@
 
 #filter-box {
   text-align: center;
-  z-index: 20;
+  // z-index: 20;
   position: fixed;
-  bottom: 25px;
-  left: 25px;
-  width: 25vw;
+  // bottom: 25px;
+  top: 10px;
+  left: 10px;
+  width: 20vw;
   border: 1px solid $primary-border-color;
+  border-radius: 5px;
+  background-color: $primary-background-color;
+  color: $primary-font-color;
 }
 
 // list group item
@@ -24,4 +28,16 @@
 .region-checkbox{
   display: inline-block;
   padding: 0px 8px;
+}
+
+.close-button{
+  z-index: 20;
+  left: 25px;
+  top: 5px;
+  // margin: 5px;
+  position: fixed;
+  // background-color: transparent;
+  &:hover{
+    // background-color: transparent;
+  }
 }
