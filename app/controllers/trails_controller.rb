@@ -39,6 +39,7 @@ class TrailsController < ApplicationController
     @query = query.order("name")
 
     render 'search.json.jbuilder'
+
   end
 
 end
