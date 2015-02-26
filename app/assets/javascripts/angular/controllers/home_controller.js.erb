@@ -35,6 +35,23 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     console.log($scope.trails2);
   })
 
+  $scope.make_stars = function(factor) {
+    range = 5;
+    wholeDiff = range - factor;
+    stars = "";
+    for (var i = factor; i > 0; i--) {
+      if (i == 0.5) {
+        stars = stars + "<i class='icon fa fa-star-half'></i>";
+      } else {
+        stars = stars + "<i class='icon fa fa-star'></i>";
+      }
+    }
+    for (var i = wholeDiff; i > 0.5; i--) {
+      stars = stars + "<i class='icon fa fa-star-outline'></i>";
+    }
+    return stars;
+  }
+
   // initial markers set, see html models = 'trails'
   $scope.trails = [{ 
       title: "Dragon's Back",
