@@ -10,19 +10,14 @@
   background-color: $primary-background-color;
   overflow: scroll;
   padding: 0;
+  color: $primary-font-color;
 }
-
-// .close-button{
-//   z-index: 20;
-//   right: 0;
-//   margin: 5px;
-//   position: fixed;
-// }
 
 img.search-result-pix{
   display: inline-block;
   // max-height: 80px;
-  height: auto;
+  // height: auto;
+  height: 80px;
   // width: auto;
   max-width: 10vw;
   padding: 0px 0px;
@@ -32,6 +27,8 @@ img.search-result-pix{
 div.list-group-item{
   display: flex;
   align-items: center;
+  background-color: $primary-background-color;
+  color: $primary-font-color;
 }
 
 div.list-group-item.trail-results{
@@ -50,7 +47,6 @@ button.search-results-button{
 
 .search-results-item > h2 {
   font-size: 20px;
-
 }
 
 .search-results{
@@ -59,24 +55,24 @@ button.search-results-button{
 
 .search-results > h1{
   font-size: 24px;
-  padding-left: 5px;
+  padding-left: 15px;
 }
 
-.one-trail{
+#one-trail{
   text-align: left;
 }
 
-.one-trail > div.list-group-item{
+#one-trail > div.list-group-item{
   display: inherit;
   text-align: left;
 }
 
-.one-trail > div > h2 {
+#one-trail > div > h2 {
   font-size: 20px;
   display: inline-block;
 }
 
-.one-trail > div > p {
+#one-trail > div > p {
   display: inline-block;
 }
 
@@ -84,9 +80,6 @@ button.search-results-button{
   background-color: transparent;
   display: inline-block;
   margin-bottom: 20px;
-   //  &:hover{
-   //  background-color: $secondary-background-color;
-   // }
 }
 
 .title-name{

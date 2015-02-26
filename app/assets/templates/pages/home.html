@@ -20,8 +20,9 @@
       </ui-gmap-polyline>
 
       <ui-gmap-markers
-          models  = 'trails'
-          coords  = "'self'">
+          models  = 'trailMarkers'
+          coords  = "'self'"
+          icon    = "'icon'">
         <ui-gmap-windows 
           show="show"
           event="clickEventsObject">
@@ -33,38 +34,36 @@
       </ui-gmap-markers>
     </ui-gmap-google-map>
   </div>
+
   <div id="filter-box">
-      <ul class="list-group">
-        <!-- <li class="list-group-item" ng-click="addMarker()">
-          <div>Add Mark</div>
-        </li>  -->
-        <li class="list-group-item">
-          <div class="region-checkbox"><input type="checkbox" checked>
+    <ul class="list-group">
+      <li class="list-group-item showBar" ng-click="showbox()">Hide / Show</li>
+      <li class="list-group-item" ng-show="outBox">
+        <div class="region-checkbox"><input type="checkbox" checked>
           HK Island</div>
-          <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" checked>
           Kowloon</div>
-          <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" checked>
           New Territories</div>
-        </li>
-        <li class="list-group-item">
-          <div>Difficulty Level: {{difficulty}}</div>
-          <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Scenary Level: {{scenary}}</div>
-          <div scenary-Slider config="sliderScenaryConfig" model="scenary" id="scenary-slider" data-name="scenary"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Distance: {{distance}} km</div>
-          <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
-        </li>
-        <li class="list-group-item">
-          <div>Duration: {{duration}} mins</div>
-          <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
-        </li>
-      </ul>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Difficulty Level: {{difficulty}}</div>
+        <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Scenery Level: {{scenery}}</div>
+        <div scenery-Slider config="sliderSceneryConfig" model="scenery" id="scenery-slider" data-name="scenery"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Distance: {{distance}} km</div>
+        <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
+      </li>
+      <li class="list-group-item" ng-show="outBox">
+        <div>Duration: {{duration}} mins</div>
+        <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
+      </li>
+    </ul>
   </div>
-<!--   <button class="btn btn-sm btn-default close-button" ng-click="showPanel()">Close</button> -->
   <div id="info-panel" class="container-fluid" ng-show="true">
     <div class="search-results" ng-show="search">
       <h1 ng-click="eee()">Search Results</h1>
@@ -122,10 +121,7 @@
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <p></p>
-        <!-- the icons are messing up -->
-        <!-- <i class="icon fa fa-star"> -->
-        <!-- <i class="icon fa fa-star-half"> -->
+        <p><ul ng-bind-html="makeStars(trail.difficulty)"></ul></p>
       </div>
       <div class="list-group-item">
         <h2>Duration: </h2>
@@ -136,8 +132,8 @@
         <p>{{trail.distance}} km</p>
       </div>
       <div class="list-group-item">
-        <h2>Scenary: </h2>
-        <p></p><!-- <i class="icon fa fa-star"> -->
+        <h2>Scenery: </h2>
+        <p><ul ng-bind-html="makeStars(trail.scenery)"></ul></p>
       </div>
       <div class="list-group-item">
         <h2>Food Supply: </h2>
@@ -148,11 +144,11 @@
         <p>{{trail.warning}}</p>
       </div>
       <div class="list-group-item">
-        <h2>Birds: </h2>
+        <h2>Fauna: </h2>
         <p>{{trail.birds}}</p>
       </div>
       <div class="list-group-item">
-        <h2>Plants: </h2>
+        <h2>Flora: </h2>
         <p>{{trail.plants}}</p>
       </div>
       <div class="list-group-item">

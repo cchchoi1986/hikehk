@@ -1,4 +1,4 @@
-// var attribute = ["difficulty","duration","scenary","distance"];
+// var attribute = ["difficulty","duration","scenery","distance"];
 
 app.directive("slider", function($parse){
 
@@ -73,26 +73,26 @@ app.directive("difficultySlider", function() {
     }
 });
 
-app.directive("scenarySlider", function() {
+app.directive("scenerySlider", function() {
     return {
       restrict: 'A',
       scope: {
           config: "=config",
-          scenary: "=model"
+          scenery: "=model"
       },
       link: function(scope, elem, attrs) {
         var setModel = function(value) {
           scope.model = value;   
         }
-        $("#scenary-slider").slider({
+        $("#scenery-slider").slider({
           range: false,
           min: scope.config.min,
           max: scope.config.max,
           step: scope.config.step,
           slide: function(event, ui) { 
-            console.log("im scenary sliding!",ui.value);
+            console.log("im scenery sliding!",ui.value);
             scope.$apply(function() {
-                scope.scenary = ui.value;
+                scope.scenery = ui.value;
             });
           }
         });
