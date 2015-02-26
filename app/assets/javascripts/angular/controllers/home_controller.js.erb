@@ -104,7 +104,18 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // map options
   $scope.options = {
     scrollwheel: true,
-    styles: hikeMapStyle
+    styles: hikeMapStyle,
+    panControl:false,
+    zoomControl:true,
+    zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL,
+        position: google.maps.ControlPosition.LEFT_BOTTOM
+    },
+    mapTypeControl:false,
+    scaleControl:false,
+    streetViewControl:false,
+    minZoom: 10,
+    maxZoom: 16
   };
 
   $http.get('/trails').success(function(data, status, xhr) {
