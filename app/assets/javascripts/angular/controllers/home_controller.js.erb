@@ -51,7 +51,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
 
   // styling options, array
-  var hike = [
+  var hikeMapStyle = [
     {
       "featureType":"landscape.natural",
       "elementType":"geometry.fill",
@@ -104,10 +104,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // map options
   $scope.options = {
     scrollwheel: true,
-    styles: hike
+    styles: hikeMapStyle
   };
 
-<<<<<<< HEAD
   $http.get('/trails').success(function(data, status, xhr) {
     $scope.trails2 = data;
     console.log($scope.trails2);
@@ -130,8 +129,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     return stars;
   }
 
-=======
->>>>>>> gmap style, marker icon, awesome font stars, filter toggle done
   // initial markers set, see html models = 'trails'
   $scope.trailMarkers = [{ 
       title: "Dragon's Back",
