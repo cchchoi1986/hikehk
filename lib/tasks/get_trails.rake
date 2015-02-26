@@ -181,7 +181,6 @@ def get_photo_urls(trail_html_doc)
     photo_urls.push(f.attr("src"))
   end
   trail_html_doc.css("div.imgteaser img").each do |f|
-    f.to_s.gsub("\"", "")
     photo_urls.push(f.attr("src"))
   end
   return photo_urls

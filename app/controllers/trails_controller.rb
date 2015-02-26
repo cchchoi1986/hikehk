@@ -20,23 +20,22 @@ class TrailsController < ApplicationController
     regions = []
 
 
-    if hk == "true"
-      # regions.push(".where(region_id: 15..18)")
-      regions.push((15..18).to_a)
+    if nt == "true"
+      regions.push((1..9).to_a)
     end
     if kln == "true"
-      # regions.push(".where(region_id: 10..14)")
       regions.push((10..14).to_a)
     end
-    if nt == "true"
-      # regions.push(".where(region_id: 1..9)")
-      regions.push((1..9).to_a)
+    if hk == "true"
+      regions.push((15..18).to_a)
     end
     regions.flatten!
 
-    puts ">>>>>>>>>>>>> #{regions}"
-
-    query = Trail.where(duration: 0..duration).where(distance: 0..distance).where(difficulty: 0..difficulty).where(scenery: 0..scenery).where(region_id: regions)
+    query = Trail.where(duration: 0..duration)
+                .where(distance: 0..distance)
+                .where(difficulty: 0..difficulty)
+                .where(scenery: 0..scenery)
+                .where(region_id: regions)
     @query = query.order("name")
 
     render 'search.json.jbuilder'
