@@ -6,6 +6,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.outBox = !$scope.outBox;
   }
 
+  $scope.goHome = function(){
+    
+  }
+
   // the switch that switch from search results to individual result
   $scope.search = true;
   $scope.trailPanel = false;
@@ -18,10 +22,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   var map;
   $scope.map = {
     center: { 
-      latitude: 22.268394, //happy valley
-      longitude: 114.186700 
+      latitude: 22.3876982, //tai lam country park
+      longitude: 114.0500164
     },
-    zoom: 12,
+    zoom: 11,
     bounds: {
       latitude: 22.1634178, 
       longitude: 113.5629425
@@ -104,7 +108,18 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // map options
   $scope.options = {
     scrollwheel: true,
-    styles: hikeMapStyle
+    styles: hikeMapStyle,
+    panControl:false,
+    zoomControl:true,
+    zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL,
+        position: google.maps.ControlPosition.LEFT_BOTTOM
+    },
+    mapTypeControl:false,
+    scaleControl:false,
+    streetViewControl:false,
+    minZoom: 10,
+    maxZoom: 16
   };
 
   $http.get('/trails').success(function(data, status, xhr) {

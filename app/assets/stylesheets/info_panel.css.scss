@@ -9,6 +9,7 @@
   z-index: 15;
   background-color: $primary-background-color;
   overflow: scroll;
+  // padding-left: 10px;
   padding: 0;
   color: $primary-font-color;
 }
@@ -18,9 +19,10 @@ img.search-result-pix{
   // max-height: 80px;
   // height: auto;
   height: 80px;
-  // width: auto;
-  max-width: 10vw;
-  padding: 0px 0px;
+  width: 80px;
+  // max-width: 10vw;
+  padding: 5px 5px;
+  
 }
 
 // acting funny .trail-results
@@ -29,10 +31,14 @@ div.list-group-item{
   align-items: center;
   background-color: $primary-background-color;
   color: $primary-font-color;
+  border-color: $primary-background-color; 
+  padding: 10px;
 }
 
 div.list-group-item.trail-results{
-  padding: 0;
+  padding: 5px;
+  border-color: $primary-background-color; 
+
 }
 
 button.search-results-button{
@@ -46,7 +52,7 @@ button.search-results-button{
 }
 
 .search-results-item > h2 {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .search-results{
@@ -95,3 +101,12 @@ img.trail-img{
   width: 100%;
 }
 
+#company-name{
+  font-size: 20px;
+  font-weight: 10px;
+  background-color: $primary-font-color;
+  color: $primary-background-color;
+  text-align: center;
+  padding: 3px;
+  margin: 0;
+}
