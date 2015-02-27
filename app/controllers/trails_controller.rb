@@ -10,10 +10,10 @@ class TrailsController < ApplicationController
   end
 
   def search
-    duration = params[:duration].to_i
-    distance = params[:distance].to_i
-    scenery = params[:scenery].to_i
-    difficulty = params[:difficulty].to_i
+    duration = params[:duration].to_f
+    distance = params[:distance].to_f
+    scenery = params[:scenery].to_f
+    difficulty = params[:difficulty].to_f
     hk = params[:hk]
     kln = params[:kln]
     nt = params[:nt]
@@ -31,10 +31,10 @@ class TrailsController < ApplicationController
     end
     regions.flatten!
 
-    query = Trail.where(duration: 0..duration)
-                .where(distance: 0..distance)
-                .where(difficulty: 0..difficulty)
-                .where(scenery: 0..scenery)
+    query = Trail.where(duration: 0.0..duration)
+                .where(distance: 0.0..distance)
+                .where(difficulty: 0.0..difficulty)
+                .where(scenery: 0.0..scenery)
                 .where(region_id: regions)
     @query = query.order("name")
 

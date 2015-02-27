@@ -73,18 +73,19 @@ def get_photos(html_doc)
   imgScript.gsub!(/(var iconTitleRight=)(.*)/,'')
   imgScript.gsub!(/(var iconTitleUp=)(.*)/,'')
   imgScript.gsub!(/(var iconTitleDown=)(.*)/,'')
-  imgScript.gsub!("\s","")
-  imgScript.gsub!(" ","")
-  imgScript.gsub!("\n","")
-  imgScript.gsub!("\t","")
-  imgScript.gsub!("\\\\","/")
-  imgScript.gsub!("\\\"","")
+  # imgScript.gsub!("\s","")
+  # imgScript.gsub!(" ","")
+  # imgScript.gsub!("\n","")
+  # imgScript.gsub!("\t","")
+  # imgScript.gsub!("\\\\","\\")
+  # imgScript.gsub!("\\\"","")
   # imgScript.gsub!(/&nbsp;/,'')
-  imgScript.gsub!(/\r/,'')
+  # imgScript.gsub!(/\r/,'')
   # print imgScript
 
   imgScript.split(",").each do |f|
-    photos.push(f.to_s.gsub("\"", ""))
+    # print f.to_s.gsub("\"", "")
+    photos.push(f.to_s.gsub("\"", "").gsub("%20%20%20%20%20%20%20%20%20","").squish)
   end
   return photos
 end
