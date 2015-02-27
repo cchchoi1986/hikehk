@@ -35,7 +35,7 @@
     </ui-gmap-google-map>
   </div>
 
-  <button class="btn btn-sm glyphicon glyphicon-minus showBar" ng-click="showbox()"></button>
+  <button class="btn btn-sm glyphicon showBar" ng-class="showHide" ng-click="showbox()"></button>
   <button class="btn btn-sm glyphicon glyphicon-home home-button" ng-click="goHome()"></button>
   <div id="filter-box">
     <ul class="list-group">
@@ -82,6 +82,13 @@
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 class="title-name">{{oneTrail.name}}</h2>
       </div>
+      <div id="trail-carousel" class="list-group-item">
+        <carousel interval="4000">
+          <slide ng-repeat="photo in oneTrail.photo_urls" >
+            <img ng-src="http://www.oasistrek.com/{{photo}}" class="trail-img">
+          </slide>
+        </carousel>
+      </div>
       <div class="list-group-item">
         <h2>Location: </h2>
         <p>{{oneTrail.region}}</p>
@@ -125,17 +132,6 @@
       <div class="list-group-item">
         <h2>Description: </h2>
         <p ng-repeat="points in oneTrail.description">{{points}}</p>
-      </div>
-      <div id="trail-carousel" class="list-group-item">
-        <carousel interval="4000">
-          <slide ng-repeat="photo in oneTrail.photo_urls" >
-            <img ng-src="http://www.oasistrek.com/{{photo}}" class="trail-img">
-            <!-- <div class="carousel-caption"> 
-              <h4>Slide {{$index}}</h4> 
-              <p>{{slide.text}}</p> 
-            </div> -->
-          </slide>
-        </carousel>
       </div>
     </div>
   </div>

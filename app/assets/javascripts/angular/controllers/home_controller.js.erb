@@ -4,8 +4,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   var map;
   var homeMap = {
     center: { 
-      latitude: 22.3876982, //tai lam country park
-      longitude: 114.0500164
+      latitude: 22.3991729, //tai lam country park
+      longitude: 114.1320305
     },
     zoom: 11,
     bounds: {
@@ -17,14 +17,21 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
   // the toggle function that show and hide the filter
   $scope.outBox = true;
+  $scope.showHide = "glyphicon-minus";
   $scope.showbox = function(){
     $scope.outBox = !$scope.outBox;
+    if ($scope.outBox == true){
+      $scope.showHide = "glyphicon-minus";
+    }
+    else if($scope.outBox == false){
+      $scope.showHide = "glyphicon-plus";
+    }
   }
 
   $scope.goHome = function(){
     // console.log('go home clicked');
-    $scope.map.center.latitude = 22.3876982;
-    $scope.map.center.longitude = 114.0500164;
+    $scope.map.center.latitude = 22.3991729;
+    $scope.map.center.longitude = 114.1320305
     $scope.map.zoom = 11;
     $scope.search = true;
     $scope.trailPanel = false;
@@ -487,6 +494,106 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     text:  "dragon 2"
   }
   ];
+
+
+// search parameters code from mobile
+  $scope.search_parameters = {};
+  $scope.search_parameters.difficulty = 5;
+  $scope.search_parameters.scenery = 5;
+  $scope.search_parameters.distance = 24;
+  $scope.search_parameters.duration = 10;
+  $scope.search_parameters.regions = [
+    { text: "HK", checked: true },
+    { text: "KLN", checked: true },
+    { text: "N.T.", checked: true }
+  ];
+
+  // test print out search params
+  $scope.hihi = function () {
+    console.log($scope.search_parameters)
+  }
+
+
+  var timeOut = 1000;
+  var timeoutPromise;
+  $scope.$watch("search_parameters.difficulty", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.duration", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.distance", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.scenery", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.regions[0].checked", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.regions[1].checked", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+  $scope.$watch("search_parameters.regions[2].checked", function() {
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      $scope.loading = true;
+      console.log("hihi");
+      submitParams();
+      $scope.loading = false;
+    }, timeOut);
+  });
+
+
+  // request URL
+  // "http://www.google.com/search?key1=value1&key2=value2"
+  // "http://www.google.com/search ? key1 = value1 & key2 = value2"
+
+  // in routes
+  // get "search" => "controller#action"
+  var submitParams = function() {
+    $http.get('http://localhost:3000/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
+        $scope.results = data;
+        console.log($scope.search_parameters.regions.checked)
+        console.log($scope.results);
+    })
+  }
 
 
 
