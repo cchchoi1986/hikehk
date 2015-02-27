@@ -69,7 +69,7 @@
     <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
     <div class="search-results" ng-show="search">
       <h1>Search Results...</h1>
-      <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="switchPanel()">
+      <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">
           <h2>{{trail.name}}</h2>
@@ -82,53 +82,52 @@
     <div id="one-trail" ng-show="trailPanel">
       <div class="list-group-item" ng-click="switchPanel()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
-        <h2 class="title-name">{{trail.name}}</h2>
+        <h2 class="title-name">{{oneTrail.name}}</h2>
       </div>
       <div class="list-group-item">
         <h2>Location: </h2>
-        <p>{{trail.region}}</p>
+        <p>{{oneTrail.region}}</p>
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <p><ul ng-bind-html="makeStars(trail.difficulty)"></ul></p>
+        <p><ul ng-bind-html="makeStars(oneTrail.difficulty)"></ul></p>
       </div>
       <div class="list-group-item">
         <h2>Duration: </h2>
-        <p>{{trail.duration}} mins</p>
+        <p>{{oneTrail.duration}} mins</p>
       </div>
       <div class="list-group-item">
         <h2>Distance: </h2>
-        <p>{{trail.distance}} km</p>
+        <p>{{oneTrail.distance}} km</p>
       </div>
       <div class="list-group-item">
         <h2>Scenery: </h2>
-        <p><ul ng-bind-html="makeStars(trail.scenery)"></ul></p>
+        <p><ul ng-bind-html="makeStars(oneTrail.scenery)"></ul></p>
       </div>
       <div class="list-group-item">
         <h2>Food Supply: </h2>
-        <p>{{trail.food_supply}}</p>
+        <p>{{oneTrail.food_supply}}</p>
       </div>
       <div class="list-group-item">
         <h2>Warning: </h2>
-        <p>{{trail.warning}}</p>
+        <p>{{oneTrail.warning}}</p>
       </div>
       <div class="list-group-item">
         <h2>Fauna: </h2>
-        <p>{{trail.birds}}</p>
+        <p>{{oneTrail.birds}}</p>
       </div>
       <div class="list-group-item">
         <h2>Flora: </h2>
-        <p>{{trail.plants}}</p>
+        <p>{{oneTrail.plants}}</p>
       </div>
       <div class="list-group-item">
         <h2>Description: </h2>
-        <p>{{trail.description}}</p>
+        <p>{{oneTrail.description}}</p>
       </div>
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
-          <slide ng-repeat="slide in slides" active="slide.active">
-            <!-- trail photo? -->
-            <img ng-src="http://www.oasistrek.com/{{trail.photo_urls}}" class="trail-img">
+          <slide ng-repeat="photo in oneTrail.photo_urls" >
+            <img ng-src="http://www.oasistrek.com/{{photo}}" class="trail-img">
             <!-- <div class="carousel-caption"> 
               <h4>Slide {{$index}}</h4> 
               <p>{{slide.text}}</p> 
