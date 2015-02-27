@@ -8,6 +8,6 @@
     "underscore": "~1.4.4",
     "angular-ui-utils": "0.2.1",
     "angular-ui": "0.4.0",
-    "angular-google-maps": "2.0.12"
+    "angular-google-maps": "2.0.12",
   }
 }

@@ -22,7 +22,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
 
   $scope.goHome = function(){
-    console.log('go home clicked');
+    // console.log('go home clicked');
     $scope.map.center.latitude = 22.3876982;
     $scope.map.center.longitude = 114.0500164;
     $scope.map.zoom = 11;
@@ -59,20 +59,18 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // the function that create the stars
   $scope.makeStars = function(factor) {
     // console.log('factor:',factor);
-    range = 5;
-    wholeDiff = range - factor;
+    var range = 5.0;
+    var wholeDiff = range - factor;
     stars = "";
     for (var i = factor; i > 0; i--) {
       if (i == 0.5) {
-        stars = stars + "<i class='icon fa fa-star-half'></i>";
+        stars = stars + "<li class='icon fa fa-star-half-empty'></li>";
       } else {
-        stars = stars + "<i class='icon fa fa-star'></i>";
+        stars = stars + "<li class='icon fa fa-star'></li>";
       }
     }
     for (var i = wholeDiff; i > 0.5; i--) {
-      if (i == 0.5) {
-        stars = stars + "<i class='icon fa fa-star-outline'></i>";
-      }
+      stars = stars + "<li class='icon fa fa-star-o'></li>";
     }
     // must trust html for it to show up
     return $sce.trustAsHtml(stars);

@@ -76,11 +76,18 @@ button.search-results-button{
 #one-trail > div > h2 {
   font-size: 20px;
   display: inline-block;
+  min-width: 110px;
 }
 
 #one-trail > div > p {
   display: inline-block;
 }
+
+#one-trail > div > ul.stars {
+  display: inline-block;
+  padding-left: 0;
+}
+
 
 #back-button{
   background-color: transparent;

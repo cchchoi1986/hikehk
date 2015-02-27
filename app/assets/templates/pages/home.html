@@ -73,8 +73,6 @@
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">
           <h2>{{trail.name}}</h2>
-<!--           <ul ng-bind-html="makeStars(trail.difficulty)"></ul> -->
-          <!-- {{info.climate}} -->
         </div>
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
@@ -90,11 +88,11 @@
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
-        <p><ul ng-bind-html="makeStars(oneTrail.difficulty)"></ul></p>
+        <ul class="stars" ng-bind-html="makeStars(oneTrail.difficulty)"></ul>
       </div>
       <div class="list-group-item">
         <h2>Duration: </h2>
-        <p>{{oneTrail.duration}} mins</p>
+        <p>{{oneTrail.duration}} hours</p>
       </div>
       <div class="list-group-item">
         <h2>Distance: </h2>
@@ -102,15 +100,19 @@
       </div>
       <div class="list-group-item">
         <h2>Scenery: </h2>
-        <p><ul ng-bind-html="makeStars(oneTrail.scenery)"></ul></p>
+        <ul class="stars" ng-bind-html="makeStars(oneTrail.scenery)"></ul>
       </div>
       <div class="list-group-item">
         <h2>Food Supply: </h2>
-        <p>{{oneTrail.food_supply}}</p>
+        <ul>
+          <li ng-repeat="food in oneTrail.food_supply">{{food}}</li>
+        </ul>
       </div>
       <div class="list-group-item">
         <h2>Warning: </h2>
-        <p>{{oneTrail.warning}}</p>
+        <ul>
+          <li ng-repeat="warning in oneTrail.warning">{{warning}}</li>
+        </ul>
       </div>
       <div class="list-group-item">
         <h2>Fauna: </h2>
@@ -122,7 +124,7 @@
       </div>
       <div class="list-group-item">
         <h2>Description: </h2>
-        <p>{{oneTrail.description}}</p>
+        <p ng-repeat="points in oneTrail.description">{{points}}</p>
       </div>
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
