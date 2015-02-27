@@ -1,13 +1,40 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', '$sce', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices, $sce){
 
+  // the map
+  var map;
+  var homeMap = {
+    center: { 
+      latitude: 22.3991729, //tai lam country park
+      longitude: 114.1320305
+    },
+    zoom: 11,
+    bounds: {
+      latitude: 22.1634178, 
+      longitude: 113.5629425
+    }
+  };
+  $scope.map = homeMap;
+
   // the toggle function that show and hide the filter
   $scope.outBox = true;
+  $scope.showHide = "glyphicon-minus";
   $scope.showbox = function(){
     $scope.outBox = !$scope.outBox;
+    if ($scope.outBox == true){
+      $scope.showHide = "glyphicon-minus";
+    }
+    else if($scope.outBox == false){
+      $scope.showHide = "glyphicon-plus";
+    }
   }
 
   $scope.goHome = function(){
-    
+    // console.log('go home clicked');
+    $scope.map.center.latitude = 22.3991729;
+    $scope.map.center.longitude = 114.1320305
+    $scope.map.zoom = 11;
+    $scope.search = true;
+    $scope.trailPanel = false;
   }
 
   // the switch that switch from search results to individual result
@@ -16,39 +43,43 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.switchPanel = function(){
     $scope.search = !$scope.search;
     $scope.trailPanel = !$scope.trailPanel;
+    $scope.goHome();
   }
 
-  // the map
-  var map;
-  $scope.map = {
-    center: { 
-      latitude: 22.3876982, //tai lam country park
-      longitude: 114.0500164
-    },
-    zoom: 11,
-    bounds: {
-      latitude: 22.1634178, 
-      longitude: 113.5629425
-    }
-  };
+    // create a function openTrailPanel(trailId)
+    // close search panel
+    // open trail panel
+    // get the trail info --> put it in a scope variable singleTrail (not just trail which is confusing with the ng-repeat)
+    // update the scope.map with the trail coordinates
+  $scope.openTrailPanel = function(id){
+    console.log(id);
+    $http.get('/trails/'+ id).success(function(data, status, xhr) {
+      $scope.oneTrail = data;
+      console.log(data);
+      console.log($scope.oneTrail);
+      $scope.search = false;
+      $scope.trailPanel = true;
+      $scope.map.center.latitude = 22.3876982;
+      $scope.map.center.longitude = 114.0500164;
+      $scope.map.zoom = 15;
+    })
+  }
 
   // the function that create the stars
   $scope.makeStars = function(factor) {
     // console.log('factor:',factor);
-    range = 5;
-    wholeDiff = range - factor;
+    var range = 5.0;
+    var wholeDiff = range - factor;
     stars = "";
     for (var i = factor; i > 0; i--) {
       if (i == 0.5) {
-        stars = stars + "<i class='icon fa fa-star-half'></i>";
+        stars = stars + "<li class='icon fa fa-star-half-empty'></li>";
       } else {
-        stars = stars + "<i class='icon fa fa-star'></i>";
+        stars = stars + "<li class='icon fa fa-star'></li>";
       }
     }
     for (var i = wholeDiff; i > 0.5; i--) {
-      if (i == 0.5) {
-        stars = stars + "<i class='icon fa fa-star-outline'></i>";
-      }
+      stars = stars + "<li class='icon fa fa-star-o'></li>";
     }
     // must trust html for it to show up
     return $sce.trustAsHtml(stars);
@@ -121,11 +152,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     minZoom: 10,
     maxZoom: 16
   };
-
-  $http.get('/trails').success(function(data, status, xhr) {
-    $scope.trails2 = data;
-    console.log($scope.trails2);
-  })
 
   $scope.make_stars = function(factor) {
     range = 5;
@@ -240,7 +266,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
   $http.get('/trails').success(function(data, status, xhr) {
     $scope.trails = data.trails;
-    console.log($scope.trails);
+    // console.log($scope.trails);
   })
 
   // array of trails for plotting polylines
@@ -468,6 +494,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     text:  "dragon 2"
   }
   ];
+
+
+
 
 
 
