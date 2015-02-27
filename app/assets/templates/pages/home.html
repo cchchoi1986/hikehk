@@ -48,19 +48,19 @@
           New Territories</div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Difficulty Level: {{difficulty}}</div>
+        <div>Difficulty Level: {{search_parameters.difficulty}}</div>
         <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Scenery Level: {{scenery}}</div>
+        <div>Scenery Level: {{search_parameters.scenery}}</div>
         <div scenery-Slider config="sliderSceneryConfig" model="scenery" id="scenery-slider" data-name="scenery"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Distance: {{distance}} km</div>
+        <div>Distance: {{search_parameters.distance}} km</div>
         <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Duration: {{duration}} mins</div>
+        <div>Duration: {{search_parameters.duration}} hours</div>
         <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
       </li>
     </ul>

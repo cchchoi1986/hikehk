@@ -21,7 +21,7 @@ app.directive("slider", function($parse){
         console.log(attribute);
         
         var setModel = function(value) {
-          scope.model = value;
+          scope.search_parameters.model = value;
         }
 
 
@@ -65,7 +65,7 @@ app.directive("difficultySlider", function() {
           slide: function(event, ui) { 
             console.log("im difficult sliding!",ui.value);
             scope.$apply(function() {
-                scope.difficulty = ui.value;
+                scope.search_parameters.difficulty = ui.value;
             });
           }
         });
@@ -92,7 +92,7 @@ app.directive("scenerySlider", function() {
           slide: function(event, ui) { 
             console.log("im scenery sliding!",ui.value);
             scope.$apply(function() {
-                scope.scenery = ui.value;
+                scope.search_parameters.scenery = ui.value;
             });
           }
         });
@@ -119,7 +119,7 @@ app.directive("distanceSlider", function() {
           slide: function(event, ui) { 
             console.log("im distance sliding!",ui.value);
             scope.$apply(function() {
-                scope.distance = ui.value;
+                scope.search_parameters.distance = ui.value;
             });
           }
         });

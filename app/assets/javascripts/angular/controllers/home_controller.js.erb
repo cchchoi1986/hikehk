@@ -46,17 +46,14 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.goHome();
   }
 
-    // create a function openTrailPanel(trailId)
-    // close search panel
-    // open trail panel
-    // get the trail info --> put it in a scope variable singleTrail (not just trail which is confusing with the ng-repeat)
-    // update the scope.map with the trail coordinates
   $scope.openTrailPanel = function(id){
     console.log(id);
     $http.get('/trails/'+ id).success(function(data, status, xhr) {
       $scope.oneTrail = data;
-      console.log(data);
-      console.log($scope.oneTrail);
+      // console.log(data);
+      // console.log($scope.oneTrail);
+      // oneTrail.start_longitude;
+      // oneTrail.start_latitude;
       $scope.search = false;
       $scope.trailPanel = true;
       $scope.map.center.latitude = 22.3876982;
@@ -153,22 +150,12 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     maxZoom: 16
   };
 
-  $scope.make_stars = function(factor) {
-    range = 5;
-    wholeDiff = range - factor;
-    stars = "";
-    for (var i = factor; i > 0; i--) {
-      if (i == 0.5) {
-        stars = stars + "<i class='icon fa fa-star-half'></i>";
-      } else {
-        stars = stars + "<i class='icon fa fa-star'></i>";
-      }
-    }
-    for (var i = wholeDiff; i > 0.5; i--) {
-      stars = stars + "<i class='icon fa fa-star-outline'></i>";
-    }
-    return stars;
-  }
+  // Weather service functions to get weather details
+  $scope.lat = 22.268394; //set to trails beginning coordinates
+  $scope.lon = 114.186700;
+  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
+    $scope.info = WeatherServices.processData(data)
+  });
 
   // initial markers set, see html models = 'trails'
   $scope.trailMarkers = [{ 
@@ -178,38 +165,48 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       id: 1,
       show: false,
       description: "",
-      icon: "assets/scenery.png"
-  },{
+      icon: "assets/hike_marker.png"
+    },{
       title: "Victoria Peak",
       latitude: 22.275590,
       longitude: 114.143910,
       id: 2,
       show: false,
       description: "",
-      icon: "http://s3.amazonaws.com/nvest/users/avatars/000/000/001/thumb/33baa87.jpg?1407815203"
+      icon: "assets/hike_marker.png"
   }];
 
   // the push must wait til the map is ready in order to show up
   // $scope.trails.push(trail);
-  $scope.addMarker = function(){
-    var newtrail = { 
-        title: "Happy Valley",
-        latitude: 22.268394, 
-        longitude: 114.186700,
-        description: "",
-        show: false,
-        id: 3,
-    };
-    $scope.trails.push(newtrail);
-  }
+  // $scope.addMarker = function(){
+  //   var newtrail = { 
+  //       title: "Happy Valley",
+  //       latitude: 22.268394, 
+  //       longitude: 114.186700,
+  //       description: "",
+  //       show: false,
+  //       id: 3,
+  //   };
+  //   $scope.trails.push(newtrail);
+  // }
 
-
-
-// dont undersatnd ui-gamp-windows at all show is not working
+  // dont undersatnd ui-gamp-windows at all show is not working
   // onclick the window shows up, with title and description
   // $scope.trails.onMouseOver = function() {
   //     trails.show = !trails.show;
   // };
+
+  $scope.search_parameters = {
+    distance: 24,
+    duration: 10,
+    difficulty: 5,
+    scenery: 5,
+    regions: [
+      { text: "HK", checked: true },
+      { text: "KLN", checked: true },
+      { text: "N.T.", checked: true }
+    ]
+  }
 
   // slider for distance (km)
   $scope.sliderDistanceConfig = {
@@ -217,21 +214,19 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       max: 24,
       step: 1
   }
-  $scope.distance = 0;
   $scope.setDistance = function (distance){
-    $scope.distance = distance;
+    $scope.search_parameters.distance = distance;
   }
 
-  // slider for durations (mins)
+  // slider for durations (hours)
   $scope.sliderDurationConfig = {
-      // value:100,
+      value:2,
       min: 0,
-      max: 600,
-      step: 10
+      max: 10,
+      step: 0.5
   }
-  $scope.duration = 0;
   $scope.setDuration = function (duration){
-    $scope.duration = duration; 
+    $scope.search_parameters.duration = duration; 
   }
 
   // slider for difficulties (0-5)
@@ -240,10 +235,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       max: 5,
       step: 0.5
   }
-
-  $scope.difficulty = 0;
   $scope.setDifficulty = function (difficulty){
-    $scope.difficulty = difficulty; 
+    $scope.search_parameters.difficulty = difficulty; 
   }
 
   // slider for scenery (0-5)
@@ -252,18 +245,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       max: 5,
       step: 0.5
   }
-  $scope.scenery = 0;
   $scope.setScenery = function (scenery){
-    $scope.scenery = scenery; 
+    $scope.search_parameters.scenery = scenery; 
   }
 
-  // Weather service functions to get weather details
-  $scope.lat = 22.268394; //set to trails beginning coordinates
-  $scope.lon = 114.186700;
-  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
-    $scope.info = WeatherServices.processData(data)
-  });
-
+  // soon to be replaced by search/filter results
   $http.get('/trails').success(function(data, status, xhr) {
     $scope.trails = data.trails;
     // console.log($scope.trails);
@@ -485,20 +471,65 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       }
   ];
 
-  // pictures for displaying the individual trail
-  $scope.slides = [{
-    image: "assets/dragon1.jpg", 
-    text: "hello dragon one"
-  }, {
-    image: "assets/dragon2.jpg",
-    text:  "dragon 2"
+  // test print out search params
+  $scope.hihi = function () {
+    console.log($scope.search_parameters);
   }
-  ];
 
 
+  var timeOut = 1000;
+  var timeoutPromise;
+  $scope.loading = false;
 
+  var getParams = function(){
+    $scope.loading = true;
+    $timeout.cancel(timeoutPromise);
+    timeoutPromise = $timeout(function(){   //Set timeout
+      console.log("getParams function at work");
+      submitParams();
+    }, timeOut);
+  }
 
+  $scope.$watch("search_parameters.difficulty", function() {
+    getParams();
+    console.log("getParams difficulty");
+  });
+  $scope.$watch("search_parameters.duration", function() {
+    getParams();
+    console.log("getParams duration");
+  });
+  $scope.$watch("search_parameters.distance", function() {
+    getParams();
+    console.log("getParams distance");
+  });
+  $scope.$watch("search_parameters.scenery", function() {
+    getParams();
+    console.log("getParams scenery");
+  });
+  $scope.$watch("search_parameters.regions[0].checked", function() {
+    console.log("getParams region 0");
+    getParams();
+  });
+  $scope.$watch("search_parameters.regions[1].checked", function() {
+    console.log("getParams region 1");
+    getParams();
+  });
+  $scope.$watch("search_parameters.regions[2].checked", function() {
+    console.log("getParams region 2");
+    getParams();
+  });
 
+  // in routes
+  // get "search" => "controller#action"
+  // change to $scope.trails = data.trails;
+  var submitParams = function() {
+    $http.get('http://localhost:3000/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
+        // console.log($scope.search_parameters.regions.checked)
+        console.log("submit parmas data is ", data);
+        $scope.results = data;
+        $scope.loading = false;
+    })
+  }
 
 }]);
 
