@@ -13,6 +13,19 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       longitude: 113.5629425
     }
   };
+
+  $scope.search_parameters = {
+    distance: 24,
+    duration: 10,
+    difficulty: 5,
+    scenery: 5,
+    regions: [
+      { text: "HK", checked: true },
+      { text: "KLN", checked: true },
+      { text: "N.T.", checked: true }
+    ]
+  }
+
   $scope.map = homeMap;
 
   // the toggle function that show and hide the filter
@@ -196,17 +209,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //     trails.show = !trails.show;
   // };
 
-  $scope.search_parameters = {
-    distance: 24,
-    duration: 10,
-    difficulty: 5,
-    scenery: 5,
-    regions: [
-      { text: "HK", checked: true },
-      { text: "KLN", checked: true },
-      { text: "N.T.", checked: true }
-    ]
-  }
 
   // slider for distance (km)
   $scope.sliderDistanceConfig = {
@@ -216,6 +218,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
   $scope.setDistance = function (distance){
     $scope.search_parameters.distance = distance;
+    console.log('setDistance', $scope.search_parameters.distance);
   }
 
   // slider for durations (hours)
@@ -226,7 +229,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       step: 0.5
   }
   $scope.setDuration = function (duration){
-    $scope.search_parameters.duration = duration; 
+    $scope.search_parameters.duration = duration;
+    console.log('setDuration', $scope.search_parameters.duration);
   }
 
   // slider for difficulties (0-5)
@@ -236,7 +240,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       step: 0.5
   }
   $scope.setDifficulty = function (difficulty){
-    $scope.search_parameters.difficulty = difficulty; 
+    $scope.search_parameters.difficulty = difficulty;
+    console.log('setDifficulty', $scope.search_parameters.difficulty); 
   }
 
   // slider for scenery (0-5)
@@ -246,7 +251,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       step: 0.5
   }
   $scope.setScenery = function (scenery){
-    $scope.search_parameters.scenery = scenery; 
+    $scope.search_parameters.scenery = scenery;
+    console.log('setScenery', $scope.search_parameters.scenery); 
   }
 
   // soon to be replaced by search/filter results
