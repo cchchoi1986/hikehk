@@ -66,8 +66,11 @@
     </ul>
   </div>
   <div id="info-panel" class="container-fluid" ng-show="true">
+    <div id="loading-img" class="row" ng-show="loading">
+      <img src="assets/hiker_moves.gif">
+    </div>
     <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
-    <div class="search-results" ng-show="search">
+    <div class="search-results" ng-show="search&&!loading">
       <h1>Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
@@ -77,7 +80,7 @@
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
     </div>    
-    <div id="one-trail" ng-show="trailPanel">
+    <div id="one-trail" ng-show="trailPanel&&!loading">
       <div class="list-group-item" ng-click="switchPanel()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 class="title-name">{{oneTrail.name}}</h2>

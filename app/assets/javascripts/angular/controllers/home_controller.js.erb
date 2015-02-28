@@ -195,12 +195,15 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       value: 5
   }
 
+  // $scope.lat = 22.268394; //set to trails beginning coordinates
+  // $scope.lon = 114.186700;
+
   // Weather service functions to get weather details
-  $scope.lat = 22.268394; //set to trails beginning coordinates
-  $scope.lon = 114.186700;
-  WeatherServices.returnWeather($scope.lat, $scope.lon).success(function(data){
-    $scope.info = WeatherServices.processData(data)
-  });
+  var getWeather = function(lat, lon){
+    WeatherServices.returnWeather(lat, lon).success(function(data){
+      $scope.weatherInfo = WeatherServices.processData(data)
+    });
+  }
 
   // initial markers set, see html models = 'trails'
   $scope.trailMarkers = [{ 
