@@ -1,5 +1,13 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', '$sce', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices, $sce){
 
+  $scope.loading = false;
+  $scope.outBox = true;
+  $scope.showHide = "glyphicon-minus";
+  $scope.search = true;
+  $scope.trailPanel = false;
+  $scope.map = homeMap;
+  $scope.zero = false;
+
   // the map
   var map;
   var homeMap = {
@@ -13,76 +21,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       longitude: 113.5629425
     }
   };
-
-  $scope.map = homeMap;
-
-  // the toggle function that show and hide the filter
-  $scope.outBox = true;
-  $scope.showHide = "glyphicon-minus";
-  $scope.showbox = function(){
-    $scope.outBox = !$scope.outBox;
-    if ($scope.outBox == true){
-      $scope.showHide = "glyphicon-minus";
-    }
-    else if($scope.outBox == false){
-      $scope.showHide = "glyphicon-plus";
-    }
-  }
-
-  $scope.goHome = function(){
-    // console.log('go home clicked');
-    $scope.map.center.latitude = 22.3991729;
-    $scope.map.center.longitude = 114.1320305
-    $scope.map.zoom = 11;
-    $scope.search = true;
-    $scope.trailPanel = false;
-  }
-
-  // the switch that switch from search results to individual result
-  $scope.search = true;
-  $scope.trailPanel = false;
-  $scope.switchPanel = function(){
-    $scope.search = !$scope.search;
-    $scope.trailPanel = !$scope.trailPanel;
-    $scope.goHome();
-  }
-
-  $scope.openTrailPanel = function(id){
-    console.log(id);
-    $http.get('/trails/'+ id).success(function(data, status, xhr) {
-      $scope.oneTrail = data;
-      // console.log(data);
-      // console.log($scope.oneTrail);
-      // oneTrail.start_longitude;
-      // oneTrail.start_latitude;
-      $scope.search = false;
-      $scope.trailPanel = true;
-      $scope.map.center.latitude = 22.3876982;
-      $scope.map.center.longitude = 114.0500164;
-      $scope.map.zoom = 15;
-    })
-  }
-
-  // the function that create the stars
-  $scope.makeStars = function(factor) {
-    // console.log('factor:',factor);
-    var range = 5.0;
-    var wholeDiff = range - factor;
-    stars = "";
-    for (var i = factor; i > 0; i--) {
-      if (i == 0.5) {
-        stars = stars + "<li class='icon fa fa-star-half-empty'></li>";
-      } else {
-        stars = stars + "<li class='icon fa fa-star'></li>";
-      }
-    }
-    for (var i = wholeDiff; i > 0.5; i--) {
-      stars = stars + "<li class='icon fa fa-star-o'></li>";
-    }
-    // must trust html for it to show up
-    return $sce.trustAsHtml(stars);
-  }
-
   // styling options, array
   var hikeMapStyle = [
     {
@@ -133,6 +71,69 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       ]
     }
   ];
+
+  // the toggle function that show and hide the filter
+  $scope.showbox = function(){
+    $scope.outBox = !$scope.outBox;
+    if ($scope.outBox == true){
+      $scope.showHide = "glyphicon-minus";
+    }
+    else if($scope.outBox == false){
+      $scope.showHide = "glyphicon-plus";
+    }
+  }
+
+  $scope.goHome = function(){
+    // console.log('go home clicked');
+    $scope.map.center.latitude = 22.3991729;
+    $scope.map.center.longitude = 114.1320305
+    $scope.map.zoom = 11;
+    $scope.search = true;
+    $scope.trailPanel = false;
+  }
+
+  // the switch that switch from search results to individual result
+  $scope.switchPanel = function(){
+    $scope.search = !$scope.search;
+    $scope.trailPanel = !$scope.trailPanel;
+    $scope.goHome();
+  }
+
+  $scope.openTrailPanel = function(id){
+    console.log(id);
+    $http.get('/trails/'+ id).success(function(data, status, xhr) {
+      $scope.oneTrail = data;
+      // console.log(data);
+      // console.log($scope.oneTrail);
+      // oneTrail.start_longitude;
+      // oneTrail.start_latitude;
+      $scope.search = false;
+      $scope.trailPanel = true;
+      $scope.map.center.latitude = 22.3876982;
+      $scope.map.center.longitude = 114.0500164;
+      $scope.map.zoom = 15;
+    })
+  }
+
+  // the function that create the stars
+  $scope.makeStars = function(factor) {
+    // console.log('factor:',factor);
+    var range = 5.0;
+    var wholeDiff = range - factor;
+    stars = "";
+    for (var i = factor; i > 0; i--) {
+      if (i == 0.5) {
+        stars = stars + "<li class='icon fa fa-star-half-empty'></li>";
+      } else {
+        stars = stars + "<li class='icon fa fa-star'></li>";
+      }
+    }
+    for (var i = wholeDiff; i > 0.5; i--) {
+      stars = stars + "<li class='icon fa fa-star-o'></li>";
+    }
+    // must trust html for it to show up
+    return $sce.trustAsHtml(stars);
+  }
 
   // map options
   $scope.options = {
@@ -199,7 +200,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // $scope.lon = 114.186700;
 
   // Weather service functions to get weather details
-  var getWeather = function(lat, lon){
+  $scope.getWeather = function(lat, lon){
     WeatherServices.returnWeather(lat, lon).success(function(data){
       $scope.weatherInfo = WeatherServices.processData(data)
     });
@@ -448,8 +449,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
   var timeOut = 1000;
   var timeoutPromise;
-  $scope.loading = false;
-
   var getParams = function(){
     $scope.loading = true;
     $timeout.cancel(timeoutPromise);
@@ -461,19 +460,15 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
   $scope.$watch("search_parameters.difficulty", function() {
     getParams();
-    // console.log("getParams difficulty");
   });
   $scope.$watch("search_parameters.duration", function() {
     getParams();
-    // console.log("getParams duration");
   });
   $scope.$watch("search_parameters.distance", function() {
     getParams();
-    // console.log("getParams distance");
   });
   $scope.$watch("search_parameters.scenery", function() {
     getParams();
-    // console.log("getParams scenery");
   });
   $scope.$watch("search_parameters.regions[0].checked", function() {
     console.log("getParams region 0");
@@ -488,7 +483,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     getParams();
   });
 
-  $scope.zero = false;
   var submitParams = function() {
     $http.get('http://localhost:3000/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
         // console.log($scope.search_parameters.regions.checked)
