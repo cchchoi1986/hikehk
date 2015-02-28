@@ -488,12 +488,18 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     getParams();
   });
 
+  $scope.zero = false;
   var submitParams = function() {
     $http.get('http://localhost:3000/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
         // console.log($scope.search_parameters.regions.checked)
         console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
         $scope.loading = false;
+        // console.log("length", data.trails.length);
+        if (data.trails.length == 0){
+          $scope.zero = true;
+          // console.log($scope.zero);
+        }
     })
   }
 
