@@ -74,12 +74,23 @@ button.search-results-button{
 #one-trail > div.list-group-item{
   display: inherit;
   text-align: left;
+  padding-bottom: 0;
 }
 
 #one-trail > div > h2 {
   font-size: 20px;
   display: inline-block;
   min-width: 110px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.fauna-class {
+  width: 100%;
+}
+
+.pix-container{
+  text-align: center;
 }
 
 #one-trail > div > p {
@@ -98,8 +109,13 @@ button.search-results-button{
   margin-bottom: 20px;
 }
 
-.title-name{
+#one-trail > div > #title-name{
   display: inline-block;
+  font-size: 30px;
+}
+
+.title-description{
+  font-style: italic;
 }
 
 #trail-carousel{
@@ -107,8 +123,8 @@ button.search-results-button{
 }
 
 img.trail-img{
-  min-height: 300px;
-  max-height: 300px;
+  min-height: 200px;
+  max-height: 200px;
   width: 100%;
 }
 
@@ -133,5 +149,15 @@ img.trail-img{
 .loading-img > img {
   text-align: center;
   padding-left: 50px; 
+}
+
+.bird-class{
+  display: inline-block;
+}
+
+img.bird-pix{
+  height: 150px;
+  width: 150px;
+  padding: 2px;
 }
 

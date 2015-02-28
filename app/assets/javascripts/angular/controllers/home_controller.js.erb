@@ -160,6 +160,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.map.zoom = 11;
     $scope.search = true;
     $scope.trailPanel = false;
+    $scope.moreClicked = false;
+    $scope.morePlantClicked = false;
   }
   // the switch that switch from search results to individual result
   $scope.switchPanel = function(){
@@ -167,6 +169,14 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.trailPanel = !$scope.trailPanel;
     $scope.goHome();
   }
+  // Weather service functions to get weather details
+  var getWeather = function(lat, lon){
+    console.log("weather gets called");
+    WeatherServices.returnWeather(lat, lon).success(function(data){
+      $scope.weatherInfo = WeatherServices.processData(data)
+    });
+  }
+
   $scope.openTrailPanel = function(id){
     console.log(id);
     $http.get('/trails/'+ id).success(function(data, status, xhr) {
@@ -180,6 +190,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       $scope.map.center.latitude = 22.3876982;
       $scope.map.center.longitude = 114.0500164;
       $scope.map.zoom = 15;
+      // getWeather(data.start_latitude, data.start_longitude);
+      getWeather($scope.map.center.latitude, $scope.map.center.longitude);
     })
   }
   // the function that create the stars
@@ -201,11 +213,15 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     // must trust html for it to show up
     return $sce.trustAsHtml(stars);
   }
-  // Weather service functions to get weather details
-  $scope.getWeather = function(lat, lon){
-    WeatherServices.returnWeather(lat, lon).success(function(data){
-      $scope.weatherInfo = WeatherServices.processData(data)
-    });
+
+  $scope.moreBirdPicture = function() {
+    console.log("more bird picture clicked");
+    $scope.moreClicked = !$scope.moreClicked;
+  }
+
+  $scope.morePlantPicture = function() {
+    console.log("more plant picture clicked");
+    $scope.morePlantClicked = !$scope.morePlantClicked;
   }
 
   // dont undersatnd ui-gamp-windows at all show is not working
