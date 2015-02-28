@@ -9,6 +9,7 @@ app.directive("slider", function($parse){
       attrs.$observe('name', function (name) {
         $("#"+ name + "-slider").slider({
           range: false,
+          value: scope.config.value,
           min: scope.config.min,
           max: scope.config.max,
           step: scope.config.step,

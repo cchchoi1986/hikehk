@@ -53,11 +53,11 @@
       </li>
       <li class="list-group-item" ng-show="outBox">
         <div>Scenery Level: {{search_parameters.scenery}}</div>
-        <div slider config="sliderSceneryConfig" model="scenery" id="scenery-slider" data-name="scenery"></div>
+        <div slider config="sliderSceneryConfig" model="search_parameters.scenery" id="scenery-slider" data-name="scenery"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
         <div>Distance: {{search_parameters.distance}} km</div>
-        <div slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
+        <div slider config="sliderDistanceConfig" model="search_parameters.distance" id="distance-slider" data-name="distance"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
         <div>Duration: {{search_parameters.duration}} hours</div>

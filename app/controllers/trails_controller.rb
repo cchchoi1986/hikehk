@@ -31,11 +31,8 @@ class TrailsController < ApplicationController
     end
     regions.flatten!
 
-    query = Trail.where(duration: 0.0..duration)
-                .where(distance: 0.0..distance)
-                .where(difficulty: 0.0..difficulty)
-                .where(scenery: 0.0..scenery)
-                .where(region_id: regions)
+    query = Trail.where(duration: 0.0..duration).where(distance: 0.0..distance).where(difficulty: 0.0..difficulty).where(scenery: 0.0..scenery)
+                # .where(region_id: regions)
     @query = query.order("name")
 
     render 'search.json.jbuilder'

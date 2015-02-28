@@ -14,18 +14,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }
   };
 
-  $scope.search_parameters = {
-    distance: 24,
-    duration: 10,
-    difficulty: 5,
-    scenery: 5,
-    regions: [
-      { text: "HK", checked: true },
-      { text: "KLN", checked: true },
-      { text: "N.T.", checked: true }
-    ]
-  }
-
   $scope.map = homeMap;
 
   // the toggle function that show and hide the filter
@@ -163,6 +151,50 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     maxZoom: 16
   };
 
+  $scope.search_parameters = {
+    distance: 24,
+    duration: 10,
+    difficulty: 5,
+    scenery: 5,
+    regions: [
+      { text: "HK", checked: true },
+      { text: "KLN", checked: true },
+      { text: "N.T.", checked: true }
+    ]
+  }
+
+  // slider for distance (km)
+  $scope.sliderDistanceConfig = {
+      min: 0,
+      max: 24,
+      step: 1,
+      value: 24
+  }
+
+  // slider for durations (hours)
+  $scope.sliderDurationConfig = {
+      min: 0,
+      max: 10,
+      step: 0.5,
+      value: 10
+  }
+
+  // slider for difficulties (0-5)
+  $scope.sliderDifficultConfig = {
+      min: 0,
+      max: 5,
+      step: 0.5,
+      value: 5
+  }
+
+  // slider for scenery (0-5)
+  $scope.sliderSceneryConfig = {
+      min: 0,
+      max: 5,
+      step: 0.5,
+      value: 5
+  }
+
   // Weather service functions to get weather details
   $scope.lat = 22.268394; //set to trails beginning coordinates
   $scope.lon = 114.186700;
@@ -189,7 +221,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       icon: "assets/hike_marker.png"
   }];
 
-  // the push must wait til the map is ready in order to show up
   // $scope.trails.push(trail);
   // $scope.addMarker = function(){
   //   var newtrail = { 
@@ -209,57 +240,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   //     trails.show = !trails.show;
   // };
 
-
-  // slider for distance (km)
-  $scope.sliderDistanceConfig = {
-      min: 0,
-      max: 24,
-      step: 1
-  }
-  $scope.setDistance = function (distance){
-    $scope.search_parameters.distance = distance;
-    console.log('setDistance', $scope.search_parameters.distance);
-  }
-
-  // slider for durations (hours)
-  $scope.sliderDurationConfig = {
-      value:2,
-      min: 0,
-      max: 10,
-      step: 0.5
-  }
-  $scope.setDuration = function (duration){
-    $scope.search_parameters.duration = duration;
-    console.log('setDuration', $scope.search_parameters.duration);
-  }
-
-  // slider for difficulties (0-5)
-  $scope.sliderDifficultConfig = {
-      min: 0,
-      max: 5,
-      step: 0.5
-  }
-  $scope.setDifficulty = function (difficulty){
-    $scope.search_parameters.difficulty = difficulty;
-    console.log('setDifficulty', $scope.search_parameters.difficulty); 
-  }
-
-  // slider for scenery (0-5)
-  $scope.sliderSceneryConfig = {
-      min: 0,
-      max: 5,
-      step: 0.5
-  }
-  $scope.setScenery = function (scenery){
-    $scope.search_parameters.scenery = scenery;
-    console.log('setScenery', $scope.search_parameters.scenery); 
-  }
-
   // soon to be replaced by search/filter results
-  $http.get('/trails').success(function(data, status, xhr) {
-    $scope.trails = data.trails;
-    // console.log($scope.trails);
-  })
+  // $http.get('/trails').success(function(data, status, xhr) {
+  //   $scope.trails = data.trails;
+  //   // console.log($scope.trails);
+  // })
 
   // array of trails for plotting polylines
   var trail1 = [
@@ -425,7 +410,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     "22.24425,114.24604"
     ]
 
-  // CLEM: this is an array of coordinates for the polylines
+  // this is an array of coordinates for the polylines
   var makeCoord = function(array) {
     new_array = [];
     for (var i =0; i < array.length; i++){
@@ -455,33 +440,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
               offset: '25px',
               repeat: '50px'
           }]
-      // },
-      // {
-      //     id: 3,
-      //     path: google.maps.geometry.encoding.decodePath("sz{fCmlixTN_@f@gAJQvB{Cz@eAj@g@BAEOGi@@[QKKMCSBg@Re@JM`@SZONOhAe@~@QPELKlAcARK`@G`@?zDCH@PJHJHBXIr@Sr@Kv@G^BbA\|@\f@LRLb@l@vAhCx@bB`@f@ZJVApBa@dB_@TBRLDT]~A?P@FNJLu@BDHLFL@NRTNH^FPCt@Ch@F^Pf@^NHb@F`CVh@CPHXRT`@LTDTDLVT|@h@BVDn@v@fCDd@rA@r@In@QlA@h@IP@RHr@RXLP?j@OZUl@o@tBq@TARDP@JCHGBKDKJCDEBIHEVFd@Gd@EbEnAN?LARDd@L`@BHALBh@[D@X^Pv@@p@JHMTc@DUNEVq@ZFV]JIXH^Ph@XZNbAA`@L`@d@n@V^JRFTTx@ND~@Dv@@n@Bl@Cl@Wj@]DETGh@Q@E?EGK"),
-      //     stroke: {
-      //         color: '#4EAE47',
-      //         weight: 3
-      //     },
-      //     editable: false,
-      //     draggable: false,
-      //     geodesic: false,
-      //     visible: true,
-      //     icons: [{
-      //         icon: {
-      //             path: google.maps.SymbolPath.BACKWARD
-      //         },
-      //         offset: '25px',
-      //         repeat: '50px'
-      //     }]
       }
   ];
-
-  // test print out search params
-  $scope.hihi = function () {
-    console.log($scope.search_parameters);
-  }
-
 
   var timeOut = 1000;
   var timeoutPromise;
@@ -491,26 +451,26 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.loading = true;
     $timeout.cancel(timeoutPromise);
     timeoutPromise = $timeout(function(){   //Set timeout
-      console.log("getParams function at work");
+      // console.log("getParams function at work");
       submitParams();
     }, timeOut);
   }
 
   $scope.$watch("search_parameters.difficulty", function() {
     getParams();
-    console.log("getParams difficulty");
+    // console.log("getParams difficulty");
   });
   $scope.$watch("search_parameters.duration", function() {
     getParams();
-    console.log("getParams duration");
+    // console.log("getParams duration");
   });
   $scope.$watch("search_parameters.distance", function() {
     getParams();
-    console.log("getParams distance");
+    // console.log("getParams distance");
   });
   $scope.$watch("search_parameters.scenery", function() {
     getParams();
-    console.log("getParams scenery");
+    // console.log("getParams scenery");
   });
   $scope.$watch("search_parameters.regions[0].checked", function() {
     console.log("getParams region 0");
@@ -525,14 +485,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     getParams();
   });
 
-  // in routes
-  // get "search" => "controller#action"
-  // change to $scope.trails = data.trails;
   var submitParams = function() {
     $http.get('http://localhost:3000/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
         // console.log($scope.search_parameters.regions.checked)
         console.log("submit parmas data is ", data);
-        $scope.results = data;
+        $scope.trails = data.trails;
         $scope.loading = false;
     })
   }
