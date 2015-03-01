@@ -2,7 +2,7 @@ json.name @trail.name
 json.id @trail.id
 json.region @trail.region.name
 json.district @trail.region.district
-
+json.icon "http://harrywood.co.uk/maps/examples/web-maps-lite/markers/marker-green.png"
 json.description @trail.description
 json.difficulty @trail.difficulty
 json.scenery @trail.scenery

@@ -1,28 +1,37 @@
-== README
+# HikeHK
+### A Web Guide to Hong Kong's Hiking Trails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+###### Gems used: 
+ *  bower, 
+ *  nokogiri, 
+ *  rails_12factor, 
+ *  gmaps4rails, 
+ *  underscore-rails, 
+ *  angularjs-rails, 
+ *  font-awesome-sass, 
+ *  angular-ui-bootstrap-rails, 
+ *  jquery-ui-rails, 
+ *  dotenv-rails
+ 
+##### Bower dependencies: 
+*   "d3": "~3.1.0"
+* "underscore:" "~1.4.4"
+* "angular-ui-utils": "0.2.1"
+* "angular-ui": "0.4.0"
+* "angular-google-maps": "2.0.12"
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##### Your own Google API Key:
+* Google Maps Javascript
+* Google Directions API
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+###### Getting Started (in this order)
+* bundle install
+* rake db:migrate
+* rake get_trails:scrape
+* rake make_regions:create
+* rake get_birds:scrape
+* rake get_plants:scrape
+* rake make_region_birds:create
+* rake make_region_plants:create
+* rake make_region_trails:create
