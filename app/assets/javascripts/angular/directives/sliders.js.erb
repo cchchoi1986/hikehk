@@ -1,128 +1,27 @@
-// var attribute = ["difficulty","duration","scenery","distance"];
-
 app.directive("slider", function($parse){
-
-
-  var newScope = {};
-  newScope["config"] = "=";
-  newScope["duration"] = "=";
-
-  console.log(newScope);
-
   return {
     restrict: 'A',
-    scope: newScope,
+    scope: {
+      config: "=config",
+      model: "=model"
+    },
     link: function(scope, elem, attrs) {
-
-      var attribute;
-
-      attrs.$observe('name', function (value) {
-        attribute = value;
-        console.log(attribute);
-        
-        var setModel = function(value) {
-          scope.model = value;
-        }
-
-
-        $("#"+ attribute + "-slider").slider({
-          // 
+      attrs.$observe('name', function (name) {
+        $("#"+ name + "-slider").slider({
           range: false,
+          value: scope.config.value,
           min: scope.config.min,
           max: scope.config.max,
           step: scope.config.step,
           slide: function(event, ui) { 
-
             console.log("im sliding!",ui.value);
             scope.$apply(function() {
-              scope[attribute] = ui.value;
+              scope.model = ui.value;
+              console.log("scope.model!",scope.model);
             });
           }
         });
       });
-      
-
     }
   }
-});
-
-app.directive("difficultySlider", function() {
-    return {
-      restrict: 'A',
-      scope: {
-          config: "=config",
-          difficulty: "=model"
-      },
-      link: function(scope, elem, attrs) {
-        var setModel = function(value) {
-          scope.model = value;   
-        }
-        $("#difficulty-slider").slider({
-          range: false,
-          min: scope.config.min,
-          max: scope.config.max,
-          step: scope.config.step,
-          slide: function(event, ui) { 
-            console.log("im difficult sliding!",ui.value);
-            scope.$apply(function() {
-                scope.difficulty = ui.value;
-            });
-          }
-        });
-      }
-    }
-});
-
-app.directive("scenerySlider", function() {
-    return {
-      restrict: 'A',
-      scope: {
-          config: "=config",
-          scenery: "=model"
-      },
-      link: function(scope, elem, attrs) {
-        var setModel = function(value) {
-          scope.model = value;   
-        }
-        $("#scenery-slider").slider({
-          range: false,
-          min: scope.config.min,
-          max: scope.config.max,
-          step: scope.config.step,
-          slide: function(event, ui) { 
-            console.log("im scenery sliding!",ui.value);
-            scope.$apply(function() {
-                scope.scenery = ui.value;
-            });
-          }
-        });
-      }
-    }
-});
-
-app.directive("distanceSlider", function() {
-    return {
-      restrict: 'A',
-      scope: {
-          config: "=config",
-          distance: "=model"
-      },
-      link: function(scope, elem, attrs) {
-        var setModel = function(value) {
-          scope.model = value;   
-        }
-        $("#distance-slider").slider({
-          range: false,
-          min: scope.config.min,
-          max: scope.config.max,
-          step: scope.config.step,
-          slide: function(event, ui) { 
-            console.log("im distance sliding!",ui.value);
-            scope.$apply(function() {
-                scope.distance = ui.value;
-            });
-          }
-        });
-      }
-    }
 });

@@ -48,26 +48,32 @@
           New Territories</div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Difficulty Level: {{difficulty}}</div>
-        <div difficulty-Slider config="sliderDifficultConfig" model="difficulty" id="difficulty-slider" data-name="difficulty"></div>
+        <div>Difficulty Level: {{search_parameters.difficulty}}</div>
+        <div slider config="sliderDifficultConfig" model="search_parameters.difficulty" id="difficulty-slider" data-name="difficulty"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Scenery Level: {{scenery}}</div>
-        <div scenery-Slider config="sliderSceneryConfig" model="scenery" id="scenery-slider" data-name="scenery"></div>
+        <div>Scenery Level: {{search_parameters.scenery}}</div>
+        <div slider config="sliderSceneryConfig" model="search_parameters.scenery" id="scenery-slider" data-name="scenery"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Distance: {{distance}} km</div>
-        <div distance-Slider config="sliderDistanceConfig" model="distance" id="distance-slider" data-name="distance"></div>
+        <div>Distance: {{search_parameters.distance}} km</div>
+        <div slider config="sliderDistanceConfig" model="search_parameters.distance" id="distance-slider" data-name="distance"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
-        <div>Duration: {{duration}} mins</div>
-        <div slider config="sliderDurationConfig" duration="duration" id="duration-slider" data-name="duration"></div>
+        <div>Duration: {{search_parameters.duration}} hours</div>
+        <div slider config="sliderDurationConfig" model="search_parameters.duration" id="duration-slider" data-name="duration"></div>
       </li>
     </ul>
   </div>
   <div id="info-panel" class="container-fluid" ng-show="true">
+    <div class="row loading-img" ng-show="loading">
+      <img src="assets/hiker_moves.gif">
+    </div>
+    <div class="row loading-img" ng-show="zero">
+      <img src="assets/zero_result.png">
+    </div>
     <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
-    <div class="search-results" ng-show="search">
+    <div class="search-results" ng-show="search&&!loading&&!zero">
       <h1>Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
@@ -77,10 +83,11 @@
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
     </div>    
-    <div id="one-trail" ng-show="trailPanel">
+    <div id="one-trail" ng-show="trailPanel&&!loading&&!zero">
       <div class="list-group-item" ng-click="switchPanel()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
-        <h2 class="title-name">{{oneTrail.name}}</h2>
+        <h2 id="title-name">{{oneTrail.name}}</h2>
+        <p class="title-description"ng-repeat="points in oneTrail.description">{{points}}</p>
       </div>
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
@@ -91,7 +98,7 @@
       </div>
       <div class="list-group-item">
         <h2>Location: </h2>
-        <p>{{oneTrail.region}}</p>
+        <p>{{oneTrail.region}} - {{weatherInfo.climate}}</p>
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
@@ -122,16 +129,28 @@
         </ul>
       </div>
       <div class="list-group-item">
-        <h2>Fauna: </h2>
-        <p>{{oneTrail.birds}}</p>
+        <h2 class="fauna-class">Fauna: </h2>
+        <div class="pix-container">
+          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
+            <img src="http://{{bird.photo_urls}}" class="img-rounded bird-pix" ng-show="$index < 4">
+          </div>
+          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
+              <img src="http://{{bird.photo_urls}}" class="img-rounded bird-pix" ng-show="$index >= 4 && moreClicked">
+          </div>
+          <button class="btn btn-sm" ng-click="moreBirdPicture()" ng-show="!moreClicked">Show More</button>
+        </div>
       </div>
       <div class="list-group-item">
-        <h2>Flora: </h2>
-        <p>{{oneTrail.plants}}</p>
-      </div>
-      <div class="list-group-item">
-        <h2>Description: </h2>
-        <p ng-repeat="points in oneTrail.description">{{points}}</p>
+        <h2 class="fauna-class">Flora: </h2>
+        <div class="pix-container">
+          <div class="bird-class" ng-repeat="plant in oneTrail.plants track by $index">
+            <img src="http://{{plant.photo_urls}}" class="img-rounded bird-pix" ng-show="$index < 4">
+          </div>
+          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
+              <img src="http://{{plant.photo_urls}}" class="img-rounded bird-pix" ng-show="$index >= 4 && morePlantClicked">
+          </div>
+          <button class="btn btn-sm" ng-click="morePlantPicture()" ng-show="!morePlantClicked">Show More</button>
+        </div>
       </div>
     </div>
   </div>
