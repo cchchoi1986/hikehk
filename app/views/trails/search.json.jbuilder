@@ -1,6 +1,8 @@
 json.trails @query do |trail|
   json.name trail.name
   json.id trail.id
+  json.region trail.region.name
+  json.district trail.region.district
 
   json.description trail.description
   json.difficulty trail.difficulty
