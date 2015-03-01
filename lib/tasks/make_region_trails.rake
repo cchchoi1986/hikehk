@@ -17843,6 +17843,8 @@ namespace :make_region_trails do
       puts "=========="
     end
 
+    Trail.where( :region_id => nil ).destroy_all
+    puts Trail.all.length
 
   end
 end
