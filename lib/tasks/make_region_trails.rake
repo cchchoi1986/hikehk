@@ -17804,6 +17804,7 @@ namespace :make_region_trails do
 
 
     trails_info.each do |f|
+<<<<<<< HEAD
       # get name of trail
       trail = Trail.find_by(:name => f[:name])
 
@@ -17841,6 +17842,45 @@ namespace :make_region_trails do
       trail.trail_coordinates = new_array
       trail.save
       puts "=========="
+=======
+        # get name of trail
+        trail = Trail.find_by(:name => f[:name])
+
+        # get trail region
+        if f[:region] != ""
+          trail.region_id =  Region.find_by(:name => f[:region]).id
+        end
+        
+        # get starting coordinates
+        if f[:url] != ""
+            url = f[:url].gsub('|', '%7C')
+            google_doc = JSON.parse(open(url).read)
+            # goog_doc = Nokogiri::HTML(open(f[:url]).read)
+
+            start_coord = google_doc["routes"][0]["legs"][0]["start_location"]
+            end_coord = google_doc["routes"][0]["legs"][0]["end_location"]
+            # puts start_coord
+            trail.start_coordinates = {
+              :latitude => start_coord["lat"].to_s.gsub('\\n',"").gsub('-','').gsub(/&nbsp;/,''),
+              :longitude => start_coord["lng"].to_s.gsub('\\n',"").gsub('-','').gsub(/&nbsp;/,'')
+            } 
+            trail.end_coordinates = {
+              :latitude => end_coord["lat"].to_s.gsub('\\n',"").gsub('-','').gsub(/&nbsp;/,''),
+              :longitude => end_coord["lng"].to_s.gsub('\\n',"").gsub('-','').gsub(/&nbsp;/,'')
+            } 
+            puts trail 
+        end
+        
+        # cleaning coordinates
+        new_array = []
+        f[:trail_coordinates].each do |f|
+          new_array.push(f.gsub!(/(<option value=)(.*)(>\()(.*)(\) Level: 3<\/option>)/,'\4'))
+        end
+        # (/(var iconTitleLeft=)(.*)/,'')
+        trail.trail_coordinates = new_array
+        trail.save
+        puts "=========="
+>>>>>>> ca3a879... added birds controller, jbuilders for flora and fauna
     end
 
 
