@@ -27,8 +27,7 @@
           show="show"
           event="clickEventsObject">
           <div ng-non-bindable>
-            <h3>{{title}}</h3>
-            {{description}}
+            <h4>{{title}}</h4>
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
@@ -40,11 +39,11 @@
   <div id="filter-box">
     <ul class="list-group">
       <li class="list-group-item" ng-show="outBox">
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[0].checked">
           HK Island</div>
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[1].checked">
           Kowloon</div>
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[2].checked">
           New Territories</div>
       </li>
       <li class="list-group-item" ng-show="outBox">
@@ -74,7 +73,7 @@
     </div>
     <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
     <div class="search-results" ng-show="search&&!loading&&!zero">
-      <h1>Search Results...</h1>
+      <h1>{{trails.length}}  Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">
@@ -83,7 +82,7 @@
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
     </div>    
-    <div id="one-trail" ng-show="trailPanel&&!loading&&!zero">
+    <div id="one-trail" ng-if="trailPanel&&!loading&&!zero">
       <div class="list-group-item" ng-click="switchPanel()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 id="title-name">{{oneTrail.name}}</h2>
@@ -128,28 +127,22 @@
           <li ng-repeat="warning in oneTrail.warning">{{warning}}</li>
         </ul>
       </div>
-      <div class="list-group-item">
+      <div class="list-group-item" ng-show="oneTrail.birds.length >0">
         <h2 class="fauna-class">Fauna: </h2>
         <div class="pix-container">
-          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
-            <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix" ng-show="$index < 4">
+          <div class="bird-class" ng-repeat="bird in oneTrail.birds | limitTo: birdLimit">
+            <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix">
           </div>
-          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
-              <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix" ng-show="$index >= 4 && moreClicked">
-          </div>
-          <button class="btn btn-sm" ng-click="moreBirdPicture()" ng-show="!moreClicked">Show More</button>
+          <button class="btn btn-sm" ng-click="moreBirdPicture(oneTrail.birds.length)" ng-show="!moreClicked && oneTrail.birds.length > 4">Show More</button>
         </div>
       </div>
-      <div class="list-group-item">
+      <div class="list-group-item" ng-show="oneTrail.plants.length > 0">
         <h2 class="fauna-class">Flora: </h2>
         <div class="pix-container">
-          <div class="bird-class" ng-repeat="plant in oneTrail.plants track by $index">
-            <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index < 4">
+          <div class="bird-class" ng-repeat="plant in oneTrail.plants | limitTo: plantLimit">
+            <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix">
           </div>
-          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
-              <img src="http://{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index >= 4 && morePlantClicked">
-          </div>
-          <button class="btn btn-sm" ng-click="morePlantPicture()" ng-show="!morePlantClicked">Show More</button>
+          <button class="btn btn-sm" ng-click="morePlantPicture(oneTrail.plants.length)" ng-show="!morePlantClicked && oneTrail.plants.length > 4">Show More</button>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ json.end_coordinates @trail.end_coordinates
 json.trail_coordinates @trail.trail_coordinates
 json.region_id @trail.region_id
 
+
 json.birds @trail.region.birds do |bird|
   json.common_name bird.common_name
   json.scientific_name bird.scientific_name

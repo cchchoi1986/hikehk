@@ -15,7 +15,7 @@ namespace :get_birds do
     bird_document = open(complete_bird_url).read
     html_doc = Nokogiri::HTML(bird_document)
     birdDataStructure_pix = "a.image > img"
-    bird_pix_list = html_doc.css(birdDataStructure_pix).first.attr("src").gsub("//","").gsub("220px","440px")
+    bird_pix_list = html_doc.css(birdDataStructure_pix).first.attr("src").gsub("//","")
     return bird_pix_list
   end
 
