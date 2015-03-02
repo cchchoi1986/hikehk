@@ -69,7 +69,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.search = true;
   $scope.trailPanel = false;
   $scope.zero = false;
-    // map options
   $scope.options = {
     scrollwheel: true,
     styles: hikeMapStyle,
@@ -85,6 +84,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     minZoom: 10,
     maxZoom: 16
   };
+  $scope.trailMarkers = [];
   $scope.search_parameters = {
     distance: 24,
     duration: 10,
@@ -125,8 +125,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       value: 5
   }
   // initial markers set, see html models = 'trails'
-  $scope.trailMarkers = [];
-
   var generateMarkers = function (data){
     $scope.trailMarkers = [];
     for (i = 0; i < data.length; i++){
@@ -139,23 +137,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       })
     }
   };
-  // { 
-  //     title: "Dragon's Back",
-  //     latitude: 22.2274417, 
-  //     longitude: 114.2369122,
-  //     id: 1,
-  //     show: false,
-  //     icon: 
-  //   },{
-  //     title: "Victoria Peak",
-  //     latitude: 22.275590,
-  //     longitude: 114.143910,
-  //     id: 2,
-  //     show: false,
-  //     description: "",
-  //     icon: "assets/hike_marker.png"
-  // }];
-
   // the toggle function that show and hide the filter
   $scope.showbox = function(){
     $scope.outBox = !$scope.outBox;
@@ -169,6 +150,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.goHome = function(){
     console.log('go home clicked');
     // $scope.map = homeMap; 
+    $scope.polylines = [];
     $scope.map.center.latitude = 22.3991729;
     $scope.map.center.longitude = 114.1320305;
     $scope.map.zoom = 11;
@@ -190,7 +172,38 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       $scope.weatherInfo = WeatherServices.processData(data)
     });
   }
-
+  // this is an array of coordinates for the polylines
+  var makeCoord = function(array) {
+    new_array = [];
+    for (var i =0; i < array.length; i++){
+      new_array.push({ latitude: array[i].split(',')[0], longitude: array[i].split(',')[1]});
+    }
+    return new_array;
+  }
+  var generateTrailRoutes = function (data){
+    // console.log("generate trail routes", data);
+    $scope.polylines = [
+    {
+        id: 1,
+        path: makeCoord(data.trail_coordinates), 
+        stroke: {
+            color: 'red',
+            weight: 3
+        },
+        editable: false,
+        draggable: false,
+        geodesic: false,
+        visible: true,
+        icons: [{
+            icon: {
+                // path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
+            },
+            offset: '25px',
+            repeat: '50px',
+        }]
+    }];
+    // console.log("polyline", $scope.polylines);
+  };
   $scope.openTrailPanel = function(id){
     console.log('trail id', id);
     $http.get('/trails/'+ id).success(function(data, status, xhr) {
@@ -198,9 +211,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       console.log($scope.oneTrail);
       $scope.map.center.latitude = $scope.oneTrail.start_coordinates.latitude;
       $scope.map.center.longitude = $scope.oneTrail.start_coordinates.longitude;
+      generateTrailRoutes($scope.oneTrail);
       // console.log('openTrailPanel oneTrail coordinates', $scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
       // console.log('map center', $scope.map.center.latitude, $scope.map.center.longitude);
-      $scope.map.zoom = 13;
+      $scope.map.zoom = 15;
       $scope.search = false;
       $scope.trailPanel = true;
       getWeather($scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
@@ -225,12 +239,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     // must trust html for it to show up
     return $sce.trustAsHtml(stars);
   }
-
   $scope.moreBirdPicture = function() {
     console.log("more bird picture clicked");
     $scope.moreClicked = !$scope.moreClicked;
   }
-
   $scope.morePlantPicture = function() {
     console.log("more plant picture clicked");
     $scope.morePlantClicked = !$scope.morePlantClicked;
@@ -241,201 +253,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   // $scope.trails.onMouseOver = function() {
   //     trails.show = !trails.show;
   // };
-
-  // array of trails for plotting polylines
-  var trail1 = [
-    "22.26618,114.24983",
-    "22.26610,114.24999",
-    "22.26590,114.25035",
-    "22.26584,114.25044",
-    "22.26524,114.25122",
-    "22.26494,114.25157",
-    "22.26472,114.25177",
-    "22.26470,114.25178",
-    "22.26473,114.25186",
-    "22.26477,114.25207",
-    "22.26476,114.25221",
-    "22.26485,114.25227",
-    "22.26491,114.25234",
-    "22.26493,114.25244",
-    "22.26491,114.25264",
-    "22.26481,114.25283",
-    "22.26475,114.25290",
-    "22.26458,114.25300",
-    "22.26444,114.25308",
-    "22.26436,114.25316",
-    "22.26399,114.25335",
-    "22.26367,114.25344",
-    "22.26358,114.25347",
-    "22.26351,114.25353",
-    "22.26312,114.25387",
-    "22.26302,114.25393",
-    "22.26285,114.25397",
-    "22.26268,114.25397",
-    "22.26174,114.25399",
-    "22.26169,114.25398",
-    "22.26160,114.25392",
-    "22.26155,114.25386",
-    "22.26150,114.25384",
-    "22.26137,114.25389",
-    "22.26111,114.25399",
-    "22.26085,114.25405",
-    "22.26057,114.25409",
-    "22.26041,114.25407",
-    "22.26007,114.25392",
-    "22.25976,114.25377",
-    "22.25956,114.25370",
-    "22.25946,114.25363",
-    "22.25928,114.25340",
-    "22.25884,114.25271",
-    "22.25855,114.25221",
-    "22.25838,114.25201",
-    "22.25824,114.25195",
-    "22.25812,114.25196",
-    "22.25755,114.25213",
-    "22.25704,114.25229",
-    "22.25693,114.25227",
-    "22.25683,114.25220",
-    "22.25680,114.25209",
-    "22.25695,114.25161",
-    "22.25695,114.25152",
-    "22.25694,114.25148",
-    "22.25686,114.25142",
-    "22.25679,114.25169",
-    "22.25677,114.25166",
-    "22.25672,114.25159",
-    "22.25668,114.25152",
-    "22.25667,114.25144",
-    "22.25657,114.25133",
-    "22.25649,114.25128",
-    "22.25633,114.25124",
-    "22.25624,114.25126",
-    "22.25597,114.25128",
-    "22.25576,114.25124",
-    "22.25560,114.25115",
-    "22.25540,114.25099",
-    "22.25532,114.25094",
-    "22.25514,114.25090",
-    "22.25449,114.25078",
-    "22.25428,114.25080",
-    "22.25419,114.25075",
-    "22.25406,114.25065",
-    "22.25395,114.25048",
-    "22.25388,114.25037",
-    "22.25385,114.25026",
-    "22.25382,114.25019",
-    "22.25370,114.25008",
-    "22.25339,114.24987",
-    "22.25337,114.24975",
-    "22.25334,114.24951",
-    "22.25306,114.24883",
-    "22.25303,114.24864",
-    "22.25261,114.24863",
-    "22.25235,114.24868",
-    "22.25211,114.24877",
-    "22.25172,114.24876",
-    "22.25151,114.24881",
-    "22.25142,114.24880",
-    "22.25132,114.24875",
-    "22.25106,114.24865",
-    "22.25093,114.24858",
-    "22.25084,114.24858",
-    "22.25062,114.24866",
-    "22.25048,114.24877",
-    "22.25025,114.24901",
-    "22.24966,114.24926",
-    "22.24955,114.24927",
-    "22.24945,114.24924",
-    "22.24936,114.24923",
-    "22.24930,114.24925",
-    "22.24925,114.24929",
-    "22.24923,114.24935",
-    "22.24920,114.24941",
-    "22.24914,114.24943",
-    "22.24911,114.24946",
-    "22.24909,114.24951",
-    "22.24904,114.24954",
-    "22.24892,114.24950",
-    "22.24873,114.24954",
-    "22.24854,114.24957",
-    "22.24756,114.24917",
-    "22.24748,114.24917",
-    "22.24741,114.24918",
-    "22.24731,114.24915",
-    "22.24712,114.24908",
-    "22.24695,114.24906",
-    "22.24690,114.24907",
-    "22.24683,114.24905",
-    "22.24662,114.24919",
-    "22.24659,114.24918",
-    "22.24646,114.24902",
-    "22.24637,114.24874",
-    "22.24636,114.24849",
-    "22.24630,114.24844",
-    "22.24637,114.24833",
-    "22.24655,114.24830",
-    "22.24666,114.24822",
-    "22.24669,114.24810",
-    "22.24694,114.24796",
-    "22.24690,114.24784",
-    "22.24705,114.24778",
-    "22.24710,114.24765",
-    "22.24705,114.24749",
-    "22.24696,114.24728",
-    "22.24683,114.24714",
-    "22.24675,114.24680",
-    "22.24676,114.24663",
-    "22.24669,114.24646",
-    "22.24650,114.24622",
-    "22.24638,114.24606",
-    "22.24632,114.24596",
-    "22.24628,114.24585",
-    "22.24617,114.24556",
-    "22.24609,114.24553",
-    "22.24577,114.24550",
-    "22.24549,114.24549",
-    "22.24525,114.24547",
-    "22.24502,114.24549",
-    "22.24479,114.24561",
-    "22.24457,114.24576",
-    "22.24454,114.24579",
-    "22.24443,114.24583",
-    "22.24422,114.24592",
-    "22.24421,114.24595",
-    "22.24421,114.24598",
-    "22.24425,114.24604"
-    ]
-  // this is an array of coordinates for the polylines
-  var makeCoord = function(array) {
-    new_array = [];
-    for (var i =0; i < array.length; i++){
-      new_array.push({ latitude: array[i].split(',')[0], longitude: array[i].split(',')[1]});
-    }
-    return new_array;
-  }
-  // polyline test...
-  $scope.polylines = [
-      {
-          id: 2,
-          path: makeCoord(trail1), 
-          stroke: {
-              // color: '#4EAE47',
-              color: 'red',
-              weight: 3
-          },
-          editable: false,
-          draggable: false,
-          geodesic: false,
-          visible: true,
-          icons: [{
-              icon: {
-                  // path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW
-              },
-              offset: '25px',
-              repeat: '50px'
-          }]
-      }
-  ];
 
   var timeOut = 1000;
   var timeoutPromise;
@@ -452,6 +269,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         // console.log($scope.search_parameters.regions.checked)
         console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
+        // console.log("coordinates", $scope.trails[0].trail_coordinates, $scope.trails[0]);
         generateMarkers($scope.trails);
         $scope.loading = false;
         // console.log("length", data.trails.length);
@@ -462,9 +280,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         else {
           $scope.zero = false;
         }
+        // goHome();
     })
   }
-
   $scope.$watch("search_parameters.difficulty", function() {
     getParams();
   });
