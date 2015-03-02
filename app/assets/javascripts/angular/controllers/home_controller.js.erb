@@ -239,27 +239,16 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     // must trust html for it to show up
     return $sce.trustAsHtml(stars);
   }
-var counter = 0;
-  $scope.checkMoreThanFourPixLength = function(array){
-    counter ++;
-    console.log(counter);
-    console.log("check array", array);
-    if (array.length > 4){
-      console.log("more than 4");
-      return true;
-    }
-    else {
-      console.log("less than 4");
-      return false;
-    }
-  }
-  $scope.moreBirdPicture = function() {
-    console.log("more bird picture clicked");
+  $scope.birdLimit = 4;
+  $scope.moreBirdPicture = function(length) {
+    // console.log("more bird picture clicked");
+    $scope.birdLimit = length;
     $scope.moreClicked = !$scope.moreClicked;
   }
-  $scope.morePlantPicture = function() {
-    console.log("more plant picture clicked");
-
+  $scope.plantLimit = 4;
+  $scope.morePlantPicture = function(length) {
+    // console.log("more plant picture clicked");
+    $scope.plantLimit = length;
     $scope.morePlantClicked = !$scope.morePlantClicked;
   }
 
