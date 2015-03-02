@@ -2,7 +2,7 @@ json.trails @trails do |trail|
   json.name trail.name
   json.id trail.id
   json.region trail.region
-  json.icon "http://harrywood.co.uk/maps/examples/web-maps-lite/markers/marker-green.png"
+  json.icon "https://dl.dropboxusercontent.com/u/7814617/hike_marker.png"
   json.description trail.description
   json.difficulty trail.difficulty
   json.scenery trail.scenery
