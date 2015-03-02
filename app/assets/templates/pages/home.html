@@ -82,7 +82,7 @@
         <button class="btn glyphicon glyphicon-chevron-right search-results-button col-md-2"></button>
       </div>
     </div>    
-    <div id="one-trail" ng-show="trailPanel&&!loading&&!zero">
+    <div id="one-trail" ng-if="trailPanel&&!loading&&!zero">
       <div class="list-group-item" ng-click="switchPanel()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 id="title-name">{{oneTrail.name}}</h2>
@@ -136,7 +136,7 @@
           <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
               <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix" ng-show="$index >= 4 && moreClicked">
           </div>
-          <button class="btn btn-sm" ng-click="moreBirdPicture()" ng-show="!moreClicked">Show More</button>
+          <button class="btn btn-sm" ng-click="moreBirdPicture()" ng-if="!moreClicked && checkMoreThanFourPixLength(oneTrail.birds)">Show More</button>
         </div>
       </div>
       <div class="list-group-item">
@@ -148,7 +148,7 @@
           <div class="bird-class" ng-repeat="plant in oneTrail.plants track by $index">
               <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index >= 4 && morePlantClicked">
           </div>
-          <button class="btn btn-sm" ng-click="morePlantPicture()" ng-show="!morePlantClicked">Show More</button>
+          <button class="btn btn-sm" ng-click="morePlantPicture()" ng-if="!morePlantClicked && checkMoreThanFourPixLength(oneTrail.plants)">Show More</button>
         </div>
       </div>
     </div>
