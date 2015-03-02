@@ -39,11 +39,11 @@
   <div id="filter-box">
     <ul class="list-group">
       <li class="list-group-item" ng-show="outBox">
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[0]">
           HK Island</div>
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[1]">
           Kowloon</div>
-        <div class="region-checkbox"><input type="checkbox" checked>
+        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[2]">
           New Territories</div>
       </li>
       <li class="list-group-item" ng-show="outBox">

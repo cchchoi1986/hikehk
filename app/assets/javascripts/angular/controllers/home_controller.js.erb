@@ -270,7 +270,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }, timeOut);
   }
   var submitParams = function() {
-    $http.get('/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0].checked+"&kln="+$scope.search_parameters.regions[1].checked+"&nt="+$scope.search_parameters.regions[2].checked).success(function(data, status, xhr){
+    $http.get('/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0]+"&kln="+$scope.search_parameters.regions[1]+"&nt="+$scope.search_parameters.regions[2]).success(function(data, status, xhr){
         // console.log($scope.search_parameters.regions.checked)
         console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
@@ -300,15 +300,15 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.$watch("search_parameters.scenery", function() {
     getParams();
   });
-  $scope.$watch("search_parameters.regions[0].checked", function() {
+  $scope.$watch("search_parameters.regions[0]", function() {
     console.log("getParams region 0");
     getParams();
   });
-  $scope.$watch("search_parameters.regions[1].checked", function() {
+  $scope.$watch("search_parameters.regions[1]", function() {
     console.log("getParams region 1");
     getParams();
   });
-  $scope.$watch("search_parameters.regions[2].checked", function() {
+  $scope.$watch("search_parameters.regions[2]", function() {
     console.log("getParams region 2");
     getParams();
   });
