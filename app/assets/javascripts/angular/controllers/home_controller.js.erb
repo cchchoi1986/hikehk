@@ -157,12 +157,22 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.trailPanel = false;
     $scope.moreClicked = false;
     $scope.morePlantClicked = false;
+    console.log('moreClicked', $scope.moreClicked);
+    console.log('morePlantClicked', $scope.morePlantClicked);
+    $scope.plantLimit = 4;
+    $scope.birdLimit = 4;
   }
   // the switch that switch from search results to individual result
   $scope.switchPanel = function(){
     $scope.search = !$scope.search;
     $scope.trailPanel = !$scope.trailPanel;
     $scope.goHome();
+    $scope.moreClicked = false;
+    $scope.morePlantClicked = false;
+    console.log('moreClicked', $scope.moreClicked);
+    console.log('morePlantClicked', $scope.morePlantClicked);
+    $scope.plantLimit = 4;
+    $scope.birdLimit = 4;
   }
   // Weather service functions to get weather details
   var getWeather = function(lat, lon){
@@ -242,7 +252,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.moreBirdPicture = function(length) {
     // console.log("more bird picture clicked");
     $scope.birdLimit = length;
-    $scope.moreClicked = !$scope.moreClicked;
+    $scope.moreClicked = true;
   }
   $scope.plantLimit = 4;
   $scope.morePlantPicture = function(length) {

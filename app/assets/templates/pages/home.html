@@ -133,16 +133,16 @@
           <div class="bird-class" ng-repeat="bird in oneTrail.birds | limitTo: birdLimit">
             <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix">
           </div>
-          <button class="btn btn-sm" ng-click="moreBirdPicture(oneTrail.birds.length)" ng-if="!moreClicked && oneTrail.birds.length > 4">Show More</button>
+          <button class="btn btn-sm" ng-click="moreBirdPicture(oneTrail.birds.length)" ng-show="!moreClicked && oneTrail.birds.length > 4">Show More</button>
         </div>
       </div>
-      <div class="list-group-item" ng-show="oneTrail.plants.length >0">
+      <div class="list-group-item" ng-show="oneTrail.plants.length > 0">
         <h2 class="fauna-class">Flora: </h2>
         <div class="pix-container">
           <div class="bird-class" ng-repeat="plant in oneTrail.plants | limitTo: plantLimit">
             <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix">
           </div>
-          <button class="btn btn-sm" ng-click="morePlantPicture(oneTrail.plants.length)" ng-if="!morePlantClicked && oneTrail.plants.length > 4">Show More</button>
+          <button class="btn btn-sm" ng-click="morePlantPicture(oneTrail.plants.length)" ng-show="!morePlantClicked && oneTrail.plants.length > 4">Show More</button>
         </div>
       </div>
     </div>
