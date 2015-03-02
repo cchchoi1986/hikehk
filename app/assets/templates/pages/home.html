@@ -27,8 +27,7 @@
           show="show"
           event="clickEventsObject">
           <div ng-non-bindable>
-            <h3>{{title}}</h3>
-            {{description}}
+            <h4>{{title}}</h4>
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
@@ -146,8 +145,8 @@
           <div class="bird-class" ng-repeat="plant in oneTrail.plants track by $index">
             <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index < 4">
           </div>
-          <div class="bird-class" ng-repeat="bird in oneTrail.birds track by $index">
-              <img src="http://{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index >= 4 && morePlantClicked">
+          <div class="bird-class" ng-repeat="plant in oneTrail.plants track by $index">
+              <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix" ng-show="$index >= 4 && morePlantClicked">
           </div>
           <button class="btn btn-sm" ng-click="morePlantPicture()" ng-show="!morePlantClicked">Show More</button>
         </div>

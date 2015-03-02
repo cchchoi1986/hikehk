@@ -125,23 +125,36 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       value: 5
   }
   // initial markers set, see html models = 'trails'
-  $scope.trailMarkers = [{ 
-      title: "Dragon's Back",
-      latitude: 22.241165, 
-      longitude: 114.241569,
-      id: 1,
-      show: false,
-      description: "",
-      icon: "assets/hike_marker.png"
-    },{
-      title: "Victoria Peak",
-      latitude: 22.275590,
-      longitude: 114.143910,
-      id: 2,
-      show: false,
-      description: "",
-      icon: "assets/hike_marker.png"
-  }];
+  $scope.trailMarkers = [];
+
+  var generateMarkers = function (data){
+    $scope.trailMarkers = [];
+    for (i = 0; i < data.length; i++){
+      $scope.trailMarkers.push({
+        title: data[i].name,
+        latitude: data[i].start_coordinates.latitude, 
+        longitude: data[i].start_coordinates.longitude,
+        id: data[i].id,
+        icon: "assets/hike_marker.png",
+      })
+    }
+  };
+  // { 
+  //     title: "Dragon's Back",
+  //     latitude: 22.2274417, 
+  //     longitude: 114.2369122,
+  //     id: 1,
+  //     show: false,
+  //     icon: 
+  //   },{
+  //     title: "Victoria Peak",
+  //     latitude: 22.275590,
+  //     longitude: 114.143910,
+  //     id: 2,
+  //     show: false,
+  //     description: "",
+  //     icon: "assets/hike_marker.png"
+  // }];
 
   // the toggle function that show and hide the filter
   $scope.showbox = function(){
@@ -154,9 +167,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }
   }
   $scope.goHome = function(){
-    // console.log('go home clicked');
+    console.log('go home clicked');
+    // $scope.map = homeMap; 
     $scope.map.center.latitude = 22.3991729;
-    $scope.map.center.longitude = 114.1320305
+    $scope.map.center.longitude = 114.1320305;
     $scope.map.zoom = 11;
     $scope.search = true;
     $scope.trailPanel = false;
@@ -178,20 +192,18 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
 
   $scope.openTrailPanel = function(id){
-    console.log(id);
+    console.log('trail id', id);
     $http.get('/trails/'+ id).success(function(data, status, xhr) {
       $scope.oneTrail = data;
-      // console.log(data);
-      // console.log($scope.oneTrail);
-      // oneTrail.start_longitude;
-      // oneTrail.start_latitude;
+      console.log($scope.oneTrail);
+      $scope.map.center.latitude = $scope.oneTrail.start_coordinates.latitude;
+      $scope.map.center.longitude = $scope.oneTrail.start_coordinates.longitude;
+      // console.log('openTrailPanel oneTrail coordinates', $scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
+      // console.log('map center', $scope.map.center.latitude, $scope.map.center.longitude);
+      $scope.map.zoom = 13;
       $scope.search = false;
       $scope.trailPanel = true;
-      $scope.map.center.latitude = 22.3876982;
-      $scope.map.center.longitude = 114.0500164;
-      $scope.map.zoom = 15;
-      // getWeather(data.start_latitude, data.start_longitude);
-      getWeather($scope.map.center.latitude, $scope.map.center.longitude);
+      getWeather($scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
     })
   }
   // the function that create the stars
@@ -440,6 +452,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         // console.log($scope.search_parameters.regions.checked)
         console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
+        generateMarkers($scope.trails);
         $scope.loading = false;
         // console.log("length", data.trails.length);
         if (data.trails.length == 0){
