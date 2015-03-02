@@ -2,8 +2,11 @@ json.trails @query do |trail|
   json.name trail.name
   json.id trail.id
   json.region trail.region
-
+  json.icon "https://dl.dropboxusercontent.com/u/7814617/hike_marker.png"
   json.description trail.description
+  json.start_coordinates trail.start_coordinates
+  json.end_coordinates trail.end_coordinates
+  json.trail_coordinates trail.trail_coordinates
   json.difficulty trail.difficulty
   json.scenery trail.scenery
   json.distance trail.distance
