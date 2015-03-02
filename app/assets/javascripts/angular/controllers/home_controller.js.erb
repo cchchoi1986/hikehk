@@ -61,7 +61,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       ]
     }
   ];
-
   $scope.map = homeMap; 
   $scope.loading = false;
   $scope.outBox = true;
@@ -252,7 +251,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.morePlantClicked = !$scope.morePlantClicked;
   }
 
-
   // dont undersatnd ui-gamp-windows at all show is not working
   // onclick the window shows up, with title and description
   // $scope.trails.onMouseOver = function() {
@@ -270,9 +268,17 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }, timeOut);
   }
   var submitParams = function() {
-    $http.get('/search?duration='+$scope.search_parameters.duration+"&difficulty="+$scope.search_parameters.difficulty+"&scenery="+$scope.search_parameters.scenery+"&distance="+$scope.search_parameters.distance+"&hk="+$scope.search_parameters.regions[0]+"&kln="+$scope.search_parameters.regions[1]+"&nt="+$scope.search_parameters.regions[2]).success(function(data, status, xhr){
-        // console.log($scope.search_parameters.regions.checked)
-        console.log("submit parmas data is ", data);
+    var url = "/search?" + 
+      "duration=" + $scope.search_parameters.duration +
+      "&difficulty=" + $scope.search_parameters.difficulty +
+      "&scenery=" + $scope.search_parameters.scenery +
+      "&distance=" + $scope.search_parameters.distance +
+      "&hk=" + $scope.search_parameters.regions[0].checked +
+      "&kln=" + $scope.search_parameters.regions[1].checked +
+      "&nt=" + $scope.search_parameters.regions[2].checked;
+    $http.get(url).success(function(data, status, xhr){
+        // console.log($scope.search_parameters.regions);
+        // console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
         // console.log("coordinates", $scope.trails[0].trail_coordinates, $scope.trails[0]);
         generateMarkers($scope.trails);
@@ -300,16 +306,13 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   $scope.$watch("search_parameters.scenery", function() {
     getParams();
   });
-  $scope.$watch("search_parameters.regions[0]", function() {
-    console.log("getParams region 0");
+  $scope.$watch("search_parameters.regions[0].checked", function() {
     getParams();
   });
-  $scope.$watch("search_parameters.regions[1]", function() {
-    console.log("getParams region 1");
+  $scope.$watch("search_parameters.regions[1].checked", function() {
     getParams();
   });
-  $scope.$watch("search_parameters.regions[2]", function() {
-    console.log("getParams region 2");
+  $scope.$watch("search_parameters.regions[2].checked", function() {
     getParams();
   });
 
