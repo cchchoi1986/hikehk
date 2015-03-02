@@ -73,7 +73,7 @@
     </div>
     <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
     <div class="search-results" ng-show="search&&!loading&&!zero">
-      <h1>Search Results...</h1>
+      <h1>{{trails.length}}  Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
         <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">

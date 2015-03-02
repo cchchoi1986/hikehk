@@ -290,6 +290,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         // console.log($scope.search_parameters.regions);
         // console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
+        console.log("length ", $scope.trails.length);
         // console.log("coordinates", $scope.trails[0].trail_coordinates, $scope.trails[0]);
         generateMarkers($scope.trails);
         $scope.loading = false;
@@ -301,7 +302,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         else {
           $scope.zero = false;
         }
-        // goHome();
+        $scope.goHome();
     })
   }
   $scope.$watch("search_parameters.difficulty", function() {
