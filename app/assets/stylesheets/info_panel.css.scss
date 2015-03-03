@@ -78,11 +78,12 @@ button.search-results-button{
 }
 
 #one-trail > div > h2 {
-  font-size: 20px;
+  // font-size: 20px;
   display: inline-block;
   min-width: 110px;
   margin-top: 5px;
   margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .fauna-class {
@@ -95,6 +96,14 @@ button.search-results-button{
 
 #one-trail > div > p {
   display: inline-block;
+  font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#weatherSection {
+  display: inline-block;
+  font-size: 16px;
 }
 
 #one-trail > div > ul.stars {
@@ -114,8 +123,9 @@ button.search-results-button{
   font-size: 30px;
 }
 
-.title-description{
+#one-trail > div > p.title-description{
   font-style: italic;
+  font-size: 14px;
 }
 
 #trail-carousel{

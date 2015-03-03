@@ -7,7 +7,6 @@
 html, body, #map-canvas { 
   height: 100vh; 
   width: 100vw;
-  // clem, this is the issue
   margin: 0; 
   padding: 0;
   position: absolute;
@@ -20,13 +19,15 @@ html, body, #map-canvas {
   text-align: center;
   position: absolute;
   background-color: rgba(100,100,100,1);
-  // min-height: 100%;
-  // min-height: 100vh;
-  // display: flex;
   align-items: center;
 }
 
 #small-screen > button{
+  top: 50%;
+  position: relative;
+}
+
+#small-screen > img{
   position: relative;
   top: 50%;
 }
@@ -39,6 +40,6 @@ html, body, #map-canvas {
 
 @media(min-width:991px){
   #small-screen{
-    z-index: 1;
+    display: none;
   }
 }

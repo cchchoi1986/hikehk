@@ -33,7 +33,10 @@
       </ui-gmap-markers>
     </ui-gmap-google-map>
   </div>
-  <div id="small-screen" ng-show="small"><button class="btn btn-primary" ng-click="switchSmall()">Proceed to HikeHK Mobile App</button></div>
+  <div id="small-screen" ng-show="small">
+    <img src="assets/hiker_moves.gif">
+    <button class="btn btn-primary" ng-click="switchSmall()">Proceed to HikeHK Mobile App</button>
+  </div>
   <button class="btn btn-sm glyphicon showBar" ng-class="showHide" ng-click="showbox()"></button>
   <button class="btn btn-sm glyphicon glyphicon-home home-button" ng-click="goHome()"></button>
   <div id="filter-box">
@@ -71,7 +74,6 @@
     <div class="row loading-img" ng-show="zero">
       <img src="assets/zero_result.png">
     </div>
-    <!-- <header id="company-name"><h1>Hike HK</h1></header> -->
     <div class="search-results" ng-show="search&&!loading&&!zero">
       <h1>{{trails.length}}  Search Results...</h1>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
@@ -97,7 +99,13 @@
       </div>
       <div class="list-group-item">
         <h2>Location: </h2>
-        <p>{{oneTrail.region}} - {{weatherInfo.climate}}</p>
+        <p>{{oneTrail.region}}</p>
+      </div>
+      <div class="list-group-item">
+        <h2>Currently: </h2>
+        <div id="weatherSection"> 
+          <div>{{ weatherInfo.tempMin}} - {{ weatherInfo.tempMax }}˚C,  {{weatherInfo.climate}}, {{weatherInfo.description}}</div>
+        </div>
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>
