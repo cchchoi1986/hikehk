@@ -1,4 +1,10 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', '$sce', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices, $sce){
+  
+  $scope.small = true;
+  $scope.switchSmall = function (){
+    $scope.small = !$scope.small;
+    console.log('small clicked');
+  }
 
   var homeMap = {
     center: { 
@@ -126,19 +132,34 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
   }
   // initial markers set, see html models = 'trails'
   var generateMarkers = function (data){
+    // console.log(data);
     $scope.trailMarkers = [];
     for (i = 0; i < data.length; i++){
-      var someId = data[i].id;
+      // var someId = data[i].id;
       $scope.trailMarkers.push({
         title: data[i].name,
         latitude: data[i].start_coordinates.latitude, 
         longitude: data[i].start_coordinates.longitude,
         id: data[i].id,
         icon: "assets/hike_marker.png",
-        click: function() {
-          $scope.openTrailPanel(someId);
+        animation: "Animation.BOUNCE",
+        click: function(someId) {
+          console.log(someId.key);
+          $scope.openTrailPanel(someId.key);
         }
       })
+    }
+  };
+  $scope.markersEvents = {
+    mouseover: function (gMarker, eventName, model) {
+      console.log("meow");
+      model.show = true;
+      $scope.$apply();
+    },
+    mouseout: function (gMarker, eventName, model) {
+      console.log("meow out");
+      model.show = false;
+      $scope.$apply();
     }
   };
   // the toggle function that show and hide the filter
@@ -152,7 +173,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }
   }
   $scope.goHome = function(){
-    console.log('go home clicked');
+    // console.log('go home clicked');
     // $scope.map = homeMap; 
     $scope.polylines = [];
     $scope.map.center.latitude = 22.387118;
@@ -218,7 +239,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       getWeather($scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
     })
   }
-  // the function that create the stars
   $scope.makeStars = function(factor) {
     // console.log('factor:',factor);
     var range = 5.0;
@@ -250,12 +270,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.morePlantClicked = !$scope.morePlantClicked;
   }
 
-  // dont undersatnd ui-gamp-windows at all show is not working
-  // onclick the window shows up, with title and description
-  // $scope.trails.onMouseOver = function() {
-  //     trails.show = !trails.show;
-  // };
-
   var timeOut = 1000;
   var timeoutPromise;
   var getParams = function(){
@@ -276,17 +290,13 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       "&kln=" + $scope.search_parameters.regions[1].checked +
       "&nt=" + $scope.search_parameters.regions[2].checked;
     $http.get(url).success(function(data, status, xhr){
-        // console.log($scope.search_parameters.regions);
         // console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
         console.log("length ", $scope.trails.length);
-        // console.log("coordinates", $scope.trails[0].trail_coordinates, $scope.trails[0]);
         generateMarkers($scope.trails);
         $scope.loading = false;
-        // console.log("length", data.trails.length);
         if (data.trails.length == 0){
           $scope.zero = true;
-          // console.log($scope.zero);
         }
         else {
           $scope.zero = false;
