@@ -22,11 +22,11 @@
       <ui-gmap-markers
           models  = 'trailMarkers'
           coords  = "'self'"
-          icon    = "'icon'">
-        <ui-gmap-windows
-          event = "openTrailPanel(id)">
+          icon    = "'icon'"
+          click   = "'click'">
+        <ui-gmap-windows>
           <div ng-non-bindable>
-            <a class="marker-window" ng-click="openTrailPanel(id)">{{title}} {{id}}</a>
+            <p class="marker-window">{{title}}</p>
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
