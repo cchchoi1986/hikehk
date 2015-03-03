@@ -142,16 +142,14 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         longitude: data[i].start_coordinates.longitude,
         id: data[i].id,
         icon: "assets/hike_marker.png",
-        // click: openTrailPanel
+        animation: "Animation.BOUNCE",
         click: function(someId) {
           console.log(someId.key);
           $scope.openTrailPanel(someId.key);
         }
       })
     }
-    console.log('trailMarkers', $scope.trailMarkers);
   };
-
   $scope.markersEvents = {
     mouseover: function (gMarker, eventName, model) {
       console.log("meow");
@@ -164,7 +162,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       $scope.$apply();
     }
   };
-
   // the toggle function that show and hide the filter
   $scope.showbox = function(){
     $scope.outBox = !$scope.outBox;
@@ -242,7 +239,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       getWeather($scope.oneTrail.start_coordinates.latitude, $scope.oneTrail.start_coordinates.longitude);
     })
   }
-  // the function that create the stars
   $scope.makeStars = function(factor) {
     // console.log('factor:',factor);
     var range = 5.0;
@@ -294,17 +290,13 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       "&kln=" + $scope.search_parameters.regions[1].checked +
       "&nt=" + $scope.search_parameters.regions[2].checked;
     $http.get(url).success(function(data, status, xhr){
-        // console.log($scope.search_parameters.regions);
         // console.log("submit parmas data is ", data);
         $scope.trails = data.trails;
         console.log("length ", $scope.trails.length);
-        // console.log("coordinates", $scope.trails[0].trail_coordinates, $scope.trails[0]);
         generateMarkers($scope.trails);
         $scope.loading = false;
-        // console.log("length", data.trails.length);
         if (data.trails.length == 0){
           $scope.zero = true;
-          // console.log($scope.zero);
         }
         else {
           $scope.zero = false;
