@@ -1,4 +1,10 @@
 app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapApi', '$timeout', 'WeatherServices', '$sce', function($scope, $http, $routeParams, uiGmapGoogleMapApi, $timeout, WeatherServices, $sce){
+  
+  $scope.small = true;
+  $scope.switchSmall = function (){
+    $scope.small = !$scope.small;
+    console.log('small clicked');
+  }
 
   var homeMap = {
     center: { 
@@ -124,10 +130,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       step: 0.5,
       value: 5
   }
-
   // initial markers set, see html models = 'trails'
   var generateMarkers = function (data){
-    console.log(data);
+    // console.log(data);
     $scope.trailMarkers = [];
     for (i = 0; i < data.length; i++){
       // var someId = data[i].id;
