@@ -149,13 +149,21 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         }
       })
     }
+    console.log('trailMarkers', $scope.trailMarkers);
   };
 
-  // dont undersatnd ui-gamp-windows at all show is not working
-  // onclick the window shows up, with title and description
-  // $scope.trails.onMouseOver = function() {
-  //     trails.show = !trails.show;
-  // };
+  $scope.markersEvents = {
+    mouseover: function (gMarker, eventName, model) {
+      console.log("meow");
+      model.show = true;
+      $scope.$apply();
+    },
+    mouseout: function (gMarker, eventName, model) {
+      console.log("meow out");
+      model.show = false;
+      $scope.$apply();
+    }
+  };
 
   // the toggle function that show and hide the filter
   $scope.showbox = function(){
