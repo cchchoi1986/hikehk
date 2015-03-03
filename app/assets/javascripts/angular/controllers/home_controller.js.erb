@@ -2,14 +2,16 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
 
   var homeMap = {
     center: { 
-      latitude: 22.3991729, //tai lam country park
-      longitude: 114.1320305
+      // latitude: 22.3991729, //tai lam country park
+      // longitude: 114.1320305
+      latitude: 22.387118,
+      longitude: 114.1953501
     },
     zoom: 11,
-    bounds: {
-      latitude: 22.1634178, 
-      longitude: 113.5629425
-    }
+    // bounds: {
+    //   latitude: 22.1634178, 
+    //   longitude: 113.5629425
+    // }
   };
   // styling options, array
   var hikeMapStyle = [
@@ -132,7 +134,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         latitude: data[i].start_coordinates.latitude, 
         longitude: data[i].start_coordinates.longitude,
         id: data[i].id,
-        icon: "assets/hike_marker.png",
+        icon: "assets/hike_marker.png"
       })
     }
   };
@@ -150,8 +152,8 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     console.log('go home clicked');
     // $scope.map = homeMap; 
     $scope.polylines = [];
-    $scope.map.center.latitude = 22.3991729;
-    $scope.map.center.longitude = 114.1320305;
+    $scope.map.center.latitude = 22.387118;
+    $scope.map.center.longitude = 114.1953501;
     $scope.map.zoom = 11;
     $scope.search = true;
     $scope.trailPanel = false;
@@ -163,17 +165,17 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.birdLimit = 4;
   }
   // the switch that switch from search results to individual result
-  $scope.switchPanel = function(){
-    $scope.search = !$scope.search;
-    $scope.trailPanel = !$scope.trailPanel;
-    $scope.goHome();
-    $scope.moreClicked = false;
-    $scope.morePlantClicked = false;
-    console.log('moreClicked', $scope.moreClicked);
-    console.log('morePlantClicked', $scope.morePlantClicked);
-    $scope.plantLimit = 4;
-    $scope.birdLimit = 4;
-  }
+  // $scope.switchPanel = function(){
+  //   $scope.search = !$scope.search;
+  //   $scope.trailPanel = !$scope.trailPanel;
+  //   $scope.goHome();
+  //   $scope.moreClicked = false;
+  //   $scope.morePlantClicked = false;
+  //   console.log('moreClicked', $scope.moreClicked);
+  //   console.log('morePlantClicked', $scope.morePlantClicked);
+  //   $scope.plantLimit = 4;
+  //   $scope.birdLimit = 4;
+  // }
   // Weather service functions to get weather details
   var getWeather = function(lat, lon){
     console.log("weather gets called");

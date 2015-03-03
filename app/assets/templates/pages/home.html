@@ -23,11 +23,10 @@
           models  = 'trailMarkers'
           coords  = "'self'"
           icon    = "'icon'">
-        <ui-gmap-windows 
-          show="show"
-          event="clickEventsObject">
+        <ui-gmap-windows
+          event = "openTrailPanel(id)">
           <div ng-non-bindable>
-            <h4>{{title}}</h4>
+            <a ng-click="openTrailPanel(id)">{{title}}</a>
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
@@ -83,7 +82,7 @@
       </div>
     </div>    
     <div id="one-trail" ng-if="trailPanel&&!loading&&!zero">
-      <div class="list-group-item" ng-click="switchPanel()">
+      <div class="list-group-item" ng-click="goHome()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 id="title-name">{{oneTrail.name}}</h2>
         <p class="title-description"ng-repeat="points in oneTrail.description">{{points}}</p>
