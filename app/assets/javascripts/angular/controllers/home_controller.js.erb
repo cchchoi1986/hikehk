@@ -124,23 +124,34 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
       step: 0.5,
       value: 5
   }
+
   // initial markers set, see html models = 'trails'
   var generateMarkers = function (data){
+    console.log(data);
     $scope.trailMarkers = [];
     for (i = 0; i < data.length; i++){
-      var someId = data[i].id;
+      // var someId = data[i].id;
       $scope.trailMarkers.push({
         title: data[i].name,
         latitude: data[i].start_coordinates.latitude, 
         longitude: data[i].start_coordinates.longitude,
         id: data[i].id,
         icon: "assets/hike_marker.png",
-        click: function() {
-          $scope.openTrailPanel(someId);
+        // click: openTrailPanel
+        click: function(someId) {
+          console.log(someId.key);
+          $scope.openTrailPanel(someId.key);
         }
       })
     }
   };
+
+  // dont undersatnd ui-gamp-windows at all show is not working
+  // onclick the window shows up, with title and description
+  // $scope.trails.onMouseOver = function() {
+  //     trails.show = !trails.show;
+  // };
+
   // the toggle function that show and hide the filter
   $scope.showbox = function(){
     $scope.outBox = !$scope.outBox;
@@ -152,7 +163,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     }
   }
   $scope.goHome = function(){
-    console.log('go home clicked');
+    // console.log('go home clicked');
     // $scope.map = homeMap; 
     $scope.polylines = [];
     $scope.map.center.latitude = 22.387118;
@@ -249,12 +260,6 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.plantLimit = length;
     $scope.morePlantClicked = !$scope.morePlantClicked;
   }
-
-  // dont undersatnd ui-gamp-windows at all show is not working
-  // onclick the window shows up, with title and description
-  // $scope.trails.onMouseOver = function() {
-  //     trails.show = !trails.show;
-  // };
 
   var timeOut = 1000;
   var timeoutPromise;
