@@ -155,9 +155,30 @@ img.trail-img{
   display: inline-block;
 }
 
-img.bird-pix{
+div.thumbnail{
+  background-color: $primary-background-color;
+  display: inline-block;
+  color: $primary-font-color;
+  position: relative;
+  margin-bottom: 10px;
+  border: 0;
+  &:hover .caption{
+    visibility: hidden;
+  }
+}
+
+div.thumbnail > .caption{
+  color: $primary-font-color;
+  max-width: 150px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(255,255,255,.2);
+}
+
+div.thumbnail > img.bird-pix{
   height: 150px;
   width: 150px;
-  padding: 2px;
+  // padding: 2px;
 }
 

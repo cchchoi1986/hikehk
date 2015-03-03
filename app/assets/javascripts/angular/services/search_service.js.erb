@@ -1,0 +1,72 @@
+// app.factory('SearchService', ['$http', '$scope', '$timeout', function($scope, $http, $timeout){
+
+
+//   var timeOut = 1000;
+//   var timeoutPromise;
+//   var search = {}; 
+//   search.returnSearch = function (){
+//     var url = "/search?" + 
+//       "duration=" + $scope.search_parameters.duration +
+//       "&difficulty=" + $scope.search_parameters.difficulty +
+//       "&scenery=" + $scope.search_parameters.scenery +
+//       "&distance=" + $scope.search_parameters.distance +
+//       "&hk=" + $scope.search_parameters.regions[0].checked +
+//       "&kln=" + $scope.search_parameters.regions[1].checked +
+//       "&nt=" + $scope.search_parameters.regions[2].checked;
+//     return $http.get(url);
+//   }
+
+//   var submitParams = function() {
+//     $http.get(url).success(function(data, status, xhr){
+
+//     })
+//   }
+
+//   var getSearch = function(){
+//     console.log("search gets called");
+//     SearchServices.returnSearch().success(function(data){
+//       $scope.searchresults = data;
+//     })
+//   }
+
+// // in home controller
+//   $scope.$watch("search_parameters.difficulty", function() {
+//     // console.log("getParams function at work");
+//     $scope.loading = true;
+//     $timeout.cancel(timeoutPromise);
+//     timeoutPromise = $timeout(function(){
+//       SearchServices.getSearch(url).success(function(){
+//         // the hash equal to the $scope.trail 
+//         $scope.trails = data.trails;
+//         generateMarkers($scope.trails);
+//         $scope.loading = false;
+//         if (data.trails.length == 0){
+//           $scope.zero = true;
+//         }
+//         $scope.goHome();
+//       })
+//     }, timeOut);
+//   });
+
+//   $scope.$watch("search_parameters.duration", function() {
+//     getParams();
+//   });
+//   $scope.$watch("search_parameters.distance", function() {
+//     getParams();
+//   });
+//   $scope.$watch("search_parameters.scenery", function() {
+//     getParams();
+//   });
+//   $scope.$watch("search_parameters.regions[0].checked", function() {
+//     getParams();
+//   });
+//   $scope.$watch("search_parameters.regions[1].checked", function() {
+//     getParams();
+//   });
+//   $scope.$watch("search_parameters.regions[2].checked", function() {
+//     getParams();
+//   });
+
+//   return search; 
+
+// }]);

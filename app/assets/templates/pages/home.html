@@ -22,12 +22,11 @@
       <ui-gmap-markers
           models  = 'trailMarkers'
           coords  = "'self'"
-          icon    = "'icon'">
-        <ui-gmap-windows 
-          show="show"
-          event="clickEventsObject">
+          icon    = "'icon'"
+          click   = "'click'">
+        <ui-gmap-windows>
           <div ng-non-bindable>
-            <h4>{{title}}</h4>
+            <p class="marker-window">{{title}}</p>
           </div>
         </ui-gmap-windows>
       </ui-gmap-markers>
@@ -83,7 +82,7 @@
       </div>
     </div>    
     <div id="one-trail" ng-if="trailPanel&&!loading&&!zero">
-      <div class="list-group-item" ng-click="switchPanel()">
+      <div class="list-group-item" ng-click="goHome()">
         <button id="back-button" class="btn glyphicon glyphicon-chevron-left"></button>
         <h2 id="title-name">{{oneTrail.name}}</h2>
         <p class="title-description"ng-repeat="points in oneTrail.description">{{points}}</p>
@@ -130,8 +129,9 @@
       <div class="list-group-item" ng-show="oneTrail.birds.length >0">
         <h2 class="fauna-class">Fauna: </h2>
         <div class="pix-container">
-          <div class="bird-class" ng-repeat="bird in oneTrail.birds | limitTo: birdLimit">
-            <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix">
+          <div class="bird-class thumbnail" ng-repeat="bird in oneTrail.birds | limitTo: birdLimit">
+            <img src="http://{{bird.photo_url}}" class="img-rounded bird-pix" alt="{{bird.common_name}}">
+            <div class="caption">{{bird.common_name}}</div>
           </div>
           <button class="btn btn-sm" ng-click="moreBirdPicture(oneTrail.birds.length)" ng-show="!moreClicked && oneTrail.birds.length > 4">Show More</button>
         </div>
@@ -139,8 +139,9 @@
       <div class="list-group-item" ng-show="oneTrail.plants.length > 0">
         <h2 class="fauna-class">Flora: </h2>
         <div class="pix-container">
-          <div class="bird-class" ng-repeat="plant in oneTrail.plants | limitTo: plantLimit">
+          <div class="bird-class thumbnail" ng-repeat="plant in oneTrail.plants | limitTo: plantLimit">
             <img src="http://herbarium.gov.hk/{{plant.photo_urls[0]}}" class="img-rounded bird-pix">
+            <div class="caption">{{plant.common_name}}</div>
           </div>
           <button class="btn btn-sm" ng-click="morePlantPicture(oneTrail.plants.length)" ng-show="!morePlantClicked && oneTrail.plants.length > 4">Show More</button>
         </div>
