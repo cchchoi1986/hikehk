@@ -141,7 +141,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
         latitude: data[i].start_coordinates.latitude, 
         longitude: data[i].start_coordinates.longitude,
         id: data[i].id,
-        icon: "assets/hike_marker.png",
+        icon: "<%=asset_path('hike_marker.png')%>",
         animation: "Animation.BOUNCE",
         click: function(someId) {
           console.log(someId.key);
