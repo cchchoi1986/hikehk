@@ -1,6 +1,6 @@
 namespace :get_birds do 
   desc "Scrape Hong Kong birds from wikipedia"
-  # rake scrape_birds:get_birds
+  # rake get_birds:scrape
   task :scrape => :environment do
     require 'open-uri'
     require 'nokogiri'
@@ -35,23 +35,28 @@ namespace :get_birds do
     birds.each do |bird|
       begin
         bird_common_name = bird.css('a').attr('title') ? bird.css('a').attr('title').text.squish : ''
-
+        puts "===================-----------------------------"
+        puts "common_name = #{bird_common_name}"
         case bird_common_name
         when "Pacific loon"
           start = true
+          puts "===================%%%%%%@@@@@@"
+          puts "start=true ===== Pacific Loon"
         when "List of birds"
           start = false
+          puts "start=false ===== List of birds"
         end
 
         if start == true
           counter = counter + 1
+          puts "counter = #{counter} &&&&&&&&&&&&" 
           bird_scientific_name = bird.css('i').text
-          # puts bird_scientific_name
+          puts "scientific_name = #{bird_scientific_name}"
 
           bird_url = bird.css('a').attr('href')
-          # puts bird_url
-          puts "the number of birds scraped =============== #{counter}"
-          
+          puts bird_url
+          puts "bird url = #{bird_url}"
+          puts "the number of birds scraped =============== #{counter}. start Bird.create now"
           # call the get_bird_pix for that url
           bird = Bird.create({
             :common_name => bird_common_name,
@@ -61,6 +66,7 @@ namespace :get_birds do
           puts bird.to_yaml
         end
       rescue 
+        puts "==================="
         puts "cannot get this url"
       end
 
