@@ -22,7 +22,7 @@ html, body, #map-canvas {
   align-items: center;
 }
 
-#small-screen > button{
+#small-screen > a{
   top: 50%;
   position: relative;
 }
@@ -30,6 +30,15 @@ html, body, #map-canvas {
 #small-screen > img{
   position: relative;
   top: 50%;
+}
+
+.mobile-link{
+  color: $primary-font-color;
+  text-decoration: none;
+  &:hover{
+    color: white;
+    text-decoration: none;
+  }
 }
 
 @media(max-width:990px){
