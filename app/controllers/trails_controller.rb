@@ -9,6 +9,13 @@ class TrailsController < ApplicationController
     render 'index.json.jbuilder'
   end
 
+  def searchid
+    id = params[:id].to_i
+
+    @query = Trail.where(:id => id)
+    render 'search.json.jbuilder'
+  end
+
   def search
     duration = params[:duration].to_f
     distance = params[:distance].to_f
