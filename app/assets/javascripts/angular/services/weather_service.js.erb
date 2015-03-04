@@ -4,22 +4,34 @@ app.factory('WeatherServices', ['$http', function($http){
 
   weather.returnWeather = function(lat, lon){
 
-    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + ".json";
+    // var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + ".json";
+
+    var url = "https://api.worldweatheronline.com/free/v2/weather.ashx?key=f2f8b5561b809dffdccd40d1e680c&q=" + lat + "," + lon + "&format=json"; 
     // console.log(url);
 
     return $http.get(url);
   };
 
   weather.processData = function(data){
+    // console.log(data);
+    // var info = {
+    //   climate: data.weather[0].main,
+    //   description: data.weather[0].description,
+    //   temp: Math.floor(data.main.temp-273.5),
+    //   tempMax: Math.floor(data.main.temp_max-273.5),
+    //   tempMin: Math.floor(data.main.temp_min-273.5),
+    //   location: data.name    
+    // };
     var info = {
-      climate: data.weather[0].main,
-      description: data.weather[0].description,
-      temp: Math.floor(data.main.temp-273.5),
-      tempMax: Math.floor(data.main.temp_max-273.5),
-      tempMin: Math.floor(data.main.temp_min-273.5),
-      location: data.name    
+      climate: data.data.current_condition[0].weatherDesc[0].value,
+      temp: data.data.current_condition[0].temp_C,
+      precip: data.data.current_condition[0].precipMM,
+      feel: data.data.current_condition[0].FeelsLikeC,
+      visibility: data.data.current_condition[0].visibility,
+      updated: data.data.current_condition[0].observation_time
     };
 
+    // console.log(info);
     return info;
   }
 

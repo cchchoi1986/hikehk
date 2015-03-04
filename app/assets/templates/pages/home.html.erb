@@ -106,8 +106,13 @@
       <div class="list-group-item">
         <h2>Currently: </h2>
         <div id="weatherSection"> 
-          <div>{{ weatherInfo.tempMin}} - {{ weatherInfo.tempMax }}˚C,  {{weatherInfo.climate}}, {{weatherInfo.description}}</div>
+          <div>{{weatherInfo.temp}}˚C, feels like {{weatherInfo.feel}}˚C</div>
+          <div>{{weatherInfo.climate}}</div>
         </div>
+      </div>
+      <div class="list-group-item last-updated">
+        <h2></h2>
+        <p>( last updated: {{weatherInfo.updated}} )</p>
       </div>
       <div class="list-group-item">
         <h2>Difficulty: </h2>

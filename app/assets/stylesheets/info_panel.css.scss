@@ -35,6 +35,14 @@ div.list-group-item{
   padding: 10px;
 }
 
+div.list-group-item.last-updated{
+  padding-top: 0;
+}
+
+#one-trail > div.list-group-item.last-updated > p {
+  font-size: 12px;
+}
+
 div.list-group-item.trail-results{
   padding: 5px;
   border-color: $primary-background-color; 
@@ -102,7 +110,7 @@ button.search-results-button{
 
 #weatherSection {
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #one-trail > div > ul.stars {
