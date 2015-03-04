@@ -44,7 +44,7 @@ namespace :make_region_birds do
       
       value.each do |bird_name|
         # puts "common_name = #{common_name} , bird_name = #{bird_name}"
-        bird = Bird.where("common_name like ?", "%#{bird_name}%")
+        bird = Bird.where("common_name ilike ?", "%#{bird_name}%")
         puts "number of bird array = #{bird.count}" 
         puts "checking the bird = #{bird_name}"
         puts "number of matches= #{match}"
