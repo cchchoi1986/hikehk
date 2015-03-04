@@ -14,39 +14,46 @@ namespace :make_region_birds do
     # puts csv
 
     hash = {}
+    puts "START READING CSV FILE NOWWWWWWWWWWWWWW"
     CSV.foreach('lib/tasks/LinkRegionBird.csv', :headers => true) do |row| 
       array = []
       (2..row.length()-1).each do |i|
         array.push(row[i].squish.gsub("'","")) unless row[i] == nil
+        puts "row[i] = #{row[i]}"
       end
       if hash[row[0]]
+        puts "#{row[0]}"
         hash[row[0]].push(array).flatten!.uniq!
+        puts "then PUSH"
       else
         hash[row[0]] = array
+        puts "otherwise row[0] = array"
       end
-      # puts hash.to_yaml
-      # puts "------------"
+      puts hash.to_yaml
+      puts "--_______________--"
     end
 
-    match = 0;
-    # looop thru the hash and create link
-    hash.each do |key , value|
-      region = Region.find_by(:name => key.to_s)
-      # puts "#{key}=#{region.name}"
+    # match = 0;
+    # puts "match = #{match}"
+    # # looop thru the hash and create link
+    # hash.each do |key , value|
+    #   puts "hash each do ++++++++++++++++++++++++++++++++++++++++++++++++"
+    #   region = Region.find_by(:name => key.to_s)
+    #   puts "#{key}=#{region.name}"
       
-      value.each do |bird_name|
-        bird = Bird.where("common_name like ?", "%#{bird_name}%")
-        puts "number of bird array = #{bird.count}" 
-        puts "checking the bird = #{bird_name}"
-        puts "number of matches= #{match}"
-        if bird.count > 0 
-          match += bird.count
-          puts "match found!!!! #{bird_name}=#{bird[0].common_name}"
-          birdlink = region.region_bird_links.create(:bird => bird[0])
-          puts birdlink.to_yaml
-        end
-      end
-      puts "---------"
-    end
+    #   value.each do |bird_name|
+    #     bird = Bird.where("common_name like ?", "%#{bird_name}%")
+    #     puts "number of bird array = #{bird.count}" 
+    #     puts "checking the bird = #{bird_name}"
+    #     puts "number of matches= #{match}"
+    #     if bird.count > 0 
+    #       match += bird.count
+    #       puts "match found!!!! #{bird_name}=#{bird[0].common_name}"
+    #       birdlink = region.region_bird_links.create(:bird => bird[0])
+    #       puts birdlink.to_yaml
+    #     end
+    #   end
+    #   puts "---------"
+    # end
   end
 end
