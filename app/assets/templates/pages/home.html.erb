@@ -46,21 +46,21 @@
   <div id="filter-box">
     <ul class="list-group">
       <li class="list-group-item" ng-show="outBox">
-        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[0].checked">
+        <div ng-click="regionCheck(0)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[0].checked">
           HK Island</div>
-        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[1].checked">
+        <div ng-click="regionCheck(1)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[1].checked">
           Kowloon</div>
-        <div class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[2].checked">
+        <div ng-click="regionCheck(2)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[2].checked">
           New Territories</div>
       </li>
-      <li class="list-group-item" ng-show="outBox">
+      <!-- <li class="list-group-item" ng-show="outBox">
         <div>Difficulty Level: {{search_parameters.difficulty}}</div>
         <div slider config="sliderDifficultConfig" model="search_parameters.difficulty" id="difficulty-slider" data-name="difficulty"></div>
       </li>
       <li class="list-group-item" ng-show="outBox">
         <div>Scenery Level: {{search_parameters.scenery}}</div>
         <div slider config="sliderSceneryConfig" model="search_parameters.scenery" id="scenery-slider" data-name="scenery"></div>
-      </li>
+      </li> -->
       <li class="list-group-item" ng-show="outBox">
         <div>Distance: {{search_parameters.distance}} km</div>
         <div slider config="sliderDistanceConfig" model="search_parameters.distance" id="distance-slider" data-name="distance"></div>

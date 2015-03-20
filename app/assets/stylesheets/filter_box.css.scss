@@ -48,8 +48,22 @@ button.home-button{
 }
 
 .region-checkbox{
-  display: inline-block;
-  padding: 0px 8px;
+  display: block;
+  padding: 7px 0 7px 30px;
+  background: $primary-background-color;
+  text-align: left;
+  opacity: 0.8;
+  color: white;
+  border: 1px solid $primary-border-color;
+  border-radius: 5px;
+  margin: 4px 0 0 40px;
+  box-shadow: 1px 1px 1px 2px;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+    // color: $primary-background-color;
+    // background: $primary-font-color;
+  }
 }
 
 .close-button{
