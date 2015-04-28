@@ -10,6 +10,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'uiGmapGoogleMapA
     $scope.search_parameters.regions[i].checked = !$scope.search_parameters.regions[i].checked;
   };
 
+  $scope.parseURL = function(url){
+    return url.replace(/\//g,'%252F');
+  }
+
   var homeMap = {
     center: { 
       // latitude: 22.3991729, //tai lam country park

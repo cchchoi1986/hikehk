@@ -15,6 +15,16 @@
   color: $primary-font-color;
 }
 
+.search-results {
+  h5, h6 {
+    text-align: center;
+  }
+  h6 {
+    background: #e0efef;
+    color: #363636;
+  }
+}
+
 img.search-result-pix{
   display: inline-block;
   // max-height: 80px;

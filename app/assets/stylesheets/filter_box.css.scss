@@ -13,6 +13,12 @@
   border-radius: 5px;
   background-color: $primary-background-color;
   color: $primary-font-color;
+  .checkbox-back {
+    background: grey;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+  }
 }
 
 // list group item
