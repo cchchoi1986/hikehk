@@ -46,12 +46,21 @@
   <div id="filter-box">
     <ul class="list-group">
       <li class="list-group-item" ng-show="outBox">
-        <div ng-click="regionCheck(0)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[0].checked">
-          HK Island</div>
-        <div ng-click="regionCheck(1)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[1].checked">
-          Kowloon</div>
-        <div ng-click="regionCheck(2)" class="region-checkbox"><input type="checkbox" ng-model="search_parameters.regions[2].checked">
-          New Territories</div>
+        <div ng-click="regionCheck(0)" class="region-checkbox">
+          <div ng-show="!search_parameters.regions[0].checked" class="checkbox-back"></div>
+          <div ng-show="search_parameters.regions[0].checked" class="checkbox-back fa fa-check"></div>
+          HK Island
+        </div>
+        <div ng-click="regionCheck(1)" class="region-checkbox">
+          <div ng-show="!search_parameters.regions[1].checked" class="checkbox-back"></div>
+          <div ng-show="search_parameters.regions[1].checked" class="checkbox-back fa fa-check"></div>
+          Kowloon
+        </div>
+        <div ng-click="regionCheck(2)" class="region-checkbox">
+          <div ng-show="!search_parameters.regions[2].checked" class="checkbox-back"></div>
+          <div ng-show="search_parameters.regions[2].checked" class="checkbox-back fa fa-check"></div>
+          New Territories
+        </div>
       </li>
       <!-- <li class="list-group-item" ng-show="outBox">
         <div>Difficulty Level: {{search_parameters.difficulty}}</div>
@@ -79,9 +88,10 @@
       <img src="<%=asset_path('zero_result.png')%>">
     </div>
     <div class="search-results" ng-show="search&&!loading&&!zero">
-      <h1>{{trails.length}}  Search Results...</h1>
+      <h5>Pictures and route information sourced from <a href="http://www.oasistrek.com">Oasistrek.com</a></h5>
+      <h6>{{trails.length}} Search Results...</h6>
       <div ng-repeat="trail in trails" class="list-group-item trail-results" ng-click="openTrailPanel(trail.id)">
-        <img src="http://www.oasistrek.com/{{trail.photo_urls[0]}}" class="img-circle search-result-pix col-md-3">
+        <img src="https://s3.amazonaws.com/hikehk/{{parseURL(trail.photo_urls[0])}}" class="img-circle search-result-pix col-md-3">
         <div class="search-results-item col-md-7">
           <h2>{{trail.name}}</h2>
         </div>
@@ -97,7 +107,7 @@
       <div id="trail-carousel" class="list-group-item">
         <carousel interval="4000">
           <slide ng-repeat="photo in oneTrail.photo_urls" >
-            <img ng-src="http://www.oasistrek.com/{{photo}}" class="trail-img">
+            <img ng-src="https://s3.amazonaws.com/hikehk/{{parseURL(photo)}}" class="trail-img">
           </slide>
         </carousel>
       </div>
